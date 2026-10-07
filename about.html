@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
+<head>
+<script>document.documentElement.classList.add('js-loading');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>关于 · MyClassroom</title>
+<meta name="description" content="关于我的课表：由 Kzure Lab 开发，MIT 开源协议。">
+<link rel="icon" href="assets/img/logo/favicon.ico">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
+      <span>我的课表</span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="product.html">产品介绍</a></li>
+      <li><a href="index.html#features">功能</a></li>
+      <li><a href="plugins.html">插件广场</a></li>
+      <li><a href="themes.html">主题</a></li>
+      <li><a href="download.html">下载</a></li>
+      <li><a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+    <div class="ui-switcher" role="group" aria-label="UI 模式">
+      <button data-ui="light" title="亮色" aria-label="亮色"></button>
+      <button data-ui="dark" title="暗色" aria-label="暗色"></button>
+      <button data-ui="clear" title="通透" aria-label="通透"></button>
+      <button data-ui="fresh" title="清新" aria-label="清新"></button>
+    </div>
+    <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="tree-layout">
+
+    <aside class="tree-aside" id="treeAside">
+      <div class="tree-title">目录</div>
+
+      <div class="tree-group">
+        <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 项目</div>
+        <ul class="tree-items">
+          <li><a href="#intro" class="active">项目介绍</a></li>
+          <li><a href="#milestones">里程碑</a></li>
+          <li><a href="#tech">技术栈</a></li>
+        </ul>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 作者</div>
+        <ul class="tree-items">
+          <li><a href="#author">作者</a></li>
+          <li><a href="#license">许可</a></li>
+          <li><a href="#contact">联系方式</a></li>
+        </ul>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 相关</div>
+        <ul class="tree-items">
+          <li><a href="product.html">产品介绍</a></li>
+          <li><a href="privacy.html">隐私政策</a></li>
+          <li><a href="cookie.html">Cookie</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="tree-content">
+      <button class="tree-mobile-toggle" onclick="document.getElementById('treeAside').classList.toggle('mobile-hidden')">
+        <i class="fa-solid fa-list"></i> 目录
+      </button>
+
+      <h1>关于</h1>
+      <p class="page-lead">无服务器、纯本地、跨语言的课程表应用。</p>
+
+      <h2 id="intro">项目介绍</h2>
+      <p>《我的课表》是一款面向教师、学生、班主任和家长的课程表应用。完全本地运行，无需登录，数据永不上传。支持 20 种语言、4 种主题、灵动岛、成绩分析等功能。</p>
+
+      <h3>它解决什么问题</h3>
+      <ul>
+        <li><strong>教师</strong>：查课、调课、成绩录入，不用翻纸质表。</li>
+        <li><strong>学生</strong>：看今日课表、下节课在哪，打开即用。</li>
+        <li><strong>班主任</strong>：全班周课表、座位表、成绩一览。</li>
+        <li><strong>家长</strong>：辅助孩子整理作业，了解在校安排。</li>
+      </ul>
+
+      <h2 id="milestones">里程碑</h2>
+      <table class="tree-table">
+        <thead>
+          <tr><th>时间</th><th>事件</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2025-08</td><td>项目启动，确定"纯本地、无服务器"的产品方向</td></tr>
+          <tr><td>2026-04</td><td>核心课表与成绩功能完成，开始内部测试</td></tr>
+          <tr><td>2026-10</td><td>v1.0.0 发布，官网同步上线</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="tech">技术栈</h2>
+      <table class="tree-table">
+        <thead>
+          <tr><th>层</th><th>技术</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>语言</td><td>C# 12</td></tr>
+          <tr><td>运行时</td><td>.NET 10</td></tr>
+          <tr><td>界面</td><td>Windows Forms</td></tr>
+          <tr><td>存储</td><td>JSON</td></tr>
+          <tr><td>协议</td><td>MIT</td></tr>
+        </tbody>
+      </table>
+
+            <h2 id="author">开发团队</h2>
+      <p>《我的课表系列》由 5 人共同完成。代码、设计、测试、AI 辅助</p>
+
+      <div class="team-grid">
+
+        <div class="team-card card-3d">
+          <div class="team-avatar" style="background:#111;color:#fff">FM</div>
+          <div class="team-info">
+            <h3>fatmonkey</h3>
+            <div class="team-role">主开发 · 架构</div>
+            <p>C# / .NET 10 主力开发，负责数据层、功能编写、多语言与主题系统。</p>
+            <div class="team-tags">
+              <span>.NET</span>
+              <span>Windows Forms</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card card-3d">
+          <div class="team-avatar" style="background:#0067C0;color:#fff">KZ</div>
+          <div class="team-info">
+            <h3>Kzure</h3>
+            <div class="team-role">项目发起 · 产品设计</div>
+            <p>提出"纯本地、无服务器"的产品方向，定义课表、学生、成绩三大核心模块，设计了框架结构，网站结构，UI的重要绘制与编写。</p>
+            <div class="team-tags">
+              <span>产品</span>
+              <span>UI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card card-3d">
+          <div class="team-avatar" style="background:#2E8B57;color:#fff">CD</div>
+          <div class="team-info">
+            <h3>Conder</h3>
+            <div class="team-role">开发 · 测试</div>
+            <p>负责功能模块开发与回归测试，覆盖成绩分析、座位表、导入导出等场景。</p>
+            <div class="team-tags">
+              <span>测试</span>
+              <span>质量</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card card-3d">
+          <div class="team-avatar" style="background:linear-gradient(135deg,#7DD3FC,#C4B5FD);color:#fff">玻</div>
+          <div class="team-info">
+            <h3>成功的玻璃su</h3>
+            <div class="team-role">架构</div>
+            <p>辅助开发，AI的操控者</p>
+            <div class="team-tags">
+              <span>AI</span>
+              <span>文件选择器</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card card-3d">
+          <div class="team-avatar" style="background:#10A37F;color:#fff">AI</div>
+          <div class="team-info">
+            <h3>DeepSeek</h3>
+            <div class="team-role">AI 辅助 · 代码与文案</div>
+            <p>协助代码补全、文档撰写与多语言翻译草稿。AI 辅助，人工审核。</p>
+            <div class="team-tags">
+              <span>AI</span>
+              <span>辅助</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h2 id="license">许可</h2>
+      <p>MIT 开源协议。您可以自由使用、修改、分发本软件。完整协议见 <a href="https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>。</p>
+
+      <h2 id="contact">联系方式</h2>
+      <table class="tree-table">
+        <thead>
+          <tr><th>用途</th><th>方式</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>问题反馈</td><td><a href="https://github.com/Azurelab-Azure/myclassroom/issues" target="_blank" rel="noopener">GitHub Issues</a></td></tr>
+          <tr><td>插件投稿</td><td><code>plugins@kzurelab.com</code></td></tr>
+          <tr><td>问题支持</td><td><code>support@kzurelab.com</code></td></tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top:32px;font-size:13px;color:var(--text-3)">© 2026 Kzure Lab · 我的课表 MyClassroom</p>
+
+    </main>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="product.html">产品介绍</a>
+      <a href="plugins.html">插件广场</a>
+      <a href="themes.html">主题</a>
+      <a href="about.html">关于</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="cookie.html">Cookie</a>
+      <a href="https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE" target="_blank" rel="noopener">MIT 协议</a>
+      <a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="copyright">© 2026 <span class="lab"><span class="lab-mark">KZ</span><span class="brand">Kzure Lab</span></span> · 我的课表 MyClassroom · 保留所有权利</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+(function () {
+  document.querySelectorAll('.tree-group-title').forEach(function (t) {
+    t.style.cursor = 'pointer';
+    t.addEventListener('click', function () {
+      t.parentElement.classList.toggle('collapsed');
+    });
+  });
+  var links = document.querySelectorAll('.tree-items a[href^="#"]');
+  var sections = [];
+  links.forEach(function (a) {
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({ id: id, el: el, link: a });
+  });
+  function setActive(id) {
+    links.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+  if ('IntersectionObserver' in window && sections.length) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) setActive(e.target.id);
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    sections.forEach(function (s) { io.observe(s.el); });
+  }
+})();
+</script>
+</body>
+</html>

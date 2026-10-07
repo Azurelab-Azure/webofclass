@@ -1,0 +1,607 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
+<head>
+<meta charset="UTF-8">
+<script>document.documentElement.classList.add('js-loading');</script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>插件广场 · 我的课表 MyClassroom</title>
+<meta name="description" content="我的课表插件广场：课堂放映辅助、批注、PDF 讲稿，为教师课堂场景设计。插件纯本地运行，可审计、可卸载。">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ========== 导航栏 ========== -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <span>我的课表</span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="product.html">产品介绍</a></li>
+      <li><a href="index.html#features">功能</a></li>
+      <li><a href="plugins.html">插件广场</a></li>
+      <li><a href="themes.html">主题</a></li>
+      <li><a href="download.html">下载</a></li>
+      <li><a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+    <div class="navbar-right">
+      <div class="ui-switcher" role="group" aria-label="UI 模式">
+        <button data-ui="light" title="亮色" aria-label="亮色"></button>
+        <button data-ui="dark" title="暗色" aria-label="暗色"></button>
+        <button data-ui="clear" title="通透" aria-label="通透"></button>
+        <button data-ui="fresh" title="清新" aria-label="清新"></button>
+      </div>
+      <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== 顶部 Banner ========== -->
+<header class="store-hero">
+  <div class="container">
+    <div class="eyebrow">MyClassroom Plugins</div>
+    <h1>为课堂而生的插件。</h1>
+    <p>放映辅助、实时批注、PDF 讲稿——围绕教师真实上课流程设计。插件纯本地运行，可审计、可卸载。当前插件系统开发中，下方为规划清单。</p>
+  </div>
+</header>
+
+<!-- ========== 分类 Tab ========== -->
+<div class="container">
+  <div class="store-tabs" id="storeTabs">
+    <button class="store-tab active" data-target="all">全部</button>
+    <button class="store-tab" data-target="lecture">课堂放映</button>
+    <button class="store-tab" data-target="annotate">批注标注</button>
+    <button class="store-tab" data-target="pdf">PDF 讲稿</button>
+    <button class="store-tab" data-target="material">课件素材</button>
+    <button class="store-tab" data-target="grade">成绩与考勤</button>
+    <button class="store-tab" data-target="tools">效率工具</button>
+    <button class="store-tab" data-target="submit">我要投稿</button>
+  </div>
+</div>
+
+<!-- ========== 编辑推荐 ========== -->
+<section class="store-section" id="editor">
+  <div class="container">
+    <div class="store-section-head">
+      <h2>编辑推荐</h2>
+      <a href="#submit" class="more">我要投稿</a>
+    </div>
+    <div class="store-scroll">
+      <div class="editor-card">
+        <div class="editor-visual"><i class="fa-solid fa-display"></i></div>
+        <div class="editor-body">
+          <div class="editor-tag">课堂放映</div>
+          <h3>PPT 放映辅助</h3>
+          <p>在课表里直接调起 PPT 放映，显示当前页 / 总页数，支持遥控翻页。</p>
+        </div>
+      </div>
+      <div class="editor-card">
+        <div class="editor-visual"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="editor-body">
+          <div class="editor-tag">批注</div>
+          <h3>屏幕批注</h3>
+          <p>在任意窗口上涂写、画重点、圈答案，讲完即擦，不修改原文件。</p>
+        </div>
+      </div>
+      <div class="editor-card">
+        <div class="editor-visual"><i class="fa-solid fa-file-pdf"></i></div>
+        <div class="editor-body">
+          <div class="editor-tag">PDF</div>
+          <h3>PDF 讲稿</h3>
+          <p>把 PDF 讲稿挂在课表旁边，翻页与课表进度同步。</p>
+        </div>
+      </div>
+      <div class="editor-card">
+        <div class="editor-visual"><i class="fa-solid fa-stopwatch"></i></div>
+        <div class="editor-body">
+          <div class="editor-tag">课堂</div>
+          <h3>课堂计时器</h3>
+          <p>随堂练习、小组讨论倒计时，到点桌面提醒。</p>
+        </div>
+      </div>
+      <div class="editor-card">
+        <div class="editor-visual"><i class="fa-solid fa-list-check"></i></div>
+        <div class="editor-body">
+          <div class="editor-tag">考勤</div>
+          <h3>一键点名</h3>
+          <p>从学生名单随机抽人，也可标记缺勤，导出考勤表。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 规划优先级 ========== -->
+<section class="store-section" id="rank">
+  <div class="container">
+    <div class="store-section-head">
+      <h2>规划优先级</h2>
+      <a href="#submit" class="more">提交需求</a>
+    </div>
+    <div class="rank-list">
+      <div class="rank-item">
+        <div class="rank-num">1</div>
+        <div class="rank-icon"><i class="fa-solid fa-display"></i></div>
+        <div class="rank-info"><h3>PPT 放映辅助</h3><p>课堂放映 · 高优先级</p></div>
+        <button class="rank-action">规划中</button>
+      </div>
+      <div class="rank-item">
+        <div class="rank-num">2</div>
+        <div class="rank-icon"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="rank-info"><h3>屏幕批注</h3><p>批注标注 · 高优先级</p></div>
+        <button class="rank-action">规划中</button>
+      </div>
+      <div class="rank-item">
+        <div class="rank-num">3</div>
+        <div class="rank-icon"><i class="fa-solid fa-file-pdf"></i></div>
+        <div class="rank-info"><h3>PDF 讲稿</h3><p>PDF 讲稿 · 高优先级</p></div>
+        <button class="rank-action">规划中</button>
+      </div>
+      <div class="rank-item">
+        <div class="rank-num">4</div>
+        <div class="rank-icon"><i class="fa-solid fa-list-check"></i></div>
+        <div class="rank-info"><h3>一键点名</h3><p>成绩与考勤 · 中优先级</p></div>
+        <button class="rank-action">规划中</button>
+      </div>
+      <div class="rank-item">
+        <div class="rank-num">5</div>
+        <div class="rank-icon"><i class="fa-solid fa-stopwatch"></i></div>
+        <div class="rank-info"><h3>课堂计时器</h3><p>效率工具 · 中优先级</p></div>
+        <button class="rank-action">规划中</button>
+      </div>
+      <div class="rank-item">
+        <div class="rank-num">6</div>
+        <div class="rank-icon"><i class="fa-solid fa-file-import"></i></div>
+        <div class="rank-info"><h3>课表导入</h3><p>效率工具 · 中优先级</p></div>
+        <button class="rank-action">规划中</button>
+      </div>
+      <div class="rank-item">
+        <div class="rank-num">7</div>
+        <div class="rank-icon"><i class="fa-solid fa-print"></i></div>
+        <div class="rank-info"><h3>课表打印</h3><p>效率工具 · 中优先级</p></div>
+        <button class="rank-action">规划中</button>
+      </div>
+      <div class="rank-item">
+        <div class="rank-num">8</div>
+        <div class="rank-icon"><i class="fa-solid fa-palette"></i></div>
+        <div class="rank-info"><h3>主题市场</h3><p>效率工具 · 低优先级</p></div>
+        <button class="rank-action">规划中</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 课堂放映 ========== -->
+<section class="store-section" id="lecture">
+  <div class="container">
+    <div class="store-section-head">
+      <h2>课堂放映</h2>
+    </div>
+    <div class="app-grid">
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-display"></i></div>
+        <div class="app-body">
+          <h3>PPT 放映辅助</h3>
+          <div class="app-sub">课堂放映 · 规划中</div>
+          <div class="app-desc">在课表里直接调起 PPT 放映，显示当前页 / 总页数，支持遥控翻页与进度标记。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-tv"></i></div>
+        <div class="app-body">
+          <h3>双屏放映</h3>
+          <div class="app-sub">课堂放映 · 规划中</div>
+          <div class="app-desc">教师屏看备注，学生屏看投影。适合连接投影仪的教室。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-window-restore"></i></div>
+        <div class="app-body">
+          <h3>窗口切换</h3>
+          <div class="app-sub">课堂放映 · 规划中</div>
+          <div class="app-desc">一键在 PPT、PDF、浏览器之间切换，减少上课时的操作。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-closed-captioning"></i></div>
+        <div class="app-body">
+          <h3>字幕提示</h3>
+          <div class="app-sub">课堂放映 · 规划中</div>
+          <div class="app-desc">在屏幕角落显示讲稿要点，不打断学生视线。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 批注标注 ========== -->
+<section class="store-section" id="annotate">
+  <div class="container">
+    <div class="store-section-head">
+      <h2>批注标注</h2>
+    </div>
+    <div class="app-grid">
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="app-body">
+          <h3>屏幕批注</h3>
+          <div class="app-sub">批注标注 · 规划中</div>
+          <div class="app-desc">在任意窗口上涂写、画重点、圈答案，讲完即擦，不修改原文件。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-highlighter"></i></div>
+        <div class="app-body">
+          <h3>高亮笔</h3>
+          <div class="app-sub">批注标注 · 规划中</div>
+          <div class="app-desc">半透明高亮，叠加在 PPT / PDF 上标注重点。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-ruler-combined"></i></div>
+        <div class="app-body">
+          <h3>直尺与量角器</h3>
+          <div class="app-sub">批注标注 · 规划中</div>
+          <div class="app-desc">数理化课堂可直接在屏幕上画直线、量角度。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-eraser"></i></div>
+        <div class="app-body">
+          <h3>一键擦除</h3>
+          <div class="app-sub">批注标注 · 规划中</div>
+          <div class="app-desc">快捷键清空所有批注，不留痕迹，不影响原文件。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PDF 讲稿 ========== -->
+<section class="store-section" id="pdf">
+  <div class="container">
+    <div class="store-section-head">
+      <h2>PDF 讲稿</h2>
+    </div>
+    <div class="app-grid">
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-file-pdf"></i></div>
+        <div class="app-body">
+          <h3>PDF 讲稿</h3>
+          <div class="app-sub">PDF 讲稿 · 规划中</div>
+          <div class="app-desc">把 PDF 讲稿挂在课表旁边，翻页与课表进度同步。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-bookmark"></i></div>
+        <div class="app-body">
+          <h3>书签与目录</h3>
+          <div class="app-sub">PDF 讲稿 · 规划中</div>
+          <div class="app-desc">按课时保存书签，下节课直接跳到上次的位置。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-crop-simple"></i></div>
+        <div class="app-body">
+          <h3>裁剪与拼页</h3>
+          <div class="app-sub">PDF 讲稿 · 规划中</div>
+          <div class="app-desc">把两页拼成一页、裁掉页边，投影时字更大。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-file-export"></i></div>
+        <div class="app-body">
+          <h3>讲义导出</h3>
+          <div class="app-sub">PDF 讲稿 · 规划中</div>
+          <div class="app-desc">把批注和标注导出成新的 PDF，发给学生复习。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 课件素材 ========== -->
+<section class="store-section" id="material">
+  <div class="container">
+    <div class="store-section-head">
+      <h2>课件素材</h2>
+    </div>
+    <div class="app-grid">
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-image"></i></div>
+        <div class="app-body">
+          <h3>图片素材库</h3>
+          <div class="app-sub">课件素材 · 规划中</div>
+          <div class="app-desc">本地管理课件图片，按科目、单元分类，一键插入。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-shapes"></i></div>
+        <div class="app-body">
+          <h3>几何图形</h3>
+          <div class="app-sub">课件素材 · 规划中</div>
+          <div class="app-desc">常用几何图形与函数图像，拖到屏幕上直接用。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-flask"></i></div>
+        <div class="app-body">
+          <h3>实验演示</h3>
+          <div class="app-sub">课件素材 · 规划中</div>
+          <div class="app-desc">物理化学常用演示动画，离线播放。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-map"></i></div>
+        <div class="app-body">
+          <h3>地图与历史年表</h3>
+          <div class="app-sub">课件素材 · 规划中</div>
+          <div class="app-desc">可缩放的历史地图与时间轴，文史课堂使用。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 成绩与考勤 ========== -->
+<section class="store-section" id="grade">
+  <div class="container">
+    <div class="store-section-head">
+      <h2>成绩与考勤</h2>
+    </div>
+    <div class="app-grid">
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-list-check"></i></div>
+        <div class="app-body">
+          <h3>一键点名</h3>
+          <div class="app-sub">成绩与考勤 · 规划中</div>
+          <div class="app-desc">从学生名单随机抽人，也可标记缺勤，导出考勤表。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+        <div class="app-body">
+          <h3>随堂小测</h3>
+          <div class="app-sub">成绩与考勤 · 规划中</div>
+          <div class="app-desc">课堂快速出题，学生纸上作答，教师快速录入。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="app-body">
+          <h3>成绩趋势图</h3>
+          <div class="app-sub">成绩与考勤 · 规划中</div>
+          <div class="app-desc">按学期、科目追踪成绩变化，看进步也看退步。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-users-rectangle"></i></div>
+        <div class="app-body">
+          <h3>班级对比</h3>
+          <div class="app-sub">成绩与考勤 · 规划中</div>
+          <div class="app-desc">多个班级成绩横向对比，教学一目了然。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 效率工具 ========== -->
+<section class="store-section" id="tools">
+  <div class="container">
+    <div class="store-section-head">
+      <h2>效率工具</h2>
+    </div>
+    <div class="app-grid">
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-file-import"></i></div>
+        <div class="app-body">
+          <h3>课表导入</h3>
+          <div class="app-sub">效率工具 · 规划中</div>
+          <div class="app-desc">从 Excel / CSV 导入课表，自动识别周次与节次。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-print"></i></div>
+        <div class="app-body">
+          <h3>课表打印</h3>
+          <div class="app-sub">效率工具 · 规划中</div>
+          <div class="app-desc">导出 PDF / 图片，A4 排版，直接打印贴墙。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-stopwatch"></i></div>
+        <div class="app-body">
+          <h3>课堂计时器</h3>
+          <div class="app-sub">效率工具 · 规划中</div>
+          <div class="app-desc">随堂练习、小组讨论倒计时，到点桌面提醒。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+      <div class="app-card card-3d">
+        <div class="app-icon"><i class="fa-solid fa-qrcode"></i></div>
+        <div class="app-body">
+          <h3>二维码分享</h3>
+          <div class="app-sub">效率工具 · 规划中</div>
+          <div class="app-desc">生成课表二维码，学生扫码即可查看。</div>
+        </div>
+        <button class="get-btn">规划中</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 投稿 ========== -->
+<section class="store-section" id="submit">
+  <div class="container">
+    <div class="store-section-head">
+      <h2>我要投稿</h2>
+    </div>
+    <div class="card-3d" style="padding:32px;max-width:720px">
+      <p style="font-size:15px;line-height:1.8;color:var(--text-2);margin-bottom:20px">
+        你有想要的插件，或者你自己写了一个想分享？发邮件告诉我。
+      </p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:20px">
+        <div style="border:1px solid var(--line);border-radius:var(--radius-m);padding:18px">
+          <div style="font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">插件投稿</div>
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;word-break:break-all">
+            plugins@kzurelab.com
+          </div>
+        </div>
+        <div style="border:1px solid var(--line);border-radius:var(--radius-m);padding:18px">
+          <div style="font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">问题反馈</div>
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;word-break:break-all">
+            support@kzurelab.com
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:13.5px;color:var(--text-2);line-height:1.8;margin-bottom:16px">
+        <strong>投稿请包含：</strong><br>
+        · 插件名称与一句话说明<br>
+        · 解决什么课堂场景的问题<br>
+        · 截图或原型（可选）<br>
+        · 如果是代码，附上仓库地址
+      </p>
+
+      <p style="font-size:12.5px;color:var(--text-3);line-height:1.7">
+        我们会在 7 个工作日内回复。插件通过审核后，会出现在插件广场。插件必须开源、纯本地运行、不上传用户数据。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 插件原则 ========== -->
+<section class="store-section" style="background:var(--bg-soft)">
+  <div class="container" style="max-width:720px">
+    <div class="store-section-head">
+      <h2>插件原则</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><h3>纯本地</h3><p>插件不联网、不上传数据，与主程序一致。</p></div>
+      <div class="faq-item"><h3>可审计</h3><p>插件为开源代码，你可以查看它做了什么。</p></div>
+      <div class="faq-item"><h3>可卸载</h3><p>删除插件文件即完全移除，不留痕迹。</p></div>
+      <div class="faq-item"><h3>不捆绑</h3><p>主程序不预装任何插件，一切由你决定。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 底部 CTA ========== -->
+<section class="store-section">
+  <div class="container" style="max-width:720px;text-align:center">
+    <h2 class="section-title">想第一时间用上插件？</h2>
+    <p class="section-subtitle">下载主程序，插件发布后会自动出现在插件广场。</p>
+    <div style="margin-top:24px">
+      <a href="download.html" class="btn btn-primary">
+        <i class="fa-solid fa-download"></i>
+        <span>下载我的课表</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 页脚 ========== -->
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="product.html">产品介绍</a>
+      <a href="plugins.html">插件广场</a>
+      <a href="themes.html">主题</a>
+      <a href="about.html">关于</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="cookie.html">Cookie</a>
+      <a href="https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE" target="_blank" rel="noopener">MIT 协议</a>
+      <a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="copyright">
+      © 2026 <span class="lab"><span class="lab-mark">KZ</span><span class="brand">Kzure Lab</span></span> · 我的课表 MyClassroom · 保留所有权利
+    </p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+// 分类 Tab 滚动 + 3D 卡片
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var tabs = document.querySelectorAll('#storeTabs .store-tab');
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      var target = tab.getAttribute('data-target');
+      if (target === 'all') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      var el = document.getElementById(target);
+      if (el) {
+        var top = el.getBoundingClientRect().top + window.pageYOffset - 70;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  document.querySelectorAll('.get-btn, .rank-action').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (btn.dataset.done === '1') return;
+      var orig = btn.textContent;
+      btn.textContent = '已记录';
+      btn.dataset.done = '1';
+      setTimeout(function () {
+        btn.textContent = orig;
+        btn.dataset.done = '0';
+      }, 1400);
+    });
+  });
+
+  if (reduce) return;
+
+  document.querySelectorAll('.card-3d').forEach(function (el) {
+    el.addEventListener('mousemove', function (e) {
+      var r = el.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width;
+      var y = (e.clientY - r.top) / r.height;
+      var rx = (0.5 - y) * 14;
+      var ry = (x - 0.5) * 14;
+      el.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+      el.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+      el.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+    });
+    el.addEventListener('mouseleave', function () {
+      el.style.transform = '';
+      el.style.setProperty('--mx', '50%');
+      el.style.setProperty('--my', '50%');
+    });
+  });
+})();
+</script>
+</body>
+</html>

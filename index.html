@@ -1,0 +1,569 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
+<head>
+<meta charset="UTF-8">
+<script>document.documentElement.classList.add('js-loading');</script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>我的课表 · My Schedule - 无服务器、纯本地的课程表应用</title>
+<meta name="description" content="无服务器、纯本地、20 种语言的课程表应用。支持课程表、学生管理、成绩分析、灵动岛、4 种主题。数据永不上传。">
+<meta name="keywords" content="课程表,课表软件,教师工具,学生工具,成绩管理,本地应用,开源">
+<meta property="og:title" content="我的课表 · My Schedule">
+<meta property="og:description" content="无服务器、纯本地、20 种语言的课程表应用。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ========== 导航栏 ========== -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <span>我的课表</span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="product.html">产品介绍</a></li>
+      <li><a href="index.html#features">功能</a></li>
+      <li><a href="plugins.html">插件广场</a></li>
+      <li><a href="themes.html">主题</a></li>
+      <li><a href="download.html">下载</a></li>
+      <li><a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+    <div class="navbar-right">
+      <div class="ui-switcher" role="group" aria-label="UI 模式">
+        <button data-ui="light" title="亮色" aria-label="亮色"></button>
+        <button data-ui="dark" title="暗色" aria-label="暗色"></button>
+        <button data-ui="clear" title="通透" aria-label="通透"></button>
+        <button data-ui="fresh" title="清新" aria-label="清新"></button>
+      </div>
+      <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== Hero ========== -->
+<header class="hero">
+  <div class="container">
+    <h1>你的课表，你的数据。</h1>
+    <p class="subtitle">无服务器、纯本地、20 种语言的课程表应用。数据永远不上传，打开即用。</p>
+    <div class="hero-buttons">
+      <a href="download.html" class="btn btn-primary">
+        <i class="fa-brands fa-windows"></i>
+        <span>下载 Windows 版</span>
+      </a>
+      <a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener" class="btn btn-secondary">
+        <i class="fa-brands fa-github"></i>
+        <span>查看 GitHub</span>
+      </a>
+    </div>
+
+    <!-- 3D 截图堆叠 -->
+    <div class="stack-3d reveal">
+      <div class="stack-item">
+        <img src="assets/img/screenshots/dashboard.png" alt="我的课表 主界面">
+      </div>
+      <div class="stack-item">
+        <img src="assets/img/screenshots/schedule.png" alt="课表界面">
+      </div>
+      <div class="stack-item">
+        <img src="assets/img/screenshots/grades.png" alt="成绩看板">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== 核心特性（3D 翻转） ========== -->
+<section id="features">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">核心特性</h2>
+      <p class="section-subtitle">为教师、学生、班主任、家长设计。</p>
+    </div>
+
+    <div class="flip-grid">
+      <div class="flip-card reveal">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="icon"><i class="fa-solid fa-calendar-days"></i></div>
+            <h3>课程表</h3>
+            <p>支持周次、单双周、特殊节次。</p>
+          </div>
+          <div class="flip-face flip-back">
+            <ul>
+              <li><i class="fa-solid fa-check"></i> 12 节课自定义</li>
+              <li><i class="fa-solid fa-check"></i> 单双周切换</li>
+              <li><i class="fa-solid fa-check"></i> 特殊节次标注</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="icon"><i class="fa-solid fa-users"></i></div>
+            <h3>学生管理</h3>
+            <p>名单、座位表、个人档案。</p>
+          </div>
+          <div class="flip-face flip-back">
+            <ul>
+              <li><i class="fa-solid fa-check"></i> 批量导入名单</li>
+              <li><i class="fa-solid fa-check"></i> 可视化座位表</li>
+              <li><i class="fa-solid fa-check"></i> 个人档案记录</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="icon"><i class="fa-solid fa-chart-simple"></i></div>
+            <h3>成绩分析</h3>
+            <p>录入、看板、排名、及格率。</p>
+          </div>
+          <div class="flip-face flip-back">
+            <ul>
+              <li><i class="fa-solid fa-check"></i> 快速录入</li>
+              <li><i class="fa-solid fa-check"></i> 班级排名</li>
+              <li><i class="fa-solid fa-check"></i> 及格率统计</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <h3>灵动岛</h3>
+            <p>今日课程悬浮窗，下课倒计时。</p>
+          </div>
+          <div class="flip-face flip-back">
+            <ul>
+              <li><i class="fa-solid fa-check"></i> 正在上的课高亮</li>
+              <li><i class="fa-solid fa-check"></i> 下课倒计时</li>
+              <li><i class="fa-solid fa-check"></i> 可拖动悬浮窗</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="icon"><i class="fa-solid fa-circle-half-stroke"></i></div>
+            <h3>4 种主题</h3>
+            <p>亮色、暗色、通透、清新。</p>
+          </div>
+          <div class="flip-face flip-back">
+            <ul>
+              <li><i class="fa-solid fa-check"></i> 亮色 / 暗色</li>
+              <li><i class="fa-solid fa-check"></i> 通透 / 清新</li>
+              <li><i class="fa-solid fa-check"></i> 一键切换</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card reveal">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <div class="icon"><i class="fa-solid fa-globe"></i></div>
+            <h3>20 种语言</h3>
+            <p>简体、繁体、英、日、韩、法、德……</p>
+          </div>
+          <div class="flip-face flip-back">
+            <ul>
+              <li><i class="fa-solid fa-check"></i> 20 种语言</li>
+              <li><i class="fa-solid fa-check"></i> 随时切换</li>
+              <li><i class="fa-solid fa-check"></i> 社区可贡献</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3D 数据看板 ========== -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">数字说明一切</h2>
+      <p class="section-subtitle">小巧、专注、不打扰。</p>
+    </div>
+    <div class="stats-3d">
+      <div class="stat-3d reveal">
+        <div class="num" data-target="20" data-suffix=" 种">0</div>
+        <div class="label">界面语言</div>
+      </div>
+      <div class="stat-3d reveal">
+        <div class="num" data-target="4" data-suffix=" 种">0</div>
+        <div class="label">主题模式</div>
+      </div>
+      <div class="stat-3d reveal">
+        <div class="num" data-target="0" data-suffix=" 字节">0</div>
+        <div class="label">上传数据</div>
+      </div>
+      <div class="stat-3d reveal">
+        <div class="num" data-target="100" data-suffix="%">0</div>
+        <div class="label">本地存储</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 隐私承诺 ========== -->
+<section class="privacy-section">
+  <div class="container">
+    <div class="privacy-grid">
+      <div class="privacy-left">
+        <h2>你的数据，永远属于你。</h2>
+        <p>我们不做分析，不做广告，不做账号体系。<br>所有数据保存在你的设备上，删除程序即完全卸载。</p>
+        <div class="data-flow">
+          <div>
+            <div class="flow-label">STEP 01</div>
+            <div class="flow-text">你录入数据</div>
+          </div>
+          <div>
+            <div class="flow-label">STEP 02</div>
+            <div class="flow-text">保存在本地</div>
+          </div>
+          <div>
+            <div class="flow-label">STEP 03</div>
+            <div class="flow-text">不上传服务器</div>
+          </div>
+        </div>
+      </div>
+      <div class="privacy-right">
+        <ul class="privacy-list">
+          <li><i class="fa-solid fa-xmark"></i> 不上传你的数据</li>
+          <li><i class="fa-solid fa-xmark"></i> 不收集个人信息</li>
+          <li><i class="fa-solid fa-xmark"></i> 不使用分析工具</li>
+          <li><i class="fa-solid fa-xmark"></i> 不展示广告</li>
+          <li><i class="fa-solid fa-xmark"></i> 不要求登录</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 界面预览（轮播） ========== -->
+<section id="screenshots">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">界面预览</h2>
+      <p class="section-subtitle">简洁、直观、专注。左右滑动查看更多。</p>
+    </div>
+    <div class="carousel">
+      <div class="carousel-track">
+        <div class="carousel-slide">
+          <img src="assets/img/screenshots/schedule.png" alt="课表界面">
+          <div class="carousel-caption"><strong>课表</strong>支持周次、单双周、自定义节次。</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="assets/img/screenshots/students.png" alt="学生管理界面">
+          <div class="carousel-caption"><strong>学生管理</strong>名单、座位表、个人档案。</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="assets/img/screenshots/grades.png" alt="成绩看板">
+          <div class="carousel-caption"><strong>成绩看板</strong>录入、排名、及格率。</div>
+        </div>
+        <div class="carousel-slide">
+          <img src="assets/img/screenshots/dark-theme.png" alt="暗色主题">
+          <div class="carousel-caption"><strong>暗色主题</strong>夜间使用更护眼。</div>
+        </div>
+      </div>
+      <button class="carousel-btn prev" aria-label="上一张"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn next" aria-label="下一张"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots">
+        <button class="carousel-dot active" aria-label="第 1 张"></button>
+        <button class="carousel-dot" aria-label="第 2 张"></button>
+        <button class="carousel-dot" aria-label="第 3 张"></button>
+        <button class="carousel-dot" aria-label="第 4 张"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 20 个功能看点（5 组轮播） ========== -->
+<section id="highlights">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">20 个功能看点</h2>
+      <p class="section-subtitle">从课表到成绩，从桌面到悬浮窗，一次到位。左右滑动查看全部。</p>
+    </div>
+    <div class="carousel">
+      <div class="carousel-track">
+
+        <div class="carousel-slide">
+          <div class="features-grid" style="border:none;border-radius:0">
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-calendar-days"></i></div><h3>周课表</h3><p>12 节课、单双周、自定义节次，一屏看全。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-clock"></i></div><h3>今日课程</h3><p>打开即看今天上什么，下节课在哪。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-mobile-screen"></i></div><h3>灵动岛</h3><p>今日课程悬浮窗，正在上的课高亮，下课倒计时。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-users"></i></div><h3>学生名单</h3><p>批量导入，支持 Excel / CSV。</p></div>
+          </div>
+        </div>
+
+        <div class="carousel-slide">
+          <div class="features-grid" style="border:none;border-radius:0">
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-chair"></i></div><h3>座位表</h3><p>可视化排座，拖拽调整，导出图片。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-id-card"></i></div><h3>学生档案</h3><p>每个学生的完整记录，一次录入全程可用。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-chart-simple"></i></div><h3>成绩录入</h3><p>键盘快速录入，自动保存，不怕断电。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-ranking-star"></i></div><h3>排名看板</h3><p>班级排名、年级排名，一目了然。</p></div>
+          </div>
+        </div>
+
+        <div class="carousel-slide">
+          <div class="features-grid" style="border:none;border-radius:0">
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-percent"></i></div><h3>及格率分析</h3><p>各科及格率、优秀率，教学效果量化。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-chart-line"></i></div><h3>成绩趋势</h3><p>按学期追踪，看进步也看退步。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-circle-half-stroke"></i></div><h3>4 种主题</h3><p>亮色、暗色、通透、清新，一键切换。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-globe"></i></div><h3>20 种语言</h3><p>简体、繁体、英、日、韩、法、德、西、俄、阿……</p></div>
+          </div>
+        </div>
+
+        <div class="carousel-slide">
+          <div class="features-grid" style="border:none;border-radius:0">
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-file-code"></i></div><h3>JSON 存储</h3><p>所有数据纯文本保存，随时打开查看。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-box-archive"></i></div><h3>一键备份</h3><p>复制目录即可，或使用内置备份功能。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-trash-can"></i></div><h3>零残留卸载</h3><p>删除程序目录 = 完全卸载，不留痕迹。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-keyboard"></i></div><h3>快捷键</h3><p>常用操作全键盘完成，效率翻倍。</p></div>
+          </div>
+        </div>
+
+        <div class="carousel-slide">
+          <div class="features-grid" style="border:none;border-radius:0">
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div><h3>全局搜索</h3><p>搜课程、搜学生、搜成绩，秒出结果。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-print"></i></div><h3>打印导出</h3><p>课表、座位表、成绩单，直接打印。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></div><h3>插件广场</h3><p>扩展功能，按需安装，纯本地运行。</p></div>
+            <div class="feature-card"><div class="icon"><i class="fa-solid fa-shield-halved"></i></div><h3>隐私优先</h3><p>不联网、不登录、不上传，数据永远在你手里。</p></div>
+          </div>
+        </div>
+
+      </div>
+      <button class="carousel-btn prev" aria-label="上一组"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn next" aria-label="下一组"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots">
+        <button class="carousel-dot active" aria-label="第 1 组"></button>
+        <button class="carousel-dot" aria-label="第 2 组"></button>
+        <button class="carousel-dot" aria-label="第 3 组"></button>
+        <button class="carousel-dot" aria-label="第 4 组"></button>
+        <button class="carousel-dot" aria-label="第 5 组"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 插件广场入口 ========== -->
+<section id="plugins">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">插件广场</h2>
+      <p class="section-subtitle">为课堂而生。插件系统即将开放。</p>
+    </div>
+    <div class="card-3d" style="padding:40px;text-align:center;max-width:800px;margin:0 auto">
+      <div style="font-size:44px;color:var(--accent);margin-bottom:16px">
+        <i class="fa-solid fa-display"></i>
+      </div>
+      <h3 style="font-size:22px;font-weight:600;margin-bottom:12px">放映辅助、批注、PDF 讲稿</h3>
+      <p style="color:var(--text-2);font-size:15px;margin-bottom:24px;line-height:1.7">
+        PPT 放映辅助、屏幕批注、PDF 讲稿、课堂计时器、一键点名……<br>
+        插件不联网、不上传数据，与主程序一致。
+      </p>
+      <a href="plugins.html" class="btn btn-primary">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>查看插件预告</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 技术栈 ========== -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">技术栈</h2>
+      <p class="section-subtitle">简单、可靠、可审计。</p>
+    </div>
+    <div class="tech-list">
+      <div class="tech-item"><div class="tech-label">语言</div><div class="tech-value">C# 12</div></div>
+      <div class="tech-item"><div class="tech-label">运行时</div><div class="tech-value">.NET 10</div></div>
+      <div class="tech-item"><div class="tech-label">界面</div><div class="tech-value">Windows Forms</div></div>
+      <div class="tech-item"><div class="tech-label">存储</div><div class="tech-value">JSON</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 下载 ========== -->
+<section id="download" style="background:var(--bg-soft)">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">下载</h2>
+      <p class="section-subtitle">Windows 10 / 11 · 免费开源 · MIT 协议</p>
+    </div>
+    <div class="download-cards">
+      <div class="download-card">
+        <h3>安装版</h3>
+        <p class="meta">v1.0.0 · .exe · 约 45 MB</p>
+        <a href="https://github.com/Azurelab-Azure/myclassroom/releases/download/v1.0.0/MyClassroom-Setup-1.0.0.exe" class="btn btn-primary">
+          <i class="fa-solid fa-download"></i>
+          <span>下载安装版</span>
+        </a>
+      </div>
+      <div class="download-card">
+        <h3>绿色版</h3>
+        <p class="meta">v1.0.0 · .zip · 约 40 MB</p>
+        <a href="https://github.com/Azurelab-Azure/myclassroom/releases/download/v1.0.0/MyClassroom-v1.0.0-portable.zip" class="btn btn-secondary">
+          <i class="fa-solid fa-download"></i>
+          <span>下载绿色版</span>
+        </a>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:24px;color:var(--text-3);font-size:13.5px">
+      更多版本与更新日志，请见 <a href="download.html">下载页</a>。
+    </p>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">常见问题</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><h3>需要联网吗？</h3><p>不需要。除了可选的新闻功能外，完全离线可用。</p></div>
+      <div class="faq-item"><h3>数据会上传吗？</h3><p>不会。所有数据保存在本地 JSON 文件中。</p></div>
+      <div class="faq-item"><h3>支持 Mac / Linux 吗？</h3><p>当前仅支持 Windows 10/11。跨平台版本在计划中。</p></div>
+      <div class="faq-item"><h3>怎么备份？</h3><p>复制程序目录即可。或使用内置"备份数据"功能。</p></div>
+      <div class="faq-item"><h3>怎么卸载？</h3><p>删除程序目录。数据文件也会一起删掉，零残留。</p></div>
+      <div class="faq-item"><h3>收费吗？</h3><p>完全免费，MIT 开源协议。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 页脚 ========== -->
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="product.html">产品介绍</a>
+      <a href="plugins.html">插件广场</a>
+      <a href="themes.html">主题</a>
+      <a href="about.html">关于</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="cookie.html">Cookie</a>
+      <a href="https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE" target="_blank" rel="noopener">MIT 协议</a>
+      <a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="copyright">
+      © 2026 <span class="lab"><span class="lab-mark">KZ</span><span class="brand">Kzure Lab</span></span> · 我的课表 MyClassroom · 保留所有权利
+    </p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+// ---------- 3D 卡片：鼠标跟随倾斜 ----------
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+
+  document.querySelectorAll('.card-3d').forEach(function (el) {
+    el.addEventListener('mousemove', function (e) {
+      var r = el.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width;
+      var y = (e.clientY - r.top) / r.height;
+      var rx = (0.5 - y) * 16;
+      var ry = (x - 0.5) * 16;
+      el.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+      el.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+      el.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+    });
+    el.addEventListener('mouseleave', function () {
+      el.style.transform = '';
+      el.style.setProperty('--mx', '50%');
+      el.style.setProperty('--my', '50%');
+    });
+  });
+
+  // ---------- 3D 数字滚动 ----------
+  var statNums = document.querySelectorAll('.stat-3d .num[data-target]');
+  if (statNums.length && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var target = parseFloat(el.getAttribute('data-target'));
+        var suffix = el.getAttribute('data-suffix') || '';
+        var start = performance.now();
+        function tick(now) {
+          var p = Math.min((now - start) / 1200, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    statNums.forEach(function (el) { io.observe(el); });
+  }
+
+  // ---------- 轮播 ----------
+  document.querySelectorAll('.carousel').forEach(function (carousel) {
+    var track = carousel.querySelector('.carousel-track');
+    var slides = carousel.querySelectorAll('.carousel-slide');
+    var prev = carousel.querySelector('.carousel-btn.prev');
+    var next = carousel.querySelector('.carousel-btn.next');
+    var dots = carousel.querySelectorAll('.carousel-dot');
+    var index = 0;
+    function go(i) {
+      if (i < 0) i = slides.length - 1;
+      if (i >= slides.length) i = 0;
+      index = i;
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+      dots.forEach(function (d, di) { d.classList.toggle('active', di === index); });
+    }
+    if (prev) prev.addEventListener('click', function () { go(index - 1); });
+    if (next) next.addEventListener('click', function () { go(index + 1); });
+    dots.forEach(function (d, di) { d.addEventListener('click', function () { go(di); }); });
+    if (slides.length > 1) {
+      var timer = setInterval(function () { go(index + 1); }, 6000);
+      carousel.addEventListener('mouseenter', function () { clearInterval(timer); });
+      carousel.addEventListener('mouseleave', function () {
+        timer = setInterval(function () { go(index + 1); }, 6000);
+      });
+    }
+    var startX = 0;
+    track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - startX;
+      if (dx > 50) go(index - 1);
+      else if (dx < -50) go(index + 1);
+    });
+    go(0);
+  });
+
+  // ---------- 滚动淡入 ----------
+  var reveals = document.querySelectorAll('.reveal');
+  if (reveals.length && 'IntersectionObserver' in window) {
+    var ro = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          ro.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function (el) { ro.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('visible'); });
+  }
+})();
+</script>
+</body>
+</html>

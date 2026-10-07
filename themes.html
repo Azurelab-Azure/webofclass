@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
+<head>
+<script>document.documentElement.classList.add('js-loading');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>主题 · MyClassroom</title>
+<meta name="description" content="我的课表 4 种主题：亮色、暗色、通透、清新。一键切换。">
+<link rel="icon" href="assets/img/logo/favicon.ico">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
+      <span>我的课表</span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="product.html">产品介绍</a></li>
+      <li><a href="index.html#features">功能</a></li>
+      <li><a href="plugins.html">插件广场</a></li>
+      <li><a href="themes.html">主题</a></li>
+      <li><a href="download.html">下载</a></li>
+      <li><a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+    <div class="ui-switcher" role="group" aria-label="UI 模式">
+      <button data-ui="light" title="亮色" aria-label="亮色"></button>
+      <button data-ui="dark" title="暗色" aria-label="暗色"></button>
+      <button data-ui="clear" title="通透" aria-label="通透"></button>
+      <button data-ui="fresh" title="清新" aria-label="清新"></button>
+    </div>
+    <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="tree-layout">
+
+    <!-- 左侧树 -->
+    <aside class="tree-aside" id="treeAside">
+      <div class="tree-title">目录</div>
+
+      <div class="tree-group">
+        <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 主题概览</div>
+        <ul class="tree-items">
+          <li><a href="#overview" class="active">四种主题</a></li>
+          <li><a href="#how">怎么切换</a></li>
+          <li><a href="#storage">存储位置</a></li>
+        </ul>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 主题详情</div>
+        <ul class="tree-items">
+          <li><a href="#light">亮色</a></li>
+          <li><a href="#dark">暗色</a></li>
+          <li><a href="#clear">通透</a></li>
+          <li><a href="#fresh">清新</a></li>
+        </ul>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 相关</div>
+        <ul class="tree-items">
+          <li><a href="product.html">产品介绍</a></li>
+          <li><a href="cookie.html">Cookie 与本地存储</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- 右侧内容 -->
+    <main class="tree-content">
+      <button class="tree-mobile-toggle" onclick="document.getElementById('treeAside').classList.toggle('mobile-hidden')">
+        <i class="fa-solid fa-list"></i> 目录
+      </button>
+
+      <h1>主题</h1>
+      <p class="page-lead">亮色、暗色、通透、清新。右上角切换，立刻生效。</p>
+
+      <h2 id="overview">四种主题</h2>
+      <p>《我的课表》提供 4 种界面主题。桌面软件内可切换，本官网也同步提供这 4 种模式，方便你在下载前先感受。</p>
+
+      <table class="tree-table">
+        <thead>
+          <tr><th>主题</th><th>底色</th><th>适合场景</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>亮色</td><td>白色</td><td>白天、光线充足</td></tr>
+          <tr><td>暗色</td><td>深灰</td><td>夜间、投影环境</td></tr>
+          <tr><td>通透</td><td>冷调浅蓝</td><td>白天、清爽现代</td></tr>
+          <tr><td>清新</td><td>自然绿调</td><td>长时间使用、护眼</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="how">怎么切换</h2>
+      <h3>官网</h3>
+      <ul>
+        <li>右上角 4 个圆点，点击即切换</li>
+        <li>月亮 / 太阳图标切换亮暗，UI 模式同步</li>
+      </ul>
+
+      <h3>桌面软件</h3>
+      <ul>
+        <li>设置 → 外观 → 主题</li>
+        <li>或使用快捷键（见软件内帮助）</li>
+      </ul>
+
+      <div class="callout">
+        <strong>提示：</strong>官网的主题选择保存在浏览器 LocalStorage 中，不会上传。软件的主题选择保存在程序目录下的 <code>config.json</code> 中。
+      </div>
+
+      <h2 id="storage">存储位置</h2>
+      <table class="tree-table">
+        <thead>
+          <tr><th>位置</th><th>存储内容</th><th>文件</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>官网</td><td>亮/暗 + UI 模式</td><td>浏览器 LocalStorage（键名 <code>theme</code>、<code>ui</code>）</td></tr>
+          <tr><td>桌面软件</td><td>主题、语言、窗口位置</td><td><code>config.json</code></td></tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <h2 id="light">亮色</h2>
+      <p>默认模式。白底黑字，长时间阅读不累。适合白天、光线充足的教室和办公室。</p>
+      <div style="padding:24px;border:1px solid var(--line);border-radius:var(--radius-m);background:#fff;color:#111;margin:16px 0">
+        <strong>示例：白底黑字</strong>
+        <p style="color:#555;margin-top:8px">这是亮色模式下的示例文字。</p>
+      </div>
+
+      <h2 id="dark">暗色</h2>
+      <p>夜间模式。深灰底浅字，减少屏幕刺激。适合夜间备课、投影环境。</p>
+      <div style="padding:24px;border:1px solid #2a2a2a;border-radius:var(--radius-m);background:#0e0e0e;color:#ededed;margin:16px 0">
+        <strong>示例：深底浅字</strong>
+        <p style="color:#a0a0a0;margin-top:8px">这是暗色模式下的示例文字。</p>
+      </div>
+
+      <h2 id="clear">通透</h2>
+      <p>冷色调浅蓝。清爽、现代，适合白天使用。</p>
+      <div style="padding:24px;border:1px solid #dce4ef;border-radius:var(--radius-m);background:#eef3f9;color:#1a2333;margin:16px 0">
+        <strong>示例：浅蓝底</strong>
+        <p style="color:#4a5a73;margin-top:8px">这是通透模式下的示例文字。</p>
+      </div>
+
+      <h2 id="fresh">清新</h2>
+      <p>自然绿调。柔和、护眼，适合长时间使用。</p>
+      <div style="padding:24px;border:1px solid #dee9d6;border-radius:var(--radius-m);background:#f1f7ec;color:#1e2a1a;margin:16px 0">
+        <strong>示例：浅绿底</strong>
+        <p style="color:#4e5e48;margin-top:8px">这是清新模式下的示例文字。</p>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="product.html">产品介绍</a>
+      <a href="plugins.html">插件广场</a>
+      <a href="themes.html">主题</a>
+      <a href="about.html">关于</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="cookie.html">Cookie</a>
+      <a href="https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE" target="_blank" rel="noopener">MIT 协议</a>
+      <a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="copyright">© 2026 <span class="lab"><span class="lab-mark">KZ</span><span class="brand">Kzure Lab</span></span> · 我的课表 MyClassroom · 保留所有权利</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+// TreeUI：折叠 + 高亮 + 平滑滚动
+(function () {
+  // 折叠
+  document.querySelectorAll('.tree-group-title').forEach(function (t) {
+    t.style.cursor = 'pointer';
+    t.addEventListener('click', function () {
+      t.parentElement.classList.toggle('collapsed');
+    });
+  });
+
+  // 高亮当前章节
+  var links = document.querySelectorAll('.tree-items a[href^="#"]');
+  var sections = [];
+  links.forEach(function (a) {
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({ id: id, el: el, link: a });
+  });
+
+  function setActive(id) {
+    links.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+
+  if ('IntersectionObserver' in window && sections.length) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) setActive(e.target.id);
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    sections.forEach(function (s) { io.observe(s.el); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
+<head>
+<script>document.documentElement.classList.add('js-loading');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>隐私政策 · MyClassroom</title>
+<meta name="description" content="我的课表隐私政策：不收集任何个人信息，所有数据保存在本地设备。">
+<link rel="icon" href="assets/img/logo/favicon.ico">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
+      <span>我的课表</span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="product.html">产品介绍</a></li>
+      <li><a href="index.html#features">功能</a></li>
+      <li><a href="plugins.html">插件广场</a></li>
+      <li><a href="themes.html">主题</a></li>
+      <li><a href="download.html">下载</a></li>
+      <li><a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+    <div class="ui-switcher" role="group" aria-label="UI 模式">
+      <button data-ui="light" title="亮色" aria-label="亮色"></button>
+      <button data-ui="dark" title="暗色" aria-label="暗色"></button>
+      <button data-ui="clear" title="通透" aria-label="通透"></button>
+      <button data-ui="fresh" title="清新" aria-label="清新"></button>
+    </div>
+    <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="tree-layout">
+
+    <aside class="tree-aside" id="treeAside">
+      <div class="tree-title">目录</div>
+
+      <div class="tree-group">
+        <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 政策条款</div>
+        <ul class="tree-items">
+          <li><a href="#who" class="active">我们是谁</a></li>
+          <li><a href="#collect">我们收集什么</a></li>
+          <li><a href="#storage">数据存储</a></li>
+          <li><a href="#third">第三方服务</a></li>
+          <li><a href="#rights">您的权利</a></li>
+          <li><a href="#contact">联系我们</a></li>
+        </ul>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 相关</div>
+        <ul class="tree-items">
+          <li><a href="cookie.html">Cookie 与本地存储</a></li>
+          <li><a href="about.html">关于</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="tree-content">
+      <button class="tree-mobile-toggle" onclick="document.getElementById('treeAside').classList.toggle('mobile-hidden')">
+        <i class="fa-solid fa-list"></i> 目录
+      </button>
+
+      <h1>隐私政策</h1>
+      <p class="page-lead">最后更新：2026-10-06</p>
+
+      <h2 id="who">一、我们是谁</h2>
+      <p>本软件《我的课表》由 Kzure Lab 开发。这是一款完全离线的本地软件，无需登录、无需网络。</p>
+
+      <h2 id="collect">二、我们收集什么</h2>
+      <p>我们不收集任何个人信息。所有数据（课程、教师、学生、成绩等）均保存在您的本地设备上，永远不会上传到任何服务器。</p>
+
+      <h2 id="storage">三、数据存储</h2>
+      <p>所有数据以 JSON 文件形式保存在程序目录（或 <code>%APPDATA%\MyClassroom</code>）中。您可以随时打开、备份、复制或删除这些文件。</p>
+
+      <h2 id="third">四、第三方服务</h2>
+      <p>本软件不使用任何第三方分析服务、广告服务或统计服务。</p>
+      <p>新闻资讯功能（可选，默认关闭）会访问您指定的 RSS 地址，仅用于获取新闻标题。该功能不会上传您的任何信息。</p>
+
+      <div class="callout">
+        <strong>说明：</strong>RSS 功能只下载内容到本地，不会上传任何数据。默认关闭，需手动开启。
+      </div>
+
+      <h2 id="rights">五、您的权利</h2>
+      <p>您拥有数据的完整控制权。删除程序目录即可完全卸载，不残留任何数据。</p>
+
+      <h2 id="contact">六、联系我们</h2>
+      <p>如有隐私相关问题，请通过以下方式反馈：</p>
+      <ul>
+        <li>GitHub Issues：<a href="https://github.com/Azurelab-Azure/myclassroom/issues" target="_blank" rel="noopener">项目主页</a></li>
+        <li>邮箱：<code>support@kzurelab.com</code></li>
+      </ul>
+
+    </main>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="product.html">产品介绍</a>
+      <a href="plugins.html">插件广场</a>
+      <a href="themes.html">主题</a>
+      <a href="about.html">关于</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="cookie.html">Cookie</a>
+      <a href="https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE" target="_blank" rel="noopener">MIT 协议</a>
+      <a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="copyright">© 2026 <span class="lab"><span class="lab-mark">KZ</span><span class="brand">Kzure Lab</span></span> · 我的课表 MyClassroom · 保留所有权利</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+(function () {
+  document.querySelectorAll('.tree-group-title').forEach(function (t) {
+    t.style.cursor = 'pointer';
+    t.addEventListener('click', function () {
+      t.parentElement.classList.toggle('collapsed');
+    });
+  });
+  var links = document.querySelectorAll('.tree-items a[href^="#"]');
+  var sections = [];
+  links.forEach(function (a) {
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({ id: id, el: el, link: a });
+  });
+  function setActive(id) {
+    links.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+  if ('IntersectionObserver' in window && sections.length) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) setActive(e.target.id);
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    sections.forEach(function (s) { io.observe(s.el); });
+  }
+})();
+</script>
+</body>
+</html>
