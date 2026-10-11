@@ -1,12 +1,121 @@
 /* ============================================
-   我的课表 · 官网脚本 v1.2
-   主题 + UI 模式 + 轮播 + 滚动淡入
+   我的课表 · 公共脚本
+   功能：主题切换、UI 模式、JSON 数据加载、
+        链接替换、滚动进度条、数字滚动、
+        卡片 3D 倾斜、滚动淡入、Cookie 条、
+        平滑锚点
    ============================================ */
 
-// ---------- 主题 & UI 模式初始化 ----------
-(function () {
-  var theme = localStorage.getItem('theme');
-  var ui = localStorage.getItem('ui');
+// 全局数据缓存
+const SiteData = {
+  site: null,
+  links: null,
+  changelog: null
+};
+
+/**
+ * 读取 JSON 文件
+ * 输入路径返回解析后的对象
+ * 读取失败返回 null 不抛异常
+ */
+async function loadJSON(path) {
+  try {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error('加载失败 ' + path);
+    return await res.json();
+  } catch (err) {
+    console.warn('JSON 读取失败', path, err);
+    return null;
+  }
+}
+
+/**
+ * 批量加载站点数据
+ * 依次读取 site、links、changelog
+ * 任意一个失败都不影响其他
+ */
+async function loadAllData() {
+  const results = await Promise.all([
+    loadJSON('assets/data/site.json'),
+    loadJSON('assets/data/links.json'),
+    loadJSON('assets/data/changelog.json')
+  ]);
+  SiteData.site = results[0] || {};
+  SiteData.links = results[1] || {};
+  SiteData.changelog = results[2] || null;
+}
+
+/**
+ * 按点分路径取值
+ * 例如 getByPath(obj, 'download.installer')
+ */
+function getByPath(obj, path) {
+  if (!obj || !path) return undefined;
+  return path.split('.').reduce(function (acc, key) {
+    return acc && acc[key] !== undefined ? acc[key] : undefined;
+  }, obj);
+}
+
+/**
+ * 替换页面中所有 data-link 元素的 href
+ * 元素写法 a data-link 等于 github
+ */
+function applyLinks() {
+  document.querySelectorAll('[data-link]').forEach(function (el) {
+    const path = el.getAttribute('data-link');
+    const url = getByPath(SiteData.links, path);
+    if (url) el.setAttribute('href', url);
+  });
+}
+
+/**
+ * 替换页面中所有 data-text 元素的文本
+ * 用于版本号、版权年份、品牌名
+ */
+function applyTexts() {
+  document.querySelectorAll('[data-text]').forEach(function (el) {
+    const path = el.getAttribute('data-text');
+    const val = getByPath(SiteData.site, path);
+    if (val !== undefined && val !== null) el.textContent = val;
+  });
+}
+
+/**
+ * 渲染更新日志与历史版本
+ * 用于 download.html 的 changelogCurrent 与 changelogHistory
+ */
+function renderChangelog() {
+  if (!SiteData.changelog) return;
+
+  const currentBox = document.getElementById('changelogCurrent');
+  if (currentBox && SiteData.changelog.current) {
+    const c = SiteData.changelog.current;
+    let html = '<h3>v' + c.version + ' · ' + c.date + '</h3><ul>';
+    c.items.forEach(function (item) {
+      html += '<li>' + item + '</li>';
+    });
+    html += '</ul>';
+    currentBox.innerHTML = html;
+  }
+
+  const historyBox = document.getElementById('changelogHistory');
+  if (historyBox && SiteData.changelog.history) {
+    let html = '<table class="tree-table"><thead><tr><th>版本</th><th>日期</th><th>说明</th></tr></thead><tbody>';
+    SiteData.changelog.history.forEach(function (row) {
+      html += '<tr><td>v' + row.version + '</td><td>' + row.date + '</td><td>' + row.note + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    historyBox.innerHTML = html;
+  }
+}
+
+/**
+ * 初始化主题和 UI 模式
+ * 优先读取本地存储否则跟随系统
+ */
+function initTheme() {
+  let theme = localStorage.getItem('theme');
+  let ui = localStorage.getItem('ui');
 
   if (!theme) {
     theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -15,32 +124,45 @@
 
   document.documentElement.setAttribute('data-theme', theme);
   document.documentElement.setAttribute('data-ui', ui);
-})();
+}
 
-document.addEventListener('DOMContentLoaded', function () {
+/**
+ * 更新主题切换按钮的图标
+ * 暗色显示太阳亮色显示月亮
+ */
+function updateThemeIcon(theme) {
+  const icon = document.querySelector('.theme-toggle i');
+  if (!icon) return;
+  icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+}
 
-  // ---------- UI 模式切换器 ----------
-  var uiButtons = document.querySelectorAll('.ui-switcher button');
-  uiButtons.forEach(function (btn) {
-    var ui = btn.getAttribute('data-ui');
-    if (ui === document.documentElement.getAttribute('data-ui')) {
-      btn.classList.add('active');
-    }
+/**
+ * 绑定 UI 模式切换器
+ * 四个圆点分别对应亮色暗色通透清新
+ */
+function bindUISwitcher() {
+  const buttons = document.querySelectorAll('.ui-switcher button');
+  if (!buttons.length) return;
+
+  const currentUI = document.documentElement.getAttribute('data-ui');
+  buttons.forEach(function (btn) {
+    if (btn.getAttribute('data-ui') === currentUI) btn.classList.add('active');
+
     btn.addEventListener('click', function () {
-      uiButtons.forEach(function (b) { b.classList.remove('active'); });
+      buttons.forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
 
-      var uiVal = btn.getAttribute('data-ui');
+      const uiVal = btn.getAttribute('data-ui');
       document.documentElement.setAttribute('data-ui', uiVal);
       localStorage.setItem('ui', uiVal);
 
-      // 通透/清新是浅色系，切到这两个时把 data-theme 也同步为 light
+      // 通透和清新属于浅色系同步主题
       if (uiVal === 'clear' || uiVal === 'fresh') {
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
         updateThemeIcon('light');
       }
-      // 点 dark 时同步主题为 dark
+      // 暗色模式同步主题
       if (uiVal === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
@@ -48,286 +170,162 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+}
 
-  // ---------- 亮/暗切换按钮（保留） ----------
-  var toggle = document.querySelector('.theme-toggle');
-  if (toggle) {
-    toggle.addEventListener('click', function () {
-      var current = document.documentElement.getAttribute('data-theme');
-      var next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      updateThemeIcon(next);
+/**
+ * 绑定亮暗切换按钮
+ * 点击时同步更新 UI 模式的选中状态
+ */
+function bindThemeToggle() {
+  const toggle = document.querySelector('.theme-toggle');
+  if (!toggle) return;
 
-      // 亮/暗切换时，UI 模式同步
-      var uiVal = next === 'dark' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-ui', uiVal);
-      localStorage.setItem('ui', uiVal);
-      uiButtons.forEach(function (b) {
-        b.classList.toggle('active', b.getAttribute('data-ui') === uiVal);
-      });
-    });
-    updateThemeIcon(document.documentElement.getAttribute('data-theme'));
-  }
+  toggle.addEventListener('click', function () {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateThemeIcon(next);
 
-  function updateThemeIcon(theme) {
-    var icon = document.querySelector('.theme-toggle i');
-    if (icon) {
-      icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-    }
-  }
-
-  // ---------- 轮播 ----------
-  document.querySelectorAll('.carousel').forEach(function (carousel) {
-    var track = carousel.querySelector('.carousel-track');
-    var slides = carousel.querySelectorAll('.carousel-slide');
-    var prev = carousel.querySelector('.carousel-btn.prev');
-    var next = carousel.querySelector('.carousel-btn.next');
-    var dots = carousel.querySelectorAll('.carousel-dot');
-    var index = 0;
-
-    function go(i) {
-      if (i < 0) i = slides.length - 1;
-      if (i >= slides.length) i = 0;
-      index = i;
-      track.style.transform = 'translateX(-' + (index * 100) + '%)';
-      dots.forEach(function (d, di) {
-        d.classList.toggle('active', di === index);
-      });
-    }
-
-    if (prev) prev.addEventListener('click', function () { go(index - 1); });
-    if (next) next.addEventListener('click', function () { go(index + 1); });
-    dots.forEach(function (d, di) {
-      d.addEventListener('click', function () { go(di); });
-    });
-
-    // 自动播放（可选）
-    if (slides.length > 1) {
-      var timer = setInterval(function () { go(index + 1); }, 6000);
-      carousel.addEventListener('mouseenter', function () { clearInterval(timer); });
-      carousel.addEventListener('mouseleave', function () {
-        timer = setInterval(function () { go(index + 1); }, 6000);
-      });
-    }
-
-    // 触摸滑动
-    var startX = 0;
-    track.addEventListener('touchstart', function (e) {
-      startX = e.touches[0].clientX;
-    }, { passive: true });
-    track.addEventListener('touchend', function (e) {
-      var dx = e.changedTouches[0].clientX - startX;
-      if (dx > 50) go(index - 1);
-      else if (dx < -50) go(index + 1);
-    });
-
-    go(0);
-  });
-
-
-  // ---------- 插件广场：分类 Tab 滚动 ----------
-  var storeTabs = document.querySelectorAll('#storeTabs .store-tab');
-  if (storeTabs.length) {
-    storeTabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        storeTabs.forEach(function (t) { t.classList.remove('active'); });
-        tab.classList.add('active');
-
-        var target = tab.getAttribute('data-target');
-        if (target === 'all') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          return;
-        }
-        var el = document.getElementById(target);
-        if (el) {
-          var top = el.getBoundingClientRect().top + window.pageYOffset - 70;
-          window.scrollTo({ top: top, behavior: 'smooth' });
-        }
-      });
-    });
-  }
-
-  // ---------- 获取按钮点击反馈 ----------
-  document.querySelectorAll('.get-btn, .rank-action').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      if (btn.classList.contains('installed')) return;
-      var original = btn.textContent;
-      btn.textContent = '即将开放';
-      btn.classList.add('installed');
-      setTimeout(function () {
-        btn.textContent = original;
-        btn.classList.remove('installed');
-      }, 1600);
+    const uiVal = next === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-ui', uiVal);
+    localStorage.setItem('ui', uiVal);
+    document.querySelectorAll('.ui-switcher button').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-ui') === uiVal);
     });
   });
 
-  // ---------- 滚动淡入 ----------
-  var reveals = document.querySelectorAll('.reveal');
-  if (reveals.length && 'IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(function (el) { observer.observe(el); });
-  } else {
-    reveals.forEach(function (el) { el.classList.add('visible'); });
+  updateThemeIcon(document.documentElement.getAttribute('data-theme'));
+}
+
+/**
+ * 滚动进度条
+ * 页面顶部一条细线随滚动增长
+ */
+function initScrollProgress() {
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  document.body.appendChild(bar);
+
+  function update() {
+    const doc = document.documentElement;
+    const total = doc.scrollHeight - doc.clientHeight;
+    const current = doc.scrollTop;
+    bar.style.width = (total > 0 ? (current / total) * 100 : 0) + '%';
   }
 
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
 
-});
+/**
+ * 数字滚动
+ * 元素进入视口时从 0 跳到目标值
+ * 用 easeOutCubic 缓动
+ */
+function initStatCounters() {
+  const nums = document.querySelectorAll('.stat-3d .num[data-target]');
+  if (!nums.length || !('IntersectionObserver' in window)) return;
 
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseFloat(el.getAttribute('data-target'));
+      const suffix = el.getAttribute('data-suffix') || '';
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      const duration = 1200;
+      const start = performance.now();
 
-/* ============================================
-   3D 交互 v1.3
-   ============================================ */
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = target * eased;
+        el.textContent = val.toFixed(decimals) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.4 });
 
-(function () {
-  // 尊重用户的"减少动态"偏好
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  nums.forEach(function (el) { io.observe(el); });
+}
+
+/**
+ * 卡片 3D 倾斜
+ * 鼠标在卡片上移动时轻微旋转
+ * 同时更新光晕位置变量
+ */
+function initCardTilt() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;
 
-  // ---------- 3D 卡片：鼠标跟随倾斜 + 光晕 ----------
-  function bindTilt(el) {
-    var maxTilt = 8; // 最大倾斜角度
-
+  document.querySelectorAll('.card-3d').forEach(function (el) {
     el.addEventListener('mousemove', function (e) {
-      var rect = el.getBoundingClientRect();
-      var x = (e.clientX - rect.left) / rect.width;
-      var y = (e.clientY - rect.top) / rect.height;
-
-      var rx = (0.5 - y) * maxTilt * 2;
-      var ry = (x - 0.5) * maxTilt * 2;
-
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      const rx = (0.5 - y) * 14;
+      const ry = (x - 0.5) * 14;
       el.style.transform =
-        'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateZ(0)';
-
+        'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
       el.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
       el.style.setProperty('--my', (y * 100).toFixed(1) + '%');
     });
 
     el.addEventListener('mouseleave', function () {
-      el.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      el.style.transform = '';
       el.style.setProperty('--mx', '50%');
       el.style.setProperty('--my', '50%');
     });
+  });
+}
+
+/**
+ * 滚动淡入
+ * 元素进入视口时加 visible 类
+ * 同时触发数字 3D 翻转动画
+ */
+function initReveal() {
+  const items = document.querySelectorAll('.reveal, .stat-3d');
+  if (!items.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('visible'); });
+    return;
   }
 
-  document.querySelectorAll('.card-3d').forEach(bindTilt);
-
-  // ---------- 3D 堆叠：鼠标移动时整体轻微偏移 ----------
-  var stack = document.querySelector('.stack-3d');
-  if (stack) {
-    var items = stack.querySelectorAll('.stack-item');
-    stack.addEventListener('mousemove', function (e) {
-      var rect = stack.getBoundingClientRect();
-      var x = (e.clientX - rect.left) / rect.width - 0.5;
-      var y = (e.clientY - rect.top) / rect.height - 0.5;
-
-      items.forEach(function (item, i) {
-        var depth = i === 0 ? 10 : 4;
-        var tx = x * depth;
-        var ty = y * depth;
-        item.style.setProperty('--tx', tx.toFixed(2) + 'px');
-        item.style.setProperty('--ty', ty.toFixed(2) + 'px');
-        // 叠加到现有 transform 上（用 translate 补一层）
-        item.style.transition = 'transform .2s ease-out';
-        item.style.transform =
-          getComputedStyle(item).transform === 'none'
-            ? 'translate(' + tx + 'px, ' + ty + 'px)'
-            : item.style.transform;
-      });
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
     });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    stack.addEventListener('mouseleave', function () {
-      items.forEach(function (item) {
-        item.style.transition = 'transform .7s cubic-bezier(.2, .8, .2, 1)';
-      });
-    });
-  }
+  items.forEach(function (el) { io.observe(el); });
+}
 
-  // ---------- 3D 数字滚动 ----------
-  var statNums = document.querySelectorAll('.stat-3d .num[data-target]');
-  if (statNums.length && 'IntersectionObserver' in window) {
-    var statObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var el = entry.target;
-        var target = parseFloat(el.getAttribute('data-target'));
-        var suffix = el.getAttribute('data-suffix') || '';
-        var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
-        var duration = 1200;
-        var start = performance.now();
-
-        function tick(now) {
-          var p = Math.min((now - start) / duration, 1);
-          // easeOutCubic
-          var eased = 1 - Math.pow(1 - p, 3);
-          var val = target * eased;
-          el.textContent = val.toFixed(decimals) + suffix;
-          if (p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-        statObserver.unobserve(el);
-      });
-    }, { threshold: 0.4 });
-
-    statNums.forEach(function (el) { statObserver.observe(el); });
-  }
-})();
-
-
-
-
-
-
-
-
-
-/* ============================================
-   v3.1 · 加载完成 + Cookie 同意 + 平滑
-   ============================================ */
-
-(function () {
-  var html = document.documentElement;
-
-  // ---------- 首屏加载动画 ----------
-  function ready() {
-    // 至少一帧后再加 is-ready，保证过渡可见
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        html.classList.remove('js-loading');
-        document.body.classList.add('is-ready');
-      });
-    });
-  }
-
-  if (document.readyState === 'complete') {
-    ready();
-  } else {
-    window.addEventListener('load', ready);
-    // 兜底：最长 1.2s 必须显示
-    setTimeout(ready, 1200);
-  }
-
-  // ---------- Cookie 同意条 ----------
-  var COOKIE_KEY = 'myclassroom_cookie_consent';
-  var COOKIE_DAYS = 365;
+/**
+ * Cookie 同意条
+ * 记录用户是否已确认本地存储使用
+ * 一年内不再弹出
+ */
+function initCookieBanner() {
+  const KEY = 'myclassroom_cookie_consent';
+  const DAYS = 365;
 
   function getConsent() {
     try {
-      var raw = localStorage.getItem(COOKIE_KEY);
+      const raw = localStorage.getItem(KEY);
       if (!raw) return null;
-      var obj = JSON.parse(raw);
+      const obj = JSON.parse(raw);
       if (!obj || !obj.time) return null;
-      var ageDays = (Date.now() - obj.time) / 86400000;
-      if (ageDays > COOKIE_DAYS) {
-        localStorage.removeItem(COOKIE_KEY);
+      if ((Date.now() - obj.time) / 86400000 > DAYS) {
+        localStorage.removeItem(KEY);
         return null;
       }
       return obj;
@@ -338,241 +336,126 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function setConsent(value) {
     try {
-      localStorage.setItem(COOKIE_KEY, JSON.stringify({
-        value: value,
-        time: Date.now()
-      }));
+      localStorage.setItem(KEY, JSON.stringify({ value: value, time: Date.now() }));
     } catch (e) {}
   }
 
-  function buildCookieBanner() {
-    var banner = document.createElement('div');
-    banner.className = 'cookie-banner';
-    banner.setAttribute('role', 'dialog');
-    banner.setAttribute('aria-label', 'Cookie 与本地存储说明');
-    banner.innerHTML =
-      '<div class="cookie-inner">' +
-        '<div class="cookie-icon"><i class="fa-solid fa-cookie-bite"></i></div>' +
-        '<div class="cookie-text">' +
-          '<strong>本站只使用必要的本地存储。</strong>' +
-          '我们用它记住你的主题偏好（亮/暗、通透、清新），不做追踪、不做广告、不上传任何数据。' +
-          '详见 <a href="cookie.html">Cookie 与本地存储说明</a>。' +
-        '</div>' +
-        '<div class="cookie-actions">' +
-          '<button type="button" class="btn btn-secondary" data-cookie="decline">仅必要</button>' +
-          '<button type="button" class="btn btn-primary" data-cookie="accept">知道了</button>' +
-        '</div>' +
-      '</div>';
-    document.body.appendChild(banner);
+  if (getConsent()) return;
 
-    // 下一帧再显示，保证过渡动画可见
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        banner.classList.add('show');
-      });
-    });
-
-    banner.addEventListener('click', function (e) {
-      var t = e.target.closest('[data-cookie]');
-      if (!t) return;
-      var v = t.getAttribute('data-cookie');
-      setConsent(v);
-      banner.classList.remove('show');
-      setTimeout(function () {
-        banner.remove();
-      }, 500);
-    });
-  }
-
-  function initCookieBanner() {
-    if (getConsent()) return;
-    buildCookieBanner();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCookieBanner);
-  } else {
-    initCookieBanner();
-  }
-
-  // ---------- 平滑锚点滚动（带导航栏偏移） ----------
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest('a[href^="#"]');
-    if (!a) return;
-    var href = a.getAttribute('href');
-    if (href === '#' || href === '#top') return;
-    var el = document.querySelector(href);
-    if (!el) return;
-    e.preventDefault();
-    var navH = 64;
-    var top = el.getBoundingClientRect().top + window.pageYOffset - navH - 12;
-    window.scrollTo({ top: top, behavior: 'smooth' });
-    history.replaceState(null, '', href);
-  });
-})();
-
-
-
-
-
-
-/* ============================================
-   开屏动画 v4.0
-   ============================================ */
-
-(function () {
-  var SPLASH_MIN_MS = 2000;     // 最短显示时长
-  var SPLASH_MAX_MS = 2200;    // 兜底最长时长
-
-  // 首次访问才显示开屏；用 sessionStorage，会话内只闪一次
-  var KEY = 'myclassroom_splash_shown';
-  var seen = false;
-  try { seen = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
-
-  // 想每次都看，把 seen 强制设为 false
-  // seen = false;
-
-  function buildSplash() {
-    var s = document.createElement('div');
-    s.className = 'splash';
-    s.setAttribute('aria-hidden', 'true');
-    s.innerHTML =
-      '<div class="splash-mark">' +
-        '<span class="splash-lab-mark">KZ</span>' +
-        '<span class="splash-brand">Kzure Lab</span>' +
+  const banner = document.createElement('div');
+  banner.className = 'cookie-banner';
+  banner.setAttribute('role', 'dialog');
+  banner.innerHTML =
+    '<div class="cookie-inner">' +
+      '<div class="cookie-icon"><i class="fa-solid fa-cookie-bite"></i></div>' +
+      '<div class="cookie-text">' +
+        '<strong>本站只使用必要的本地存储。</strong>' +
+        '用于记住你的主题偏好，不做追踪、不做广告。详见 ' +
+        '<a href="cookie.html">Cookie 说明</a>。' +
       '</div>' +
-      '<div class="splash-bar"></div>' +
-      '<div class="splash-tagline">MyClassroom</div>';
-    return s;
+      '<div class="cookie-actions">' +
+        '<button type="button" class="btn btn-secondary" data-cookie="decline">仅必要</button>' +
+        '<button type="button" class="btn btn-primary" data-cookie="accept">知道了</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(banner);
+
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () { banner.classList.add('show'); });
+  });
+
+  banner.addEventListener('click', function (e) {
+    const t = e.target.closest('[data-cookie]');
+    if (!t) return;
+    setConsent(t.getAttribute('data-cookie'));
+    banner.classList.remove('show');
+    setTimeout(function () { banner.remove(); }, 500);
+  });
+}
+
+/**
+ * 平滑锚点滚动
+ * 自动避开导航栏高度
+ */
+function initCookieBanner() {
+  const SESSION_KEY = 'myclassroom_cookie_shown';
+  const CONSENT_KEY = 'myclassroom_cookie_consent';
+  const DAYS = 365;
+
+  // 本次会话已经弹过就直接返回
+  try {
+    if (sessionStorage.getItem(SESSION_KEY) === '1') return;
+  } catch (e) {}
+
+  function setConsent(value) {
+    try {
+      localStorage.setItem(CONSENT_KEY, JSON.stringify({
+        value: value,
+        time: Date.now()
+      }));
+      sessionStorage.setItem(SESSION_KEY, '1');
+    } catch (e) {}
   }
 
-  function hideSplash(el) {
-    el.classList.add('hide');
-    try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
-    setTimeout(function () {
-      if (el.parentNode) el.parentNode.removeChild(el);
-    }, 600);
-  }
+  const banner = document.createElement('div');
+  banner.className = 'cookie-banner';
+  banner.setAttribute('role', 'dialog');
+  banner.setAttribute('aria-modal', 'true');
+  banner.innerHTML =
+    '<div class="cookie-inner">' +
+      '<div class="cookie-icon"><i class="fa-solid fa-cookie-bite"></i></div>' +
+      '<div class="cookie-text">' +
+        '<strong>本站只使用必要的本地存储。</strong>' +
+        '用于记住你的主题偏好，不做追踪、不做广告。详见 ' +
+        '<a href="cookie.html">Cookie 说明</a>。' +
+      '</div>' +
+      '<div class="cookie-actions">' +
+        '<button type="button" class="btn btn-secondary" data-cookie="decline">仅必要</button>' +
+        '<button type="button" class="btn btn-primary" data-cookie="accept">知道了</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(banner);
 
-  function runSplash() {
-    var splash = buildSplash();
-    document.body.appendChild(splash);
-    // 至少显示 SPLASH_MIN_MS，之后立刻隐藏
-    var start = Date.now();
-    function finish() {
-      var elapsed = Date.now() - start;
-      var wait = Math.max(0, SPLASH_MIN_MS - elapsed);
-      setTimeout(function () { hideSplash(splash); }, wait);
-    }
-    if (document.readyState === 'complete') {
-      finish();
-    } else {
-      window.addEventListener('load', finish);
-      // 兜底，最长 SPLASH_MAX_MS 一定隐藏
-      setTimeout(finish, SPLASH_MAX_MS);
-    }
-  }
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () { banner.classList.add('show'); });
+  });
 
-  if (!seen) {
-    // 必须在 body 上，DOM 就绪后立刻插
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', runSplash);
-    } else {
-      runSplash();
-    }
-  }
-})();
+  banner.addEventListener('click', function (e) {
+    const t = e.target.closest('[data-cookie]');
+    if (!t) return;
+    setConsent(t.getAttribute('data-cookie'));
+    banner.classList.remove('show');
+    setTimeout(function () { banner.remove(); }, 500);
+  });
+}
 
 
+/**
+ * 主入口
+ * 所有初始化独立 try 保证一项失败不影响其他
+ * 最后统一移除 js-loading 加 is-ready
+ */
+async function bootstrap() {
+  try { initTheme(); } catch (e) { console.warn('主题初始化失败', e); }
+  try { await loadAllData(); } catch (e) { console.warn('数据加载失败', e); }
+  try { applyLinks(); } catch (e) { console.warn('链接替换失败', e); }
+  try { applyTexts(); } catch (e) { console.warn('文本替换失败', e); }
+  try { renderChangelog(); } catch (e) { console.warn('日志渲染失败', e); }
+  try { bindUISwitcher(); } catch (e) { console.warn('UI 切换绑定失败', e); }
+  try { bindThemeToggle(); } catch (e) { console.warn('主题切换绑定失败', e); }
+  try { initScrollProgress(); } catch (e) { console.warn('滚动进度条失败', e); }
+  try { initStatCounters(); } catch (e) { console.warn('数字滚动失败', e); }
+  try { initCardTilt(); } catch (e) { console.warn('卡片倾斜失败', e); }
+  try { initReveal(); } catch (e) { console.warn('滚动淡入失败', e); }
+  try { initCookieBanner(); } catch (e) { console.warn('Cookie 条失败', e); }
+  try { initSmoothAnchor(); } catch (e) { console.warn('锚点滚动失败', e); }
 
+  document.documentElement.classList.remove('js-loading');
+  document.body.classList.add('is-ready');
+}
 
-
-
-/* ============================================
-   开屏动画 v4.2 · 丝滑版
-   - 与 CSS 3.2s 时间轴对齐
-   - 停留结束后再触发整体淡出
-   ============================================ */
-
-(function () {
-  // CSS 动画总长 3.2s，之后再停留 0.3s，然后整体淡出
-  var CSS_ANIM_MS = 3200;
-  var HOLD_MS = 300;
-  var HIDE_MS = 650;
-
-  // 同一会话只闪一次
-  var KEY = 'myclassroom_splash_shown_v3';
-  var seen = false;
-  try { seen = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
-
-  // 想让每次访问都闪，取消下面注释
-  // seen = false;
-
-  function buildSplash() {
-    var s = document.createElement('div');
-    s.className = 'splash';
-    s.setAttribute('aria-hidden', 'true');
-    s.innerHTML =
-      '<div class="splash-stage">' +
-        '<div class="splash-step1">' +
-          '<span>Kzure Lab</span>' +
-        '</div>' +
-        '<div class="splash-step2">' +
-          '<span class="txt">Kzure</span>' +
-          '<span class="box">Lab</span>' +
-        '</div>' +
-      '</div>';
-    return s;
-  }
-
-  function hideSplash(el) {
-    el.classList.add('hide');
-    try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
-    setTimeout(function () {
-      if (el.parentNode) el.parentNode.removeChild(el);
-    }, HIDE_MS + 100);
-  }
-
-  function runSplash() {
-    var splash = buildSplash();
-    document.body.appendChild(splash);
-
-    // body 内容提前进入可显示状态，开屏淡出时能接上
-    setTimeout(function () {
-      document.body.classList.add('is-ready');
-    }, 200);
-
-    var total = CSS_ANIM_MS + HOLD_MS;
-
-    function finish() {
-      hideSplash(splash);
-    }
-
-    if (document.readyState === 'complete') {
-      setTimeout(finish, total);
-    } else {
-      window.addEventListener('load', function () {
-        setTimeout(finish, total);
-      });
-      // 兜底：最长 5s 一定隐藏
-      setTimeout(finish, 5000);
-    }
-  }
-
-  if (!seen) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', runSplash);
-    } else {
-      runSplash();
-    }
-  } else {
-    // 不闪开屏，但 body 正常显示
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function () {
-        document.body.classList.add('is-ready');
-      });
-    } else {
-      document.body.classList.add('is-ready');
-    }
-  }
-})();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootstrap);
+} else {
+  bootstrap();
+}

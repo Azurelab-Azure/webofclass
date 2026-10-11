@@ -5,18 +5,18 @@
 <script>document.documentElement.classList.add('js-loading');</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>插件广场 · 我的课表 MyClassroom</title>
-<meta name="description" content="我的课表插件广场：课堂放映辅助、批注、PDF 讲稿，为教师课堂场景设计。插件纯本地运行，可审计、可卸载。">
+<meta name="description" content="我的课表插件广场：课堂放映辅助、批注、PDF 讲稿。插件纯本地运行，可审计、可卸载。">
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<!-- ========== 导航栏 ========== -->
 <nav class="navbar">
   <div class="container navbar-inner">
     <a href="index.html" class="navbar-logo">
-      <span>我的课表</span>
+      <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
+      <span data-text="brand.name">我的课表</span>
     </a>
     <ul class="navbar-links">
       <li><a href="product.html">产品介绍</a></li>
@@ -24,7 +24,7 @@
       <li><a href="plugins.html">插件广场</a></li>
       <li><a href="themes.html">主题</a></li>
       <li><a href="download.html">下载</a></li>
-      <li><a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
     </ul>
     <div class="navbar-right">
       <div class="ui-switcher" role="group" aria-label="UI 模式">
@@ -38,16 +38,14 @@
   </div>
 </nav>
 
-<!-- ========== 顶部 Banner ========== -->
 <header class="store-hero">
   <div class="container">
     <div class="eyebrow">MyClassroom Plugins</div>
     <h1>为课堂而生的插件。</h1>
-    <p>放映辅助、实时批注、PDF 讲稿——围绕教师真实上课流程设计。插件纯本地运行，可审计、可卸载。当前插件系统开发中，下方为规划清单。</p>
+    <p>放映辅助、实时批注、PDF 讲稿，围绕教师真实上课流程设计。插件纯本地运行，可审计、可卸载。当前插件系统开发中，下方为规划清单。</p>
   </div>
 </header>
 
-<!-- ========== 分类 Tab ========== -->
 <div class="container">
   <div class="store-tabs" id="storeTabs">
     <button class="store-tab active" data-target="all">全部</button>
@@ -61,7 +59,6 @@
   </div>
 </div>
 
-<!-- ========== 编辑推荐 ========== -->
 <section class="store-section" id="editor">
   <div class="container">
     <div class="store-section-head">
@@ -74,7 +71,7 @@
         <div class="editor-body">
           <div class="editor-tag">课堂放映</div>
           <h3>PPT 放映辅助</h3>
-          <p>在课表里直接调起 PPT 放映，显示当前页 / 总页数，支持遥控翻页。</p>
+          <p>在课表里直接调起 PPT 放映，显示当前页与总页数，支持遥控翻页。</p>
         </div>
       </div>
       <div class="editor-card">
@@ -113,7 +110,6 @@
   </div>
 </section>
 
-<!-- ========== 规划优先级 ========== -->
 <section class="store-section" id="rank">
   <div class="container">
     <div class="store-section-head">
@@ -173,19 +169,16 @@
   </div>
 </section>
 
-<!-- ========== 课堂放映 ========== -->
 <section class="store-section" id="lecture">
   <div class="container">
-    <div class="store-section-head">
-      <h2>课堂放映</h2>
-    </div>
+    <div class="store-section-head"><h2>课堂放映</h2></div>
     <div class="app-grid">
       <div class="app-card card-3d">
         <div class="app-icon"><i class="fa-solid fa-display"></i></div>
         <div class="app-body">
           <h3>PPT 放映辅助</h3>
           <div class="app-sub">课堂放映 · 规划中</div>
-          <div class="app-desc">在课表里直接调起 PPT 放映，显示当前页 / 总页数，支持遥控翻页与进度标记。</div>
+          <div class="app-desc">在课表里直接调起 PPT 放映，显示当前页与总页数，支持遥控翻页与进度标记。</div>
         </div>
         <button class="get-btn">规划中</button>
       </div>
@@ -220,12 +213,9 @@
   </div>
 </section>
 
-<!-- ========== 批注标注 ========== -->
 <section class="store-section" id="annotate">
   <div class="container">
-    <div class="store-section-head">
-      <h2>批注标注</h2>
-    </div>
+    <div class="store-section-head"><h2>批注标注</h2></div>
     <div class="app-grid">
       <div class="app-card card-3d">
         <div class="app-icon"><i class="fa-solid fa-pen-nib"></i></div>
@@ -241,7 +231,7 @@
         <div class="app-body">
           <h3>高亮笔</h3>
           <div class="app-sub">批注标注 · 规划中</div>
-          <div class="app-desc">半透明高亮，叠加在 PPT / PDF 上标注重点。</div>
+          <div class="app-desc">半透明高亮，叠加在 PPT 或 PDF 上标注重点。</div>
         </div>
         <button class="get-btn">规划中</button>
       </div>
@@ -267,12 +257,9 @@
   </div>
 </section>
 
-<!-- ========== PDF 讲稿 ========== -->
 <section class="store-section" id="pdf">
   <div class="container">
-    <div class="store-section-head">
-      <h2>PDF 讲稿</h2>
-    </div>
+    <div class="store-section-head"><h2>PDF 讲稿</h2></div>
     <div class="app-grid">
       <div class="app-card card-3d">
         <div class="app-icon"><i class="fa-solid fa-file-pdf"></i></div>
@@ -314,12 +301,9 @@
   </div>
 </section>
 
-<!-- ========== 课件素材 ========== -->
 <section class="store-section" id="material">
   <div class="container">
-    <div class="store-section-head">
-      <h2>课件素材</h2>
-    </div>
+    <div class="store-section-head"><h2>课件素材</h2></div>
     <div class="app-grid">
       <div class="app-card card-3d">
         <div class="app-icon"><i class="fa-solid fa-image"></i></div>
@@ -361,12 +345,9 @@
   </div>
 </section>
 
-<!-- ========== 成绩与考勤 ========== -->
 <section class="store-section" id="grade">
   <div class="container">
-    <div class="store-section-head">
-      <h2>成绩与考勤</h2>
-    </div>
+    <div class="store-section-head"><h2>成绩与考勤</h2></div>
     <div class="app-grid">
       <div class="app-card card-3d">
         <div class="app-icon"><i class="fa-solid fa-list-check"></i></div>
@@ -408,19 +389,16 @@
   </div>
 </section>
 
-<!-- ========== 效率工具 ========== -->
 <section class="store-section" id="tools">
   <div class="container">
-    <div class="store-section-head">
-      <h2>效率工具</h2>
-    </div>
+    <div class="store-section-head"><h2>效率工具</h2></div>
     <div class="app-grid">
       <div class="app-card card-3d">
         <div class="app-icon"><i class="fa-solid fa-file-import"></i></div>
         <div class="app-body">
           <h3>课表导入</h3>
           <div class="app-sub">效率工具 · 规划中</div>
-          <div class="app-desc">从 Excel / CSV 导入课表，自动识别周次与节次。</div>
+          <div class="app-desc">从 Excel 或 CSV 导入课表，自动识别周次与节次。</div>
         </div>
         <button class="get-btn">规划中</button>
       </div>
@@ -429,7 +407,7 @@
         <div class="app-body">
           <h3>课表打印</h3>
           <div class="app-sub">效率工具 · 规划中</div>
-          <div class="app-desc">导出 PDF / 图片，A4 排版，直接打印贴墙。</div>
+          <div class="app-desc">导出 PDF 或图片，A4 排版，直接打印贴墙。</div>
         </div>
         <button class="get-btn">规划中</button>
       </div>
@@ -455,12 +433,9 @@
   </div>
 </section>
 
-<!-- ========== 投稿 ========== -->
 <section class="store-section" id="submit">
   <div class="container">
-    <div class="store-section-head">
-      <h2>我要投稿</h2>
-    </div>
+    <div class="store-section-head"><h2>我要投稿</h2></div>
     <div class="card-3d" style="padding:32px;max-width:720px">
       <p style="font-size:15px;line-height:1.8;color:var(--text-2);margin-bottom:20px">
         你有想要的插件，或者你自己写了一个想分享？发邮件告诉我。
@@ -469,13 +444,13 @@
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:20px">
         <div style="border:1px solid var(--line);border-radius:var(--radius-m);padding:18px">
           <div style="font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">插件投稿</div>
-          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;word-break:break-all">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;word-break:break-all" data-text="contact.email">
             chzurelab@outlook.com
           </div>
         </div>
         <div style="border:1px solid var(--line);border-radius:var(--radius-m);padding:18px">
           <div style="font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">问题反馈</div>
-          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;word-break:break-all">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;word-break:break-all" data-text="contact.email">
             chzurelab@outlook.com
           </div>
         </div>
@@ -485,7 +460,7 @@
         <strong>投稿请包含：</strong><br>
         · 插件名称与一句话说明<br>
         · 解决什么课堂场景的问题<br>
-        · 截图或原型（可选）<br>
+        · 截图或原型，可选<br>
         · 如果是代码，附上仓库地址
       </p>
 
@@ -496,12 +471,9 @@
   </div>
 </section>
 
-<!-- ========== 插件原则 ========== -->
 <section class="store-section" style="background:var(--bg-soft)">
   <div class="container" style="max-width:720px">
-    <div class="store-section-head">
-      <h2>插件原则</h2>
-    </div>
+    <div class="store-section-head"><h2>插件原则</h2></div>
     <div class="faq-list">
       <div class="faq-item"><h3>纯本地</h3><p>插件不联网、不上传数据，与主程序一致。</p></div>
       <div class="faq-item"><h3>可审计</h3><p>插件为开源代码，你可以查看它做了什么。</p></div>
@@ -511,10 +483,9 @@
   </div>
 </section>
 
-<!-- ========== 底部 CTA ========== -->
 <section class="store-section">
   <div class="container" style="max-width:720px;text-align:center">
-    <h2 class="section-title">想第一时间用上插件？</h2>
+    <h2 class="section-title">想第一时间用上插件</h2>
     <p class="section-subtitle">下载主程序，插件发布后会自动出现在插件广场。</p>
     <div style="margin-top:24px">
       <a href="download.html" class="btn btn-primary">
@@ -525,7 +496,6 @@
   </div>
 </section>
 
-<!-- ========== 页脚 ========== -->
 <footer>
   <div class="container">
     <div class="footer-links">
@@ -535,73 +505,23 @@
       <a href="about.html">关于</a>
       <a href="privacy.html">隐私政策</a>
       <a href="cookie.html">Cookie</a>
-      <a href="https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE" target="_blank" rel="noopener">MIT 协议</a>
-      <a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" data-link="license" target="_blank" rel="noopener">MIT 协议</a>
+      <a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
     </div>
     <p class="copyright">
-      © 2026 <span class="lab"><span class="lab-mark">KZ</span><span class="brand">Kzure Lab</span></span> · 我的课表 MyClassroom · 保留所有权利
+      © <span data-text="brand.copyright">2026</span>
+      <span class="lab">
+        <span class="lab-mark" data-text="brand.labMark">KZ</span>
+        <span class="brand" data-text="brand.lab">Kzure Lab</span>
+      </span>
+      · 我的课表 MyClassroom · 保留所有权利
     </p>
   </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
-<script>
-// 分类 Tab 滚动 + 3D 卡片
-(function () {
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var tabs = document.querySelectorAll('#storeTabs .store-tab');
-  tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      tabs.forEach(function (t) { t.classList.remove('active'); });
-      tab.classList.add('active');
-      var target = tab.getAttribute('data-target');
-      if (target === 'all') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-      }
-      var el = document.getElementById(target);
-      if (el) {
-        var top = el.getBoundingClientRect().top + window.pageYOffset - 70;
-        window.scrollTo({ top: top, behavior: 'smooth' });
-      }
-    });
-  });
-
-  document.querySelectorAll('.get-btn, .rank-action').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      if (btn.dataset.done === '1') return;
-      var orig = btn.textContent;
-      btn.textContent = '已记录';
-      btn.dataset.done = '1';
-      setTimeout(function () {
-        btn.textContent = orig;
-        btn.dataset.done = '0';
-      }, 1400);
-    });
-  });
-
-  if (reduce) return;
-
-  document.querySelectorAll('.card-3d').forEach(function (el) {
-    el.addEventListener('mousemove', function (e) {
-      var r = el.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width;
-      var y = (e.clientY - r.top) / r.height;
-      var rx = (0.5 - y) * 14;
-      var ry = (x - 0.5) * 14;
-      el.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
-      el.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
-      el.style.setProperty('--my', (y * 100).toFixed(1) + '%');
-    });
-    el.addEventListener('mouseleave', function () {
-      el.style.transform = '';
-      el.style.setProperty('--mx', '50%');
-      el.style.setProperty('--my', '50%');
-    });
-  });
-})();
-</script>
+<script src="assets/js/splash.js"></script>
+<script src="assets/js/liquid-glass-ui.js"></script>
+<script src="assets/js/plugins.js"></script>
 </body>
 </html>

@@ -1,14 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
 <head>
-<script>document.documentElement.classList.add('js-loading');</script>
 <meta charset="UTF-8">
+<script>document.documentElement.classList.add('js-loading');</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<script>
-  document.documentElement.classList.add('js-loading');
-</script>
 <title>页面未找到 · MyClassroom</title>
-<link rel="icon" href="assets/img/logo/favicon.ico">
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -18,7 +15,7 @@
   <div class="container navbar-inner">
     <a href="index.html" class="navbar-logo">
       <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
-      <span>我的课表</span>
+      <span data-text="brand.name">我的课表</span>
     </a>
     <ul class="navbar-links">
       <li><a href="product.html">产品介绍</a></li>
@@ -26,15 +23,17 @@
       <li><a href="plugins.html">插件广场</a></li>
       <li><a href="themes.html">主题</a></li>
       <li><a href="download.html">下载</a></li>
-      <li><a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
     </ul>
-    <div class="ui-switcher" role="group" aria-label="UI 模式">
-      <button data-ui="light" title="亮色" aria-label="亮色"></button>
-      <button data-ui="dark" title="暗色" aria-label="暗色"></button>
-      <button data-ui="clear" title="通透" aria-label="通透"></button>
-      <button data-ui="fresh" title="清新" aria-label="清新"></button>
+    <div class="navbar-right">
+      <div class="ui-switcher" role="group" aria-label="UI 模式">
+        <button data-ui="light" title="亮色" aria-label="亮色"></button>
+        <button data-ui="dark" title="暗色" aria-label="暗色"></button>
+        <button data-ui="clear" title="通透" aria-label="通透"></button>
+        <button data-ui="fresh" title="清新" aria-label="清新"></button>
+      </div>
+      <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
     </div>
-    <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
   </div>
 </nav>
 
@@ -62,13 +61,22 @@
       <a href="about.html">关于</a>
       <a href="privacy.html">隐私政策</a>
       <a href="cookie.html">Cookie</a>
-      <a href="https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE" target="_blank" rel="noopener">MIT 协议</a>
-      <a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" data-link="license" target="_blank" rel="noopener">MIT 协议</a>
+      <a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
     </div>
-    <p class="copyright">© 2026 <span class="lab"><span class="lab-mark">KZ</span><span class="brand">Kzure Lab</span></span> · 我的课表 MyClassroom · 保留所有权利</p>
+    <p class="copyright">
+      © <span data-text="brand.copyright">2026</span>
+      <span class="lab">
+        <span class="lab-mark" data-text="brand.labMark">KZ</span>
+        <span class="brand" data-text="brand.lab">Kzure Lab</span>
+      </span>
+      · 我的课表 MyClassroom · 保留所有权利
+    </p>
   </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/js/splash.js"></script>
+<script src="assets/js/liquid-glass-ui.js"></script>
 </body>
 </html>

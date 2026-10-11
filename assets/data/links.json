@@ -1,0 +1,10 @@
+{
+  "github": "https://github.com/Azurelab-Azure/myclassroom",
+  "license": "https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE",
+  "issues": "https://github.com/Azurelab-Azure/myclassroom/issues",
+  "releases": "https://github.com/Azurelab-Azure/myclassroom/releases",
+  "download": {
+    "installer": "https://github.com/Azurelab-Azure/myclassroom/releases/download/v1.1.0/CourseApp-Setup-1.1.0.exe",
+    "portable": "https://github.com/Azurelab-Azure/myclassroom/releases/download/v1.1.0/CourseApp-1.1.0-portable.zip"
+  }
+}

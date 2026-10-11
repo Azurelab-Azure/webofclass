@@ -1,0 +1,25 @@
+{
+  "brand": {
+    "name": "我的课表",
+    "enName": "MyClassroom",
+    "lab": "Kzure Lab",
+    "labMark": "KZ",
+    "copyright": "2026"
+  },
+  "contact": {
+    "email": "chzurelab@outlook.com"
+  },
+  "version": {
+    "current": "1.0.0",
+    "releaseDate": "2026-10-06"
+  },
+  "system": {
+    "os": "Windows 10 / 11",
+    "runtime": ".NET 10 Desktop Runtime",
+    "disk": "约 150 MB",
+    "language": "C# 12",
+    "framework": "Windows Forms",
+    "storage": "JSON",
+    "license": "MIT"
+  }
+}

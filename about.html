@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
 <head>
-<script>document.documentElement.classList.add('js-loading');</script>
 <meta charset="UTF-8">
+<script>document.documentElement.classList.add('js-loading');</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>关于 · MyClassroom</title>
 <meta name="description" content="关于我的课表：由 Kzure Lab 开发，MIT 开源协议。">
-<link rel="icon" href="assets/img/logo/favicon.ico">
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -16,7 +16,7 @@
   <div class="container navbar-inner">
     <a href="index.html" class="navbar-logo">
       <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
-      <span>我的课表</span>
+      <span data-text="brand.name">我的课表</span>
     </a>
     <ul class="navbar-links">
       <li><a href="product.html">产品介绍</a></li>
@@ -24,15 +24,17 @@
       <li><a href="plugins.html">插件广场</a></li>
       <li><a href="themes.html">主题</a></li>
       <li><a href="download.html">下载</a></li>
-      <li><a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
     </ul>
-    <div class="ui-switcher" role="group" aria-label="UI 模式">
-      <button data-ui="light" title="亮色" aria-label="亮色"></button>
-      <button data-ui="dark" title="暗色" aria-label="暗色"></button>
-      <button data-ui="clear" title="通透" aria-label="通透"></button>
-      <button data-ui="fresh" title="清新" aria-label="清新"></button>
+    <div class="navbar-right">
+      <div class="ui-switcher" role="group" aria-label="UI 模式">
+        <button data-ui="light" title="亮色" aria-label="亮色"></button>
+        <button data-ui="dark" title="暗色" aria-label="暗色"></button>
+        <button data-ui="clear" title="通透" aria-label="通透"></button>
+        <button data-ui="fresh" title="清新" aria-label="清新"></button>
+      </div>
+      <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
     </div>
-    <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
   </div>
 </nav>
 
@@ -54,7 +56,7 @@
       <div class="tree-group">
         <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 作者</div>
         <ul class="tree-items">
-          <li><a href="#author">作者</a></li>
+          <li><a href="#author">开发团队</a></li>
           <li><a href="#license">许可</a></li>
           <li><a href="#contact">联系方式</a></li>
         </ul>
@@ -71,7 +73,7 @@
     </aside>
 
     <main class="tree-content">
-      <button class="tree-mobile-toggle" onclick="document.getElementById('treeAside').classList.toggle('mobile-hidden')">
+      <button class="tree-mobile-toggle">
         <i class="fa-solid fa-list"></i> 目录
       </button>
 
@@ -79,7 +81,7 @@
       <p class="page-lead">无服务器、纯本地、跨语言的课程表应用。</p>
 
       <h2 id="intro">项目介绍</h2>
-      <p>《我的课表》是一款面向教师、学生、班主任和家长的课程表应用。完全本地运行，无需登录，数据永不上传。支持 20 种语言、4 种主题、灵动岛、成绩分析等功能。</p>
+      <p>我的课表是一款面向教师、学生、班主任和家长的课程表应用。完全本地运行，无需登录，数据永不上传。支持 20 种语言、4 种主题、灵动岛、成绩分析等功能。</p>
 
       <h3>它解决什么问题</h3>
       <ul>
@@ -95,7 +97,7 @@
           <tr><th>时间</th><th>事件</th></tr>
         </thead>
         <tbody>
-          <tr><td>2025-08</td><td>项目启动，确定"纯本地、无服务器"的产品方向</td></tr>
+          <tr><td>2025-08</td><td>项目启动，确定纯本地、无服务器的产品方向</td></tr>
           <tr><td>2026-04</td><td>核心课表与成绩功能完成，开始内部测试</td></tr>
           <tr><td>2026-10</td><td>v1.0.0 发布，官网同步上线</td></tr>
         </tbody>
@@ -107,25 +109,24 @@
           <tr><th>层</th><th>技术</th></tr>
         </thead>
         <tbody>
-          <tr><td>语言</td><td>C# 12</td></tr>
-          <tr><td>运行时</td><td>.NET 10</td></tr>
-          <tr><td>界面</td><td>Windows Forms</td></tr>
-          <tr><td>存储</td><td>JSON</td></tr>
-          <tr><td>协议</td><td>MIT</td></tr>
+          <tr><td>语言</td><td data-text="system.language">C# 12</td></tr>
+          <tr><td>运行时</td><td data-text="system.runtime">.NET 10</td></tr>
+          <tr><td>界面</td><td data-text="system.framework">Windows Forms</td></tr>
+          <tr><td>存储</td><td data-text="system.storage">JSON</td></tr>
+          <tr><td>协议</td><td data-text="system.license">MIT</td></tr>
         </tbody>
       </table>
 
-            <h2 id="author">开发团队</h2>
-      <p>《我的课表系列》由 5 人共同完成。代码、设计、测试、AI 辅助</p>
+      <h2 id="author">开发团队</h2>
+      <p>我的课表系列由 5 人共同完成。代码、设计、测试、AI 辅助。</p>
 
       <div class="team-grid">
-
         <div class="team-card card-3d">
           <div class="team-avatar" style="background:#111;color:#fff">FM</div>
           <div class="team-info">
             <h3>fatmonkey</h3>
             <div class="team-role">主开发 · 架构</div>
-            <p>C# / .NET 10 主力开发，负责数据层、功能编写、多语言与主题系统。</p>
+            <p>C# 与 .NET 10 主力开发，负责数据层、功能编写、多语言与主题系统。</p>
             <div class="team-tags">
               <span>.NET</span>
               <span>Windows Forms</span>
@@ -138,7 +139,7 @@
           <div class="team-info">
             <h3>Kzure</h3>
             <div class="team-role">项目发起 · 产品设计</div>
-            <p>提出"纯本地、无服务器"的产品方向，定义课表、学生、成绩三大核心模块，设计了框架结构，网站结构，UI的重要绘制与编写。</p>
+            <p>提出纯本地、无服务器的产品方向，定义课表、学生、成绩三大核心模块，设计框架结构、网站结构与重要 UI。</p>
             <div class="team-tags">
               <span>产品</span>
               <span>UI</span>
@@ -164,7 +165,7 @@
           <div class="team-info">
             <h3>成功的玻璃su</h3>
             <div class="team-role">架构</div>
-            <p>辅助开发，AI的操控者</p>
+            <p>辅助开发，AI 的操控者。</p>
             <div class="team-tags">
               <span>AI</span>
               <span>文件选择器</span>
@@ -184,11 +185,10 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <h2 id="license">许可</h2>
-      <p>MIT 开源协议。您可以自由使用、修改、分发本软件。完整协议见 <a href="https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>。</p>
+      <p>MIT 开源协议。您可以自由使用、修改、分发本软件。完整协议见 <a href="#" data-link="license" target="_blank" rel="noopener">LICENSE</a>。</p>
 
       <h2 id="contact">联系方式</h2>
       <table class="tree-table">
@@ -196,13 +196,13 @@
           <tr><th>用途</th><th>方式</th></tr>
         </thead>
         <tbody>
-          <tr><td>问题反馈</td><td><a href="https://github.com/Azurelab-Azure/myclassroom/issues" target="_blank" rel="noopener">GitHub Issues</a></td></tr>
-          <tr><td>插件投稿</td><td><code>chzurelab@outlook.com</code></td></tr>
-          <tr><td>问题支持</td><td><code>chzurelab@outlook.com</code></td></tr>
+          <tr><td>问题反馈</td><td><a href="#" data-link="issues" target="_blank" rel="noopener">GitHub Issues</a></td></tr>
+          <tr><td>插件投稿</td><td><code data-text="contact.email">chzurelab@outlook.com</code></td></tr>
+          <tr><td>问题支持</td><td><code data-text="contact.email">chzurelab@outlook.com</code></td></tr>
         </tbody>
       </table>
 
-      <p style="margin-top:32px;font-size:13px;color:var(--text-3)">© 2026 Kzure Lab · 我的课表 MyClassroom</p>
+      <p style="margin-top:32px;font-size:13px;color:var(--text-3)">© <span data-text="brand.copyright">2026</span> Kzure Lab · 我的课表 MyClassroom</p>
 
     </main>
   </div>
@@ -217,43 +217,23 @@
       <a href="about.html">关于</a>
       <a href="privacy.html">隐私政策</a>
       <a href="cookie.html">Cookie</a>
-      <a href="https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE" target="_blank" rel="noopener">MIT 协议</a>
-      <a href="https://github.com/Azurelab-Azure/myclassroom" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" data-link="license" target="_blank" rel="noopener">MIT 协议</a>
+      <a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
     </div>
-    <p class="copyright">© 2026 <span class="lab"><span class="lab-mark">KZ</span><span class="brand">Kzure Lab</span></span> · 我的课表 MyClassroom · 保留所有权利</p>
+    <p class="copyright">
+      © <span data-text="brand.copyright">2026</span>
+      <span class="lab">
+        <span class="lab-mark" data-text="brand.labMark">KZ</span>
+        <span class="brand" data-text="brand.lab">Kzure Lab</span>
+      </span>
+      · 我的课表 MyClassroom · 保留所有权利
+    </p>
   </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
-<script>
-(function () {
-  document.querySelectorAll('.tree-group-title').forEach(function (t) {
-    t.style.cursor = 'pointer';
-    t.addEventListener('click', function () {
-      t.parentElement.classList.toggle('collapsed');
-    });
-  });
-  var links = document.querySelectorAll('.tree-items a[href^="#"]');
-  var sections = [];
-  links.forEach(function (a) {
-    var id = a.getAttribute('href').slice(1);
-    var el = document.getElementById(id);
-    if (el) sections.push({ id: id, el: el, link: a });
-  });
-  function setActive(id) {
-    links.forEach(function (a) {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-    });
-  }
-  if ('IntersectionObserver' in window && sections.length) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) setActive(e.target.id);
-      });
-    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-    sections.forEach(function (s) { io.observe(s.el); });
-  }
-})();
-</script>
+<script src="assets/js/splash.js"></script>
+<script src="assets/js/liquid-glass-ui.js"></script>
+<script src="assets/js/tree.js"></script>
 </body>
 </html>
