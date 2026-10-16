@@ -4,6 +4,7 @@
   "issues": "https://github.com/Azurelab-Azure/myclassroom/issues",
   "releases": "https://github.com/Azurelab-Azure/myclassroom/releases",
   "download": {
-    "installer": "https://github.com/Azurelab-Azure/myclassroom/releases/download/v1.0.0/MyClassroom-Setup-1.0.0.exe"
+    "installer": "https://github.com/Azurelab-Azure/myclassroom/releases/download/v1.1.0/CourseApp-Setup-1.1.0.exe",
+    "beta": "https://github.com/Azurelab-Azure/myclassroom/releases/download/v1.1.5/My-Plan-Setup-1.1.5.exe"
   }
 }

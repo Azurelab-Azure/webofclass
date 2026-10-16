@@ -3152,3 +3152,194 @@ footer {
   box-shadow: 0 4px 14px rgba(8, 78, 148, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
+
+
+/* ============================================
+   测试版下载区块
+   ============================================ */
+.beta-block {
+  margin-top: 32px;
+  padding: 28px 32px;
+  border-radius: var(--radius-l);
+  background: var(--bg-elev);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.beta-block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent);
+  opacity: 0.8;
+}
+
+.beta-header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.beta-icon {
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-m);
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.beta-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.beta-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.beta-meta {
+  font-size: 13px;
+  color: var(--text-3);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-weight: 500;
+}
+
+.beta-dot {
+  color: var(--line-strong);
+}
+
+/* 两步流程 */
+.beta-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.beta-step {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  border-radius: var(--radius-m);
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  transition: border-color .2s, background .2s;
+}
+
+.beta-step-num {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.beta-step-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.beta-step-body strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.beta-step-body p {
+  font-size: 12.5px;
+  color: var(--text-3);
+  line-height: 1.5;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.beta-step-body .btn {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.beta-note {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.beta-note i {
+  color: var(--accent);
+}
+
+/* 用户点过 Star 后：第一步淡化，第二步高亮 */
+.beta-block.is-starred .beta-step[data-step="1"] {
+  opacity: 0.55;
+  border-color: var(--line);
+  background: var(--bg-soft);
+}
+
+.beta-block.is-starred .beta-step[data-step="1"] .beta-step-num {
+  background: #22C55E;
+}
+
+.beta-block.is-starred .beta-step[data-step="2"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.beta-block.is-starred .beta-step[data-step="2"] .beta-step-num {
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+/* 响应式 */
+@media (max-width: 640px) {
+  .beta-block {
+    padding: 20px;
+  }
+  .beta-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .beta-steps {
+    grid-template-columns: 1fr;
+  }
+}

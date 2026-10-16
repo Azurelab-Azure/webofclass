@@ -492,3 +492,39 @@ if (document.readyState === 'loading') {
 } else {
   bootstrap();
 }
+
+
+
+/**
+ * 测试版区块交互
+ * 点击过 Star 按钮后，下载按钮高亮
+ */
+(function () {
+  var starBtn = document.getElementById('betaStarBtn');
+  var downloadBtn = document.getElementById('betaDownloadBtn');
+  var block = document.getElementById('betaBlock');
+  if (!starBtn || !downloadBtn || !block) return;
+
+  var KEY = 'myclassroom_star_clicked';
+
+  /**
+   * 标记状态
+   */
+  function markClicked() {
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+    block.classList.add('is-starred');
+  }
+
+  /**
+   * 检查是否点击过
+   */
+  try {
+    if (localStorage.getItem(KEY) === '1') {
+      block.classList.add('is-starred');
+    }
+  } catch (e) {}
+
+  starBtn.addEventListener('click', function () {
+    markClicked();
+  });
+})();
