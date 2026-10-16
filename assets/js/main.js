@@ -1,22 +1,77 @@
 /* ============================================
    我的课表 · 公共脚本
-   功能：主题切换、UI 模式、JSON 数据加载、
-        链接替换、滚动进度条、数字滚动、
-        卡片 3D 倾斜、滚动淡入、Cookie 条、
-        平滑锚点
+   职责：主题切换、UI 模式、JSON 数据加载、链接替换、
+        滚动进度条、数字滚动、卡片倾斜、滚动淡入、
+        Cookie 条、平滑锚点、全局主题 API
    ============================================ */
 
+// ============================================
 // 全局数据缓存
+// ============================================
 const SiteData = {
   site: null,
   links: null,
   changelog: null
 };
 
+// ============================================
+// 全局主题 API
+// 所有主题切换的唯一入口
+// 通过 window.MyClassroomTheme 暴露给其他脚本
+// ============================================
+window.MyClassroomTheme = {
+  /**
+   * 应用主题与 UI 模式
+   * 同步 DOM 属性、本地存储、图标、圆点状态
+   * 并派发 myclassroom:themechange 事件
+   */
+  apply: function (theme, ui) {
+    // 更新根元素属性
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-ui', ui);
+
+    // 写入本地存储
+    try {
+      localStorage.setItem('theme', theme);
+      localStorage.setItem('ui', ui);
+    } catch (e) {}
+
+    // 更新主题切换图标
+    var icon = document.querySelector('.theme-toggle i');
+    if (icon) {
+      icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    }
+
+    // 更新 UI 圆点选中状态
+    document.querySelectorAll('.ui-switcher button').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-ui') === ui);
+    });
+
+    // 派发全局事件
+    window.dispatchEvent(new CustomEvent('myclassroom:themechange', {
+      detail: { theme: theme, ui: ui }
+    }));
+  },
+
+  /**
+   * 读取当前主题
+   * 返回 { theme, ui }
+   */
+  get: function () {
+    return {
+      theme: document.documentElement.getAttribute('data-theme') || 'light',
+      ui: document.documentElement.getAttribute('data-ui') || 'light'
+    };
+  }
+};
+
+// ============================================
+// JSON 加载
+// ============================================
+
 /**
  * 读取 JSON 文件
- * 输入路径返回解析后的对象
- * 读取失败返回 null 不抛异常
+ * 读取失败返回 null
  */
 async function loadJSON(path) {
   try {
@@ -31,7 +86,6 @@ async function loadJSON(path) {
 
 /**
  * 批量加载站点数据
- * 依次读取 site、links、changelog
  * 任意一个失败都不影响其他
  */
 async function loadAllData() {
@@ -58,7 +112,6 @@ function getByPath(obj, path) {
 
 /**
  * 替换页面中所有 data-link 元素的 href
- * 元素写法 a data-link 等于 github
  */
 function applyLinks() {
   document.querySelectorAll('[data-link]').forEach(function (el) {
@@ -70,7 +123,6 @@ function applyLinks() {
 
 /**
  * 替换页面中所有 data-text 元素的文本
- * 用于版本号、版权年份、品牌名
  */
 function applyTexts() {
   document.querySelectorAll('[data-text]').forEach(function (el) {
@@ -82,7 +134,7 @@ function applyTexts() {
 
 /**
  * 渲染更新日志与历史版本
- * 用于 download.html 的 changelogCurrent 与 changelogHistory
+ * 用于 download.html
  */
 function renderChangelog() {
   if (!SiteData.changelog) return;
@@ -109,9 +161,13 @@ function renderChangelog() {
   }
 }
 
+// ============================================
+// 主题
+// ============================================
+
 /**
  * 初始化主题和 UI 模式
- * 优先读取本地存储否则跟随系统
+ * 优先读取本地存储，否则跟随系统
  */
 function initTheme() {
   let theme = localStorage.getItem('theme');
@@ -128,7 +184,6 @@ function initTheme() {
 
 /**
  * 更新主题切换按钮的图标
- * 暗色显示太阳亮色显示月亮
  */
 function updateThemeIcon(theme) {
   const icon = document.querySelector('.theme-toggle i');
@@ -138,7 +193,7 @@ function updateThemeIcon(theme) {
 
 /**
  * 绑定 UI 模式切换器
- * 四个圆点分别对应亮色暗色通透清新
+ * 四个圆点分别对应亮色、暗色、通透、清新
  */
 function bindUISwitcher() {
   const buttons = document.querySelectorAll('.ui-switcher button');
@@ -149,32 +204,15 @@ function bindUISwitcher() {
     if (btn.getAttribute('data-ui') === currentUI) btn.classList.add('active');
 
     btn.addEventListener('click', function () {
-      buttons.forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-
       const uiVal = btn.getAttribute('data-ui');
-      document.documentElement.setAttribute('data-ui', uiVal);
-      localStorage.setItem('ui', uiVal);
-
-      // 通透和清新属于浅色系同步主题
-      if (uiVal === 'clear' || uiVal === 'fresh') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-        updateThemeIcon('light');
-      }
-      // 暗色模式同步主题
-      if (uiVal === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-        updateThemeIcon('dark');
-      }
+      const themeVal = uiVal === 'dark' ? 'dark' : 'light';
+      window.MyClassroomTheme.apply(themeVal, uiVal);
     });
   });
 }
 
 /**
  * 绑定亮暗切换按钮
- * 点击时同步更新 UI 模式的选中状态
  */
 function bindThemeToggle() {
   const toggle = document.querySelector('.theme-toggle');
@@ -183,26 +221,23 @@ function bindThemeToggle() {
   toggle.addEventListener('click', function () {
     const current = document.documentElement.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    updateThemeIcon(next);
-
     const uiVal = next === 'dark' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-ui', uiVal);
-    localStorage.setItem('ui', uiVal);
-    document.querySelectorAll('.ui-switcher button').forEach(function (b) {
-      b.classList.toggle('active', b.getAttribute('data-ui') === uiVal);
-    });
+    window.MyClassroomTheme.apply(next, uiVal);
   });
 
   updateThemeIcon(document.documentElement.getAttribute('data-theme'));
 }
 
+// ============================================
+// 滚动进度条
+// ============================================
+
 /**
- * 滚动进度条
- * 页面顶部一条细线随滚动增长
+ * 页面顶部一条细线，随滚动增长
  */
 function initScrollProgress() {
+  if (document.querySelector('.scroll-progress')) return;
+
   const bar = document.createElement('div');
   bar.className = 'scroll-progress';
   document.body.appendChild(bar);
@@ -219,10 +254,12 @@ function initScrollProgress() {
   update();
 }
 
+// ============================================
+// 数字滚动
+// ============================================
+
 /**
- * 数字滚动
  * 元素进入视口时从 0 跳到目标值
- * 用 easeOutCubic 缓动
  */
 function initStatCounters() {
   const nums = document.querySelectorAll('.stat-3d .num[data-target]');
@@ -253,10 +290,13 @@ function initStatCounters() {
   nums.forEach(function (el) { io.observe(el); });
 }
 
+// ============================================
+// 3D 卡片倾斜
+// ============================================
+
 /**
- * 卡片 3D 倾斜
  * 鼠标在卡片上移动时轻微旋转
- * 同时更新光晕位置变量
+ * 同步更新光晕位置变量
  */
 function initCardTilt() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -283,10 +323,13 @@ function initCardTilt() {
   });
 }
 
+// ============================================
+// 滚动淡入
+// ============================================
+
 /**
- * 滚动淡入
  * 元素进入视口时加 visible 类
- * 同时触发数字 3D 翻转动画
+ * 同时触发数字 3D 翻转
  */
 function initReveal() {
   const items = document.querySelectorAll('.reveal, .stat-3d');
@@ -309,84 +352,33 @@ function initReveal() {
   items.forEach(function (el) { io.observe(el); });
 }
 
+// ============================================
+// Cookie 条
+// ============================================
+
+/**
+ * 进入页面必弹 Cookie 条
+ * 加遮罩，用户必须点选
+ */
 /**
  * Cookie 同意条
- * 记录用户是否已确认本地存储使用
- * 一年内不再弹出
- */
-function initCookieBanner() {
-  const KEY = 'myclassroom_cookie_consent';
-  const DAYS = 365;
-
-  function getConsent() {
-    try {
-      const raw = localStorage.getItem(KEY);
-      if (!raw) return null;
-      const obj = JSON.parse(raw);
-      if (!obj || !obj.time) return null;
-      if ((Date.now() - obj.time) / 86400000 > DAYS) {
-        localStorage.removeItem(KEY);
-        return null;
-      }
-      return obj;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function setConsent(value) {
-    try {
-      localStorage.setItem(KEY, JSON.stringify({ value: value, time: Date.now() }));
-    } catch (e) {}
-  }
-
-  if (getConsent()) return;
-
-  const banner = document.createElement('div');
-  banner.className = 'cookie-banner';
-  banner.setAttribute('role', 'dialog');
-  banner.innerHTML =
-    '<div class="cookie-inner">' +
-      '<div class="cookie-icon"><i class="fa-solid fa-cookie-bite"></i></div>' +
-      '<div class="cookie-text">' +
-        '<strong>本站只使用必要的本地存储。</strong>' +
-        '用于记住你的主题偏好，不做追踪、不做广告。详见 ' +
-        '<a href="cookie.html">Cookie 说明</a>。' +
-      '</div>' +
-      '<div class="cookie-actions">' +
-        '<button type="button" class="btn btn-secondary" data-cookie="decline">仅必要</button>' +
-        '<button type="button" class="btn btn-primary" data-cookie="accept">知道了</button>' +
-      '</div>' +
-    '</div>';
-  document.body.appendChild(banner);
-
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () { banner.classList.add('show'); });
-  });
-
-  banner.addEventListener('click', function (e) {
-    const t = e.target.closest('[data-cookie]');
-    if (!t) return;
-    setConsent(t.getAttribute('data-cookie'));
-    banner.classList.remove('show');
-    setTimeout(function () { banner.remove(); }, 500);
-  });
-}
-
-/**
- * 平滑锚点滚动
- * 自动避开导航栏高度
+ * 本次会话内只弹一次
+ * 用 sessionStorage 记录，关掉标签页后重新计算
  */
 function initCookieBanner() {
   const SESSION_KEY = 'myclassroom_cookie_shown';
   const CONSENT_KEY = 'myclassroom_cookie_consent';
-  const DAYS = 365;
 
-  // 本次会话已经弹过就直接返回
+  // 本次会话已经弹过就直接跳过
   try {
     if (sessionStorage.getItem(SESSION_KEY) === '1') return;
   } catch (e) {}
 
+  /**
+   * 记录用户选择
+   * 写入 localStorage 保存同意状态
+   * 写入 sessionStorage 标记本会话已弹过
+   */
   function setConsent(value) {
     try {
       localStorage.setItem(CONSENT_KEY, JSON.stringify({
@@ -397,6 +389,16 @@ function initCookieBanner() {
     } catch (e) {}
   }
 
+  // 遮罩
+  const mask = document.createElement('div');
+  mask.className = 'cookie-mask';
+  document.body.appendChild(mask);
+
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () { mask.classList.add('show'); });
+  });
+
+  // 弹条
   const banner = document.createElement('div');
   banner.className = 'cookie-banner';
   banner.setAttribute('role', 'dialog');
@@ -423,15 +425,46 @@ function initCookieBanner() {
   banner.addEventListener('click', function (e) {
     const t = e.target.closest('[data-cookie]');
     if (!t) return;
+
     setConsent(t.getAttribute('data-cookie'));
     banner.classList.remove('show');
-    setTimeout(function () { banner.remove(); }, 500);
+    mask.classList.remove('show');
+
+    setTimeout(function () {
+      banner.remove();
+      mask.remove();
+    }, 500);
   });
 }
 
+// ============================================
+// 平滑锚点滚动
+// ============================================
 
 /**
- * 主入口
+ * 点击锚点链接时平滑滚动
+ * 自动避开导航栏高度
+ */
+function initSmoothAnchor() {
+  document.addEventListener('click', function (e) {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    if (href === '#' || href === '#top') return;
+    const el = document.querySelector(href);
+    if (!el) return;
+    e.preventDefault();
+    const top = el.getBoundingClientRect().top + window.pageYOffset - 76;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+    history.replaceState(null, '', href);
+  });
+}
+
+// ============================================
+// 主入口
+// ============================================
+
+/**
  * 所有初始化独立 try 保证一项失败不影响其他
  * 最后统一移除 js-loading 加 is-ready
  */

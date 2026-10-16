@@ -1,0 +1,236 @@
+/* ============================================
+   themes.html 专属样式
+   主题预览卡片与主题页的特殊排版
+   依赖 style.css 里的基础变量
+   ============================================ */
+
+/* ============================================
+   主题预览卡片
+   四种主题各一个示例块
+   ============================================ */
+.theme-preview {
+  margin: 16px 0 24px;
+  padding: 24px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+  transition: transform .2s ease, box-shadow .2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-preview:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.18);
+}
+
+.theme-preview strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.theme-preview p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* 亮色示例 */
+.theme-preview-light {
+  background: #FFFFFF;
+  color: #111111;
+  border-color: #E8E8EC;
+}
+
+.theme-preview-light p {
+  color: #555555;
+}
+
+/* 暗色示例 */
+.theme-preview-dark {
+  background: #0E0E0E;
+  color: #EDEDED;
+  border-color: #2A2A2A;
+}
+
+.theme-preview-dark p {
+  color: #A0A0A0;
+}
+
+/* 通透示例 */
+.theme-preview-clear {
+  background: #EEF3F9;
+  color: #1A2333;
+  border-color: #DCE4EF;
+}
+
+.theme-preview-clear p {
+  color: #4A5A73;
+}
+
+/* 清新示例 */
+.theme-preview-fresh {
+  background: #F1F7EC;
+  color: #1E2A1A;
+  border-color: #DEE9D6;
+}
+
+.theme-preview-fresh p {
+  color: #4E5E48;
+}
+
+/* ============================================
+   主题页 · 暗色主题下的预览卡片微调
+   ============================================ */
+[data-theme="dark"] .theme-preview {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .theme-preview:hover {
+  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* 暗色下亮色示例保持白色，不受主题影响 */
+[data-theme="dark"] .theme-preview-light {
+  background: #FFFFFF;
+  color: #111111;
+}
+
+[data-theme="dark"] .theme-preview-light p {
+  color: #555555;
+}
+
+/* ============================================
+   主题页 · 侧边栏主题详情分组视觉区分
+   ============================================ */
+.tree-aside .tree-group:last-of-type .tree-items a {
+  color: var(--text-3);
+}
+
+.tree-aside .tree-group:last-of-type .tree-items a:hover {
+  color: var(--text);
+}
+
+/* ============================================
+   主题页 · 表格在暗色下的对比
+   ============================================ */
+[data-theme="dark"] .tree-table th {
+  background: rgba(40, 40, 50, 0.5);
+}
+
+[data-theme="dark"] .tree-table td {
+  color: var(--text-2);
+}
+
+/* ============================================
+   主题页 · 提示框微调
+   让提示框在主题页显得更轻
+   ============================================ */
+.tree-content .callout {
+  margin: 20px 0;
+}
+
+.tree-content .callout strong {
+  display: inline;
+  margin-right: 4px;
+}
+
+/* ============================================
+   主题页 · 分隔线
+   ============================================ */
+.tree-content hr {
+  margin: 44px 0;
+  opacity: 0.7;
+}
+
+/* ============================================
+   主题页 · 四种主题的标题视觉提示
+   在每个 h2 前加一个小色块
+   ============================================ */
+#light,
+#dark,
+#clear,
+#fresh {
+  position: relative;
+  padding-left: 20px;
+}
+
+#light::before,
+#dark::before,
+#clear::before,
+#fresh::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 22px;
+  border-radius: 2px;
+}
+
+#light::before {
+  background: #FFFFFF;
+  border: 1px solid var(--line-strong);
+}
+
+#dark::before {
+  background: #0E0E0E;
+  border: 1px solid #3A3A3A;
+}
+
+#clear::before {
+  background: #1052D6;
+}
+
+#fresh::before {
+  background: #1F7A45;
+}
+
+/* ============================================
+   主题页 · 响应式
+   ============================================ */
+@media (max-width: 640px) {
+  .theme-preview {
+    padding: 18px;
+  }
+
+  .theme-preview strong {
+    font-size: 14px;
+  }
+
+  .theme-preview p {
+    font-size: 13px;
+  }
+
+  #light,
+  #dark,
+  #clear,
+  #fresh {
+    padding-left: 16px;
+  }
+
+  #light::before,
+  #dark::before,
+  #clear::before,
+  #fresh::before {
+    height: 18px;
+    width: 3px;
+  }
+}
+
+/* ============================================
+   减少动态
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .theme-preview {
+    transition: none;
+  }
+
+  .theme-preview:hover {
+    transform: none;
+  }
+}
