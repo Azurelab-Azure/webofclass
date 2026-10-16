@@ -3,16 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <script>document.documentElement.classList.add('js-loading');</script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/splash.js"></script>
-<script src="assets/js/liquid-diamond.js"></script>
-<script src="assets/js/carousel.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>下载 · MyClassroom</title>
-<meta name="description" content="下载我的课表 Windows 版。安装版与绿色版，免费开源。">
-<link rel="icon" href="assets/img/logo/favicon.ico">
+<meta name="description" content="下载我的课表 Windows 版。免费开源，MIT 协议。">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans-sc@1.0.0/index.css">
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<!-- Clarity 统计 -->
+<script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yvug3weevb");
+</script>
 </head>
 <body>
 
@@ -45,6 +52,7 @@
 <div class="container">
   <div class="tree-layout">
 
+    <!-- ========== 侧边栏目录 ========== -->
     <aside class="tree-aside" id="treeAside">
       <div class="tree-title">目录</div>
 
@@ -53,7 +61,15 @@
         <ul class="tree-items">
           <li><a href="#download" class="active">下载链接</a></li>
           <li><a href="#requirements">系统要求</a></li>
-          <li><a href="#install">安装说明</a></li>
+        </ul>
+      </div>
+
+      <div class="tree-group">
+        <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 使用</div>
+        <ul class="tree-items">
+          <li><a href="#install">安装步骤</a></li>
+          <li><a href="#uninstall">卸载方式</a></li>
+          <li><a href="#backup">数据与备份</a></li>
         </ul>
       </div>
 
@@ -69,81 +85,165 @@
         <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 相关</div>
         <ul class="tree-items">
           <li><a href="product.html">产品介绍</a></li>
+          <li><a href="themes.html">主题</a></li>
           <li><a href="privacy.html">隐私政策</a></li>
         </ul>
       </div>
     </aside>
 
+    <!-- ========== 主内容 ========== -->
     <main class="tree-content">
       <button class="tree-mobile-toggle">
         <i class="fa-solid fa-list"></i> 目录
       </button>
 
       <h1>下载</h1>
-      <p class="page-lead">Windows 10 与 11 · 免费开源 · MIT 协议</p>
+      <p class="page-lead">Windows 10 与 11 · 免费开源 · MIT 协议 · 无需登录</p>
 
+      <!-- ========== 下载主卡片 ========== -->
       <h2 id="download">下载链接</h2>
-      <p>提供安装版与绿色版两种。安装版会自动检测 .NET 运行时，绿色版解压即用。</p>
+      <p>Windows 安装包。安装过程会自动检测 .NET 运行时，缺失时提示下载。</p>
 
-      <div class="download-cards" style="margin-top:20px">
-        <div class="download-card">
-          <h3>安装版</h3>
-          <p class="meta">v<span data-text="version.current">1.0.0</span> · .exe · 约 45 MB</p>
-          <a href="#" data-link="download.installer" class="btn btn-primary">
-            <i class="fa-solid fa-download"></i>
-            <span>下载安装版</span>
-          </a>
+      <div class="dl-hero">
+        <div class="dl-hero-icon">
+          <i class="fa-brands fa-windows"></i>
         </div>
-        <div class="download-card">
-          <h3>绿色版</h3>
-          <p class="meta">v<span data-text="version.current">1.0.0</span> · .zip · 约 40 MB</p>
-          <a href="#" data-link="download.portable" class="btn btn-secondary">
-            <i class="fa-solid fa-download"></i>
-            <span>下载绿色版</span>
-          </a>
+        <div class="dl-hero-body">
+          <div class="dl-hero-tag">最新版本</div>
+          <h3 class="dl-hero-title">我的课表 · MyClassroom</h3>
+          <div class="dl-hero-meta">
+            <span>v<span data-text="version.current">1.0.0</span></span>
+            <span class="dl-meta-dot">·</span>
+            <span>.exe 安装包</span>
+            <span class="dl-meta-dot">·</span>
+            <span>约 45 MB</span>
+            <span class="dl-meta-dot">·</span>
+            <span data-text="system.os">Windows 10 或 11</span>
+          </div>
+          <div class="dl-hero-actions">
+            <a href="#" data-link="download.installer" class="btn btn-primary">
+              <i class="fa-solid fa-download"></i>
+              <span>下载 Windows 版</span>
+            </a>
+            <a href="#" data-link="releases" target="_blank" rel="noopener" class="btn btn-secondary">
+              <i class="fa-brands fa-github"></i>
+              <span>查看全部版本</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      <p style="margin-top:20px;font-size:13.5px;color:var(--text-3)">
-        所有版本都可以在 <a href="#" data-link="releases" target="_blank" rel="noopener">GitHub Releases</a> 页面找到。
-      </p>
-
+      <!-- ========== 系统要求 ========== -->
       <h2 id="requirements">系统要求</h2>
-      <table class="tree-table">
-        <thead>
-          <tr><th>项目</th><th>要求</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>操作系统</td><td data-text="system.os">Windows 10 或 Windows 11</td></tr>
-          <tr><td>运行时</td><td data-text="system.runtime">.NET 10 Desktop Runtime</td></tr>
-          <tr><td>磁盘空间</td><td data-text="system.disk">约 150 MB</td></tr>
-          <tr><td>网络</td><td>不需要。除可选的新闻功能外，完全离线可用</td></tr>
-        </tbody>
-      </table>
+      <p>满足以下条件即可正常运行。</p>
 
-      <h2 id="install">安装说明</h2>
+      <div class="req-grid">
+        <div class="req-card">
+          <div class="req-icon"><i class="fa-brands fa-windows"></i></div>
+          <div class="req-label">操作系统</div>
+          <div class="req-value" data-text="system.os">Windows 10 或 11</div>
+          <div class="req-note">64 位系统</div>
+        </div>
 
-      <h3>安装版</h3>
-      <ol>
-        <li>下载 .exe 文件</li>
-        <li>双击运行，按提示完成安装</li>
-        <li>首次启动会在程序目录生成数据文件</li>
-      </ol>
+        <div class="req-card">
+          <div class="req-icon"><i class="fa-solid fa-microchip"></i></div>
+          <div class="req-label">运行时</div>
+          <div class="req-value" data-text="system.runtime">.NET 10 Desktop Runtime</div>
+          <div class="req-note">安装时自动检测</div>
+        </div>
 
-      <h3>绿色版</h3>
-      <ol>
-        <li>下载 .zip 文件</li>
-        <li>解压到任意目录（建议不要放在 C 盘根目录）</li>
-        <li>双击 CourseApp.exe 即可运行</li>
-        <li>删除目录即完全卸载</li>
-      </ol>
+        <div class="req-card">
+          <div class="req-icon"><i class="fa-solid fa-hard-drive"></i></div>
+          <div class="req-label">磁盘空间</div>
+          <div class="req-value" data-text="system.disk">约 150 MB</div>
+          <div class="req-note">含运行时</div>
+        </div>
 
-      <h3>数据位置</h3>
-      <p>所有数据保存在程序目录下的 JSON 文件中。复制该目录即可完成备份。</p>
+        <div class="req-card">
+          <div class="req-icon"><i class="fa-solid fa-wifi"></i></div>
+          <div class="req-label">网络</div>
+          <div class="req-value">不需要</div>
+          <div class="req-note">除可选新闻功能外离线可用</div>
+        </div>
+      </div>
 
+      <!-- ========== 安装步骤 ========== -->
+      <h2 id="install">安装步骤</h2>
+      <p>三步完成安装。</p>
+
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>下载安装包</h3>
+            <p>点击上方按钮下载 .exe 文件，约 45 MB。</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>双击运行</h3>
+            <p>按提示完成安装。如果缺少 .NET 10 运行时会自动提示。</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3>首次启动</h3>
+            <p>程序会在安装目录生成数据文件，然后就可以使用了。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== 卸载方式 ========== -->
+      <h2 id="uninstall">卸载方式</h2>
+      <p>零残留，不留任何痕迹。</p>
+
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>从 Windows 设置卸载</h3>
+            <p>设置 → 应用 → 我的课表 → 卸载。</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>删除数据文件</h3>
+            <p>删除程序目录下的 JSON 文件。如果需要保留数据请先备份。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== 数据与备份 ========== -->
+      <h2 id="backup">数据与备份</h2>
+      <p>所有数据保存在程序目录下的 JSON 文件中。复制该目录即可完成完整备份。</p>
+
+      <div class="callout">
+        <strong>提示：</strong>数据永远保存在你的设备上。我们的服务器不会收到任何课程、学生或成绩信息。
+      </div>
+
+      <h3>备份方法</h3>
+      <ul>
+        <li>直接复制整个程序目录到 U 盘或云盘</li>
+        <li>或使用软件内置的「备份数据」功能</li>
+      </ul>
+
+      <h3>恢复方法</h3>
+      <ul>
+        <li>把备份的 JSON 文件放回程序目录</li>
+        <li>重启软件即可看到原来的数据</li>
+      </ul>
+
+      <!-- ========== 更新日志 ========== -->
       <h2 id="changelog">更新日志</h2>
       <div id="changelogCurrent"></div>
 
+      <!-- ========== 历史版本 ========== -->
       <h2 id="history">历史版本</h2>
       <div id="changelogHistory"></div>
 
@@ -151,6 +251,7 @@
   </div>
 </div>
 
+<!-- ========== 页脚 ========== -->
 <footer>
   <div class="container">
     <div class="footer-links">
@@ -166,7 +267,7 @@
     <p class="copyright">
       © <span data-text="brand.copyright">2026</span>
       <span class="lab">
-        <span class="lab-mark" data-text="brand.labMark">Kzure Lab</span>
+        <span class="lab-mark" data-text="brand.labMark">KZ</span>
         <span class="brand" data-text="brand.lab">Kzure Lab</span>
       </span>
       · 我的课表 MyClassroom · 保留所有权利
@@ -176,6 +277,7 @@
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/splash.js"></script>
+<script src="assets/js/liquid-glass-ui.js"></script>
 <script src="assets/js/tree.js"></script>
 </body>
 </html>
