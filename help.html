@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
+<head>
+<meta charset="UTF-8">
+<script>document.documentElement.classList.add('js-loading');</script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>帮助中心 · MyClassroom</title>
+<meta name="description" content="我的课表帮助中心：PDF 使用手册在线浏览，支持搜索、缩放、翻页。">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans-sc@1.0.0/index.css">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/help.css">
+
+<script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yvug3weevb");
+</script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
+      <span data-text="brand.name">我的课表</span>
+    </a>
+        <ul class="navbar-links">
+      <li><a href="product.html">产品介绍</a></li>
+      <li><a href="index.html#features">功能</a></li>
+      <li><a href="docs.html">文档</a></li>
+      <li><a href="help.html">帮助</a></li>
+      <li><a href="themes.html">主题</a></li>
+      <li><a href="download.html">下载</a></li>
+      <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+    <div class="navbar-right">
+      <div class="ui-switcher" role="group" aria-label="UI 模式">
+        <button data-ui="light" title="亮色" aria-label="亮色"></button>
+        <button data-ui="dark" title="暗色" aria-label="暗色"></button>
+        <button data-ui="clear" title="通透" aria-label="通透"></button>
+        <button data-ui="fresh" title="清新" aria-label="清新"></button>
+      </div>
+      <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="help-layout">
+
+    <!-- 左侧信息栏 -->
+    <aside class="help-aside">
+      <div class="help-card">
+        <div class="help-card-icon"><i class="fa-solid fa-book"></i></div>
+        <h2>使用手册</h2>
+        <p>PDF 版完整手册，覆盖安装、功能、备份与常见问题。</p>
+        <a href="assets/docs/manual.pdf" class="btn btn-primary btn-3d" download>
+          <i class="fa-solid fa-download"></i>
+          <span>下载 PDF</span>
+        </a>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon"><i class="fa-solid fa-circle-question"></i></div>
+        <h2>常见问题</h2>
+        <ul class="help-quick-links">
+          <li><a href="docs.html#faq">如何备份数据</a></li>
+          <li><a href="docs.html#faq">支持 Mac 吗</a></li>
+          <li><a href="docs.html#faq">怎么卸载</a></li>
+          <li><a href="docs.html#faq">收费吗</a></li>
+        </ul>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon"><i class="fa-solid fa-headset"></i></div>
+        <h2>联系支持</h2>
+        <ul class="help-quick-links">
+          <li>
+            <a href="#" data-link="issues" target="_blank" rel="noopener">
+              <i class="fa-brands fa-github"></i> GitHub Issues
+            </a>
+          </li>
+          <li>
+            <a href="mailto:chzurelab@outlook.com">
+              <i class="fa-solid fa-envelope"></i> 邮件支持
+            </a>
+          </li>
+          <li>
+            <a href="docs.html">
+              <i class="fa-solid fa-book-open"></i> 在线文档
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- 右侧 PDF 阅读器 -->
+    <main class="help-main">
+      <div class="help-reader">
+
+        <!-- 工具栏 -->
+        <div class="help-toolbar">
+          <div class="help-toolbar-group">
+            <button class="help-btn" id="pdfPrev" title="上一页">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <span class="help-page-info">
+              <input type="number" id="pdfPageInput" value="1" min="1" aria-label="页码">
+              <span class="help-page-total">/ <span id="pdfPageTotal">?</span></span>
+            </span>
+            <button class="help-btn" id="pdfNext" title="下一页">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+
+          <div class="help-toolbar-group">
+            <button class="help-btn" id="pdfZoomOut" title="缩小">
+              <i class="fa-solid fa-magnifying-glass-minus"></i>
+            </button>
+            <span class="help-zoom-info" id="pdfZoomInfo">100%</span>
+            <button class="help-btn" id="pdfZoomIn" title="放大">
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+            </button>
+            <button class="help-btn" id="pdfFitWidth" title="适合宽度">
+              <i class="fa-solid fa-arrows-left-right"></i>
+            </button>
+          </div>
+
+          <div class="help-toolbar-group">
+            <button class="help-btn" id="pdfSearchToggle" title="搜索">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <a href="assets/docs/manual.pdf" class="help-btn" download title="下载">
+              <i class="fa-solid fa-download"></i>
+            </a>
+            <button class="help-btn" id="pdfFullscreen" title="全屏">
+              <i class="fa-solid fa-expand"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 搜索栏 -->
+        <div class="help-search" id="helpSearch" hidden>
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="pdfSearchInput" placeholder="搜索手册内容..." autocomplete="off">
+          <span class="help-search-info" id="pdfSearchInfo"></span>
+          <button class="help-btn help-btn-small" id="pdfSearchPrev" title="上一处">
+            <i class="fa-solid fa-chevron-up"></i>
+          </button>
+          <button class="help-btn help-btn-small" id="pdfSearchNext" title="下一处">
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <button class="help-btn help-btn-small" id="pdfSearchClose" title="关闭搜索">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- PDF 画布容器 -->
+        <div class="help-canvas-wrap" id="pdfCanvasWrap">
+          <div class="help-loading" id="pdfLoading">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <p>正在加载 PDF 手册...</p>
+          </div>
+          <div class="help-error" id="pdfError" hidden>
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <h3>手册加载失败</h3>
+            <p>请检查文件是否存在，或者 <a href="assets/docs/manual.pdf" download>直接下载</a>。</p>
+          </div>
+        </div>
+
+        <!-- 底部页码 -->
+        <div class="help-footer">
+          <span class="help-footer-page" id="pdfFooterPage">第 1 页</span>
+          <span class="help-footer-hint">
+            滚轮缩放 · 方向键翻页 · Ctrl + F 搜索
+          </span>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+        <div class="footer-links">
+      <a href="product.html">产品介绍</a>
+      <a href="docs.html">文档</a>
+      <a href="help.html">帮助</a>
+      <a href="themes.html">主题</a>
+      <a href="about.html">关于</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="cookie.html">Cookie</a>
+      <a href="#" data-link="license" target="_blank" rel="noopener">MIT 协议</a>
+      <a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="copyright">
+      © <span data-text="brand.copyright">2026</span>
+      <span class="lab">
+        <span class="lab-mark" data-text="brand.labMark">KZ</span>
+        <span class="brand" data-text="brand.lab">Kzure Lab</span>
+      </span>
+      · 我的课表 MyClassroom · 保留所有权利
+    </p>
+  </div>
+</footer>
+
+<!-- pdf.js，Apache 2.0 协议 -->
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.mjs" type="module"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/splash.js"></script>
+<script src="assets/js/liquid-glass-ui.js"></script>
+<script type="module" src="assets/js/help.js"></script>
+</body>
+</html>

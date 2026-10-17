@@ -133,6 +133,30 @@ function applyTexts() {
 }
 
 /**
+ * 替换页面中所有 data-logo 元素的图片源
+ * 支持 data-logo="main" 或 data-logo="beta"
+ */
+function applyLogos() {
+  var logoMap = {
+    main: 'assets/img/logo/logo.png',
+    beta: 'assets/img/logo/logobeta.png'
+  };
+
+  if (SiteData.links && SiteData.links.logos) {
+    if (SiteData.links.logos.main) logoMap.main = SiteData.links.logos.main;
+    if (SiteData.links.logos.beta) logoMap.beta = SiteData.links.logos.beta;
+  }
+
+  document.querySelectorAll('[data-logo]').forEach(function (el) {
+    var key = el.getAttribute('data-logo');
+    var src = logoMap[key];
+    if (src && el.tagName === 'IMG') {
+      el.setAttribute('src', src);
+    }
+  });
+}
+
+/**
  * 渲染更新日志与历史版本
  * 用于 download.html
  */
@@ -473,6 +497,7 @@ async function bootstrap() {
   try { await loadAllData(); } catch (e) { console.warn('数据加载失败', e); }
   try { applyLinks(); } catch (e) { console.warn('链接替换失败', e); }
   try { applyTexts(); } catch (e) { console.warn('文本替换失败', e); }
+  try { applyLogos(); } catch (e) { console.warn('Logo 替换失败', e); }
   try { renderChangelog(); } catch (e) { console.warn('日志渲染失败', e); }
   try { bindUISwitcher(); } catch (e) { console.warn('UI 切换绑定失败', e); }
   try { bindThemeToggle(); } catch (e) { console.warn('主题切换绑定失败', e); }

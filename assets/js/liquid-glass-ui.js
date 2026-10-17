@@ -25,7 +25,9 @@
     '.app-card .get-btn',
     '.carousel-btn',
     '.theme-toggle',
-    '.ui-switcher'
+    '.ui-switcher',
+    '.dl-panel',          // 添加下载页大卡片
+    '.dl-specs-list'      // 添加系统要求列表
   ].join(', ');
 
   // 安全名单

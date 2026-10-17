@@ -1,0 +1,752 @@
+/* ============================================
+   下载页 · Apple 风格重写
+   严格的居中对齐、呼吸感留白、轻量化
+   ============================================ */
+
+.dl-body {
+  background: transparent;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* 关闭通用背景层，使用独立的 dl-bg */
+.dl-body::before,
+.dl-body::after {
+  display: none;
+}
+
+/* ============================================
+   背景层
+   ============================================ */
+.dl-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  pointer-events: none;
+  transition: opacity .6s ease;
+}
+
+.dl-bg-mask {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  transition: background .4s ease;
+}
+
+/* 亮色 */
+html[data-theme="light"][data-ui="light"] .dl-bg {
+  background-image: url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=80&auto=format&fit=crop");
+}
+html[data-theme="light"][data-ui="light"] .dl-bg-mask {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+/* 暗色 */
+html[data-theme="dark"] .dl-bg {
+  background-image: url("https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=80&auto=format&fit=crop");
+}
+html[data-theme="dark"] .dl-bg-mask {
+  background: rgba(6, 6, 12, 0.82);
+}
+
+/* 通透 */
+html[data-theme="light"][data-ui="clear"] .dl-bg {
+  background-image: url("https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=2400&q=80&auto=format&fit=crop");
+}
+html[data-theme="light"][data-ui="clear"] .dl-bg-mask {
+  background: rgba(235, 244, 252, 0.75);
+}
+
+/* 清新 */
+html[data-theme="light"][data-ui="fresh"] .dl-bg {
+  background-image: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=2400&q=80&auto=format&fit=crop");
+}
+html[data-theme="light"][data-ui="fresh"] .dl-bg-mask {
+  background: rgba(245, 252, 240, 0.78);
+}
+
+@media (max-width: 768px) {
+  .dl-bg {
+    background-attachment: scroll;
+  }
+}
+
+/* ============================================
+   页面容器
+   ============================================ */
+.dl-container {
+  position: relative;
+  z-index: 10;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  max-width: 880px;
+}
+
+/* ============================================
+   顶部 Hero（强制居中，解决折行）
+   ============================================ */
+.dl-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 0 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.dl-app-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 50px -12px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.dl-app-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dl-title {
+  font-size: clamp(40px, 5.5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: var(--text);
+  margin: 0 0 12px;
+  text-align: center;
+  width: 100%;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+}
+
+.dl-subtitle {
+  font-size: clamp(16px, 1.7vw, 19px);
+  color: var(--text-2);
+  font-weight: 500;
+  max-width: 560px;
+  margin: 0 auto 28px;
+  line-height: 1.55;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.dl-hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dl-hero-badges span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.dl-hero-badges i {
+  color: var(--accent);
+  font-size: 12px;
+}
+
+/* ============================================
+   面板卡片（配合 card-3d）
+   注意：背景和毛玻璃交由 style.css 的 .card-3d 处理
+   这里只负责下载页特有的内边距和圆角
+   ============================================ */
+.dl-panel {
+  padding: 0 !important;
+  margin-bottom: 32px;
+  border-radius: 20px !important;
+  overflow: hidden;
+}
+
+.dl-panel-head {
+  padding: 32px 32px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.dl-panel-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  margin-bottom: 12px;
+}
+
+.dl-panel-label-beta {
+  color: #FF9800;
+  background: rgba(255, 152, 0, 0.12);
+}
+
+.dl-panel-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.dl-panel-sub {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.55;
+  font-weight: 500;
+  margin: 0;
+}
+
+.dl-panel-body {
+  padding: 8px;
+}
+
+/* ============================================
+   Apple 风格行
+   ============================================ */
+.dl-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  transition: background .15s ease;
+}
+
+.dl-row:hover {
+  background: var(--bg-soft);
+}
+
+.dl-row + .dl-row {
+  border-top: 1px solid var(--line);
+}
+
+.dl-row-icon {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.dl-row-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dl-row-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -0.01em;
+}
+
+.dl-row-meta {
+  font-size: 13px;
+  color: var(--text-3);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.dl-row-action {
+  flex: 0 0 auto;
+}
+
+/* ============================================
+   按钮（Apple 药丸形）
+   ============================================ */
+.dl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background .15s ease, transform .1s ease, box-shadow .2s ease;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.dl-btn:active {
+  transform: scale(0.97);
+}
+
+.dl-btn-primary {
+  background: var(--accent);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px -2px var(--accent);
+}
+
+.dl-btn-primary:hover {
+  background: var(--accent-hover);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px -2px var(--accent);
+}
+
+.dl-btn-secondary {
+  background: var(--bg-soft);
+  color: var(--text);
+  border-color: var(--line);
+}
+
+.dl-btn-secondary:hover {
+  background: var(--bg-code);
+  color: var(--text);
+}
+
+.dl-btn-ghost {
+  background: transparent;
+  color: var(--text-2);
+  border-color: var(--line);
+}
+
+.dl-btn-ghost:hover {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+.dl-btn-star {
+  background: #24292F;
+  color: #FFFFFF;
+  padding: 12px 28px;
+  font-size: 15px;
+  box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.35);
+}
+
+.dl-btn-star:hover {
+  background: #000000;
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   测试版流程指示器
+   ============================================ */
+.dl-steps-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-soft);
+}
+
+.dl-step-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.4;
+  transition: opacity .4s ease;
+}
+
+.dl-step-node.active {
+  opacity: 1;
+}
+
+.dl-step-node-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-elev);
+  border: 2px solid var(--line-strong);
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  transition: all .4s cubic-bezier(.22, 1, .36, 1);
+}
+
+.dl-step-node.active .dl-step-node-num {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px -2px var(--accent);
+}
+
+.dl-step-node.done .dl-step-node-num {
+  background: #22C55E;
+  border-color: #22C55E;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px -2px #22C55E;
+}
+
+.dl-step-node-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dl-step-node.active .dl-step-node-label {
+  color: var(--text);
+}
+
+.dl-step-line {
+  width: 60px;
+  height: 2px;
+  background: var(--line);
+  border-radius: 2px;
+  margin-top: -20px;
+}
+
+/* ============================================
+   锁定状态 / 解锁状态
+   ============================================ */
+.dl-lock-state {
+  padding: 56px 32px 48px;
+  text-align: center;
+  animation: dlFadeIn .5s cubic-bezier(.22, 1, .36, 1);
+}
+
+.dl-lock-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: rgba(36, 41, 47, 0.08);
+  color: #24292F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+[data-theme="dark"] .dl-lock-icon {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+}
+
+.dl-lock-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+
+.dl-lock-desc {
+  font-size: 14.5px;
+  color: var(--text-2);
+  line-height: 1.65;
+  margin: 0 auto 28px;
+  max-width: 440px;
+  font-weight: 500;
+}
+
+.dl-lock-tip {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+.dl-lock-tip i {
+  color: var(--accent);
+}
+
+.dl-unlock-state {
+  padding: 40px 32px 32px;
+  text-align: center;
+  animation: dlUnlockIn .6s cubic-bezier(.22, 1, .36, 1);
+}
+
+.dl-unlock-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.12);
+  color: #22C55E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  animation: dlCheckPop .6s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.dl-unlock-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.dl-unlock-desc {
+  font-size: 14.5px;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin: 0 auto 28px;
+  max-width: 440px;
+  font-weight: 500;
+}
+
+.dl-row-unlock {
+  text-align: left;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 14px;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+}
+
+.dl-row-unlock:hover {
+  background: var(--accent-soft);
+}
+
+.dl-row-unlock .dl-row-icon {
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+.dl-unlock-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ============================================
+   动画
+   ============================================ */
+@keyframes dlFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dlUnlockIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes dlCheckPop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ============================================
+   系统要求
+   ============================================ */
+.dl-specs {
+  margin-top: 56px;
+}
+
+.dl-specs-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 16px;
+  letter-spacing: -0.025em;
+}
+
+.dl-specs-list {
+  background: var(--bg-elev);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.dl-spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  font-size: 14.5px;
+}
+
+.dl-spec-item + .dl-spec-item {
+  border-top: 1px solid var(--line);
+}
+
+.dl-spec-label {
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+.dl-spec-value {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ============================================
+   更新日志
+   ============================================ */
+.dl-changelog {
+  margin-top: 56px;
+}
+
+.dl-changelog h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+  padding-left: 20px;
+  position: relative;
+}
+
+.dl-changelog h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.dl-changelog ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 20px;
+  border-left: 2px solid var(--line);
+}
+
+.dl-changelog li {
+  position: relative;
+  padding: 8px 0 8px 18px;
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.65;
+  font-weight: 500;
+}
+
+.dl-changelog li::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bg-elev);
+  border: 2px solid var(--accent);
+}
+
+/* ============================================
+   页脚间距
+   ============================================ */
+.dl-body footer {
+  position: relative;
+  z-index: 10;
+  margin-top: 80px;
+}
+
+/* ============================================
+   响应式
+   ============================================ */
+@media (max-width: 640px) {
+  .dl-container {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .dl-hero {
+    padding-bottom: 40px;
+  }
+
+  .dl-app-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 18px;
+  }
+
+  .dl-panel-head {
+    padding: 24px 20px 20px;
+  }
+
+  .dl-panel-title {
+    font-size: 22px;
+  }
+
+  .dl-row {
+    padding: 14px 16px;
+    flex-wrap: wrap;
+  }
+
+  .dl-row-action {
+    flex: 0 0 100%;
+    margin-top: 10px;
+  }
+
+  .dl-row-action .dl-btn {
+    width: 100%;
+  }
+
+  .dl-lock-state,
+  .dl-unlock-state {
+    padding: 40px 20px 32px;
+  }
+
+  .dl-steps-indicator {
+    padding: 20px;
+  }
+
+  .dl-step-line {
+    width: 40px;
+  }
+
+  .dl-spec-item {
+    padding: 14px 20px;
+  }
+}
+
+/* ============================================
+   减少动态
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .dl-lock-state,
+  .dl-unlock-state,
+  .dl-unlock-icon {
+    animation: none !important;
+  }
+  .dl-btn,
+  .dl-step-node-num {
+    transition: none !important;
+  }
+}

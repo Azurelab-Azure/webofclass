@@ -1,0 +1,38 @@
+{
+  "groups": [
+    {
+      "title": "入门",
+      "items": [
+        { "id": "quickstart", "title": "快速开始", "file": "quickstart.md" },
+        { "id": "install", "title": "安装与卸载", "file": "install.md" }
+      ]
+    },
+    {
+      "title": "功能",
+      "items": [
+        { "id": "schedule", "title": "课程表", "file": "schedule.md" },
+        { "id": "students", "title": "学生管理", "file": "students.md" },
+        { "id": "grades", "title": "成绩分析", "file": "grades.md" }
+      ]
+    },
+    {
+      "title": "个性化",
+      "items": [
+        { "id": "themes", "title": "主题", "file": "themes.md" },
+        { "id": "language", "title": "语言", "file": "language.md" }
+      ]
+    },
+    {
+      "title": "数据",
+      "items": [
+        { "id": "backup", "title": "备份与恢复", "file": "backup.md" }
+      ]
+    },
+    {
+      "title": "其他",
+      "items": [
+        { "id": "faq", "title": "常见问题", "file": "faq.md" }
+      ]
+    }
+  ]
+}
