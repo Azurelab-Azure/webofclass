@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>下载 · 我的课表 MyClassroom</title>
 <meta name="description" content="下载我的课表 Windows 版。正式版与测试版，免费开源。">
-<link rel="icon" href="data:,">
+<link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans-sc@1.0.0/index.css">
@@ -51,9 +51,31 @@
         <button data-ui="fresh" title="清新" aria-label="清新"></button>
       </div>
       <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
   </div>
 </nav>
+
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <span class="mobile-menu-title">菜单</span>
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="关闭菜单">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <ul class="mobile-menu-links">
+    <li><a href="product.html">产品介绍</a></li>
+    <li><a href="index.html#features">功能</a></li>
+    <li><a href="docs.html">文档</a></li>
+    <li><a href="help.html">帮助</a></li>
+    <li><a href="themes.html">主题</a></li>
+    <li><a href="download.html">下载</a></li>
+    <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
+  </ul>
+</div>
 
 <div class="container dl-container">
 

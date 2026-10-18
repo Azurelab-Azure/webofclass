@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Cookie 与本地存储 · MyClassroom</title>
 <meta name="description" content="我的课表 Cookie 与本地存储说明。">
-<link rel="icon" href="data:,">
+<link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -15,10 +15,10 @@
 <nav class="navbar">
   <div class="container navbar-inner">
     <a href="index.html" class="navbar-logo">
-      <img src="assets/img/logo/logo.png" alt="我的课表 Logo" data-logo="main">
+      <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
       <span data-text="brand.name">我的课表</span>
     </a>
-        <ul class="navbar-links">
+    <ul class="navbar-links">
       <li><a href="product.html">产品介绍</a></li>
       <li><a href="index.html#features">功能</a></li>
       <li><a href="docs.html">文档</a></li>
@@ -35,9 +35,31 @@
         <button data-ui="fresh" title="清新" aria-label="清新"></button>
       </div>
       <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
   </div>
 </nav>
+
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <span class="mobile-menu-title">菜单</span>
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="关闭菜单">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <ul class="mobile-menu-links">
+    <li><a href="product.html">产品介绍</a></li>
+    <li><a href="index.html#features">功能</a></li>
+    <li><a href="docs.html">文档</a></li>
+    <li><a href="help.html">帮助</a></li>
+    <li><a href="themes.html">主题</a></li>
+    <li><a href="download.html">下载</a></li>
+    <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
+  </ul>
+</div>
 
 <div class="container">
   <div class="tree-layout">

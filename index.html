@@ -11,7 +11,7 @@
 <meta property="og:description" content="无服务器、纯本地、20 种语言的课程表应用。">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:,">
+<link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans-sc@1.0.0/index.css">
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -31,10 +31,10 @@
 <nav class="navbar">
   <div class="container navbar-inner">
     <a href="index.html" class="navbar-logo">
-      <img src="assets/img/logo/logo.png" alt="我的课表 Logo" data-logo="main">
+      <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
       <span data-text="brand.name">我的课表</span>
     </a>
-        <ul class="navbar-links">
+    <ul class="navbar-links">
       <li><a href="product.html">产品介绍</a></li>
       <li><a href="index.html#features">功能</a></li>
       <li><a href="docs.html">文档</a></li>
@@ -51,9 +51,49 @@
         <button data-ui="fresh" title="清新" aria-label="清新"></button>
       </div>
       <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
   </div>
 </nav>
+
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <span class="mobile-menu-title">菜单</span>
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="关闭菜单">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <ul class="mobile-menu-links">
+    <li><a href="product.html">产品介绍</a></li>
+    <li><a href="index.html#features">功能</a></li>
+    <li><a href="docs.html">文档</a></li>
+    <li><a href="help.html">帮助</a></li>
+    <li><a href="themes.html">主题</a></li>
+    <li><a href="download.html">下载</a></li>
+    <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
+  </ul>
+</div>
+
+
+<!-- 顶部通知栏 -->
+<div class="announcement" id="announcement">
+  <div class="announcement-inner">
+    <div class="announcement-icon">
+      <i class="fa-solid fa-bullhorn"></i>
+    </div>
+    <div class="announcement-text">
+      <strong>12 月 25 日</strong> 发布全新 <strong>v2.0</strong> 版本！
+      <span class="announcement-divider">|</span>
+      新版功能测试中，欢迎抢先体验 <a href="download.html#betaPanel">测试版</a>。
+    </div>
+    <button class="announcement-close" id="announcementClose" aria-label="关闭通知">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+</div>
 
 <!-- ========== 首屏 ========== -->
 <header class="hero">
@@ -478,5 +518,30 @@
 <script src="assets/js/liquid-glass-ui.js"></script>
 <script src="assets/js/carousel.js"></script>
 <script src="assets/js/typewriter.js"></script>
+
+<script>
+(function () {
+  var banner = document.getElementById('announcement');
+  var closeBtn = document.getElementById('announcementClose');
+  var KEY = 'myclassroom_announcement_closed';
+
+  if (!banner || !closeBtn) return;
+
+  // 如果本次会话已经关闭过，直接隐藏
+  try {
+    if (sessionStorage.getItem(KEY) === '1') {
+      banner.classList.add('hidden');
+    }
+  } catch (e) {}
+
+  // 点击关闭按钮
+  closeBtn.addEventListener('click', function () {
+    banner.classList.add('hidden');
+    try {
+      sessionStorage.setItem(KEY, '1');
+    } catch (e) {}
+  });
+})();
+</script>
 </body>
 </html>

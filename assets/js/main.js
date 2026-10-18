@@ -507,7 +507,7 @@ async function bootstrap() {
   try { initReveal(); } catch (e) { console.warn('滚动淡入失败', e); }
   try { initCookieBanner(); } catch (e) { console.warn('Cookie 条失败', e); }
   try { initSmoothAnchor(); } catch (e) { console.warn('锚点滚动失败', e); }
-
+ try { bindMobileMenu(); } catch (e) { console.warn('移动端菜单绑定失败', e); }
   document.documentElement.classList.remove('js-loading');
   document.body.classList.add('is-ready');
 }
@@ -518,7 +518,40 @@ if (document.readyState === 'loading') {
   bootstrap();
 }
 
+/**
+ * 绑定移动端菜单交互
+ */
+function bindMobileMenu() {
+  var toggle = document.getElementById('mobileMenuToggle');
+  var menu = document.getElementById('mobileMenu');
+  var overlay = document.getElementById('mobileMenuOverlay');
+  var close = document.getElementById('mobileMenuClose');
 
+  if (!toggle || !menu || !overlay || !close) return;
+
+  function openMenu() {
+    menu.classList.add('active');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden'; // 防止背景滚动
+  }
+
+  function closeMenu() {
+    menu.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = ''; // 恢复滚动
+  }
+
+  toggle.addEventListener('click', openMenu);
+  close.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+
+  // 按 ESC 关闭
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menu.classList.contains('active')) {
+      closeMenu();
+    }
+  });
+}
 
 /**
  * 测试版区块交互
