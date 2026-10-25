@@ -750,3 +750,62 @@ html[data-theme="light"][data-ui="fresh"] .dl-bg-mask {
     transition: none !important;
   }
 }
+
+/* ============================================
+   新架构体验版 (Avalonia)
+   ============================================ */
+.dl-panel-label-avalonia {
+  color: #A855F7; /* 紫色 */
+  background: rgba(168, 85, 247, 0.12);
+}
+
+.dl-row-avalonia:hover {
+  background: rgba(168, 85, 247, 0.05);
+}
+
+.dl-row-avalonia .dl-row-icon {
+  background: rgba(168, 85, 247, 0.15);
+  color: #A855F7;
+}
+
+.dl-btn-avalonia {
+  background: #7E22CE;
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px -2px #7E22CE;
+}
+
+.dl-btn-avalonia:hover {
+  background: #6B21A8;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px -2px #7E22CE;
+}
+
+/* 警告提示框 */
+.dl-avalonia-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px 24px;
+  background: rgba(168, 85, 247, 0.08);
+  border-top: 1px solid rgba(168, 85, 247, 0.2);
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.dl-avalonia-note i {
+  color: #A855F7;
+  font-size: 15px;
+  margin-top: 2px;
+}
+
+.dl-avalonia-note strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .dl-avalonia-note {
+    padding: 16px 20px;
+  }
+}

@@ -5,7 +5,7 @@
 <script>document.documentElement.classList.add('js-loading');</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>下载 · 我的课表 MyClassroom</title>
-<meta name="description" content="下载我的课表 Windows 版。正式版与测试版，免费开源。">
+<meta name="description" content="下载我的课表 Windows 版。正式版、测试版与全新 Avalonia 架构体验版。">
 <link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://images.unsplash.com">
@@ -51,31 +51,9 @@
         <button data-ui="fresh" title="清新" aria-label="清新"></button>
       </div>
       <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
-        <i class="fa-solid fa-bars"></i>
-      </button>
     </div>
   </div>
 </nav>
-
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-header">
-    <span class="mobile-menu-title">菜单</span>
-    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="关闭菜单">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-  </div>
-  <ul class="mobile-menu-links">
-    <li><a href="product.html">产品介绍</a></li>
-    <li><a href="index.html#features">功能</a></li>
-    <li><a href="docs.html">文档</a></li>
-    <li><a href="help.html">帮助</a></li>
-    <li><a href="themes.html">主题</a></li>
-    <li><a href="download.html">下载</a></li>
-    <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
-  </ul>
-</div>
 
 <div class="container dl-container">
 
@@ -84,21 +62,20 @@
     <div class="dl-app-icon">
       <img src="assets/img/logo/logo.png" alt="我的课表">
     </div>
-    <h1 class="dl-title">我的课表</h1>
-    <p class="dl-subtitle">你的课表，你的数据。在 Windows 上轻快地管理课程。</p>
+    <h1 class="dl-title">选择你的版本</h1>
+    <p class="dl-subtitle">Windows 10 与 11 · 免费开源 · 无需登录</p>
     <div class="dl-hero-badges">
-      <span><i class="fa-solid fa-check"></i> 免费开源</span>
-      <span><i class="fa-solid fa-check"></i> 无需登录</span>
-      <span><i class="fa-solid fa-check"></i> 纯本地</span>
+      <span><i class="fa-solid fa-check"></i> 纯本地存储</span>
       <span><i class="fa-solid fa-check"></i> MIT 协议</span>
+      <span><i class="fa-solid fa-check"></i> 20 种语言</span>
     </div>
   </header>
 
-  <!-- 正式版卡片（Apple 风格） -->
+  <!-- ================= 1. 正式版 ================= -->
   <section class="dl-panel card-3d">
     <div class="dl-panel-head">
       <div class="dl-panel-label">稳定版</div>
-      <h2 class="dl-panel-title">下载 Windows 版</h2>
+      <h2 class="dl-panel-title">我的课表 MyClassroom</h2>
       <p class="dl-panel-sub">适合日常使用。安装时自动检测 .NET 运行时。</p>
     </div>
 
@@ -109,7 +86,7 @@
         </div>
         <div class="dl-row-content">
           <div class="dl-row-title">Windows 安装包</div>
-          <div class="dl-row-meta">v<span data-text="version.current">1.0.0</span> · 约 45 MB · Windows 10 / 11</div>
+          <div class="dl-row-meta">v<span data-text="version.current">1.0.0</span> · 约 45 MB</div>
         </div>
         <div class="dl-row-action">
           <a href="#" data-link="download.installer" class="dl-btn dl-btn-primary">
@@ -118,7 +95,6 @@
           </a>
         </div>
       </div>
-
       <div class="dl-row">
         <div class="dl-row-icon">
           <i class="fa-brands fa-github"></i>
@@ -137,11 +113,48 @@
     </div>
   </section>
 
-  <!-- 测试版卡片（两步解锁） -->
-  <section class="dl-panel dl-panel-beta card-3d" id="betaPanel">
-
+  <!-- ================= 2. 新版体验版 (Avalonia) ================= -->
+  <section class="dl-panel dl-panel-avalonia card-3d" id="avaloniaPanel">
     <div class="dl-panel-head">
-      <div class="dl-panel-label dl-panel-label-beta">测试版 · Beta</div>
+      <div class="dl-panel-label dl-panel-label-avalonia">全新架构</div>
+      <h2 class="dl-panel-title">PlanPeople 测试版</h2>
+      <p class="dl-panel-sub">基于 C# 与 Avalonia 彻底重构。免安装，解压即用。</p>
+    </div>
+
+    <div class="dl-panel-body">
+      <div class="dl-row dl-row-avalonia">
+        <div class="dl-row-icon">
+          <i class="fa-solid fa-cube"></i>
+        </div>
+        <div class="dl-row-content">
+          <div class="dl-row-title">PlanPeople_Portable.zip</div>
+          <div class="dl-row-meta">
+            <span>v<span data-text="version.avalonia">3.0test</span></span>
+            <span class="dl-meta-dot">·</span>
+            <span>约 38.8 MB</span>
+            <span class="dl-meta-dot">·</span>
+            <span>绿色免安装</span>
+          </div>
+        </div>
+        <div class="dl-row-action">
+          <a href="#" data-link="download.avalonia" class="dl-btn dl-btn-avalonia">
+            <span>下载体验</span>
+            <i class="fa-solid fa-download"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dl-avalonia-note">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <strong>警告：</strong>底层重写中，逻辑未完善，请勿用于重要生产环境。欢迎下载体验并反馈 Bug。
+    </div>
+  </section>
+
+  <!-- ================= 3. 旧版测试版 (Star 解锁) ================= -->
+  <section class="dl-panel dl-panel-beta card-3d" id="betaPanel">
+    <div class="dl-panel-head">
+      <div class="dl-panel-label dl-panel-label-beta">旧版测试 · Beta</div>
       <h2 class="dl-panel-title">抢先体验新功能</h2>
       <p class="dl-panel-sub">包含即将发布的功能，可能有 Bug。下载前请先给项目点个 Star。</p>
     </div>
@@ -159,7 +172,7 @@
       </div>
     </div>
 
-    <!-- 第 1 步：只显示点 Star -->
+    <!-- 第 1 步：锁定 -->
     <div class="dl-lock-state" id="betaLock">
       <div class="dl-lock-icon">
         <i class="fa-brands fa-github"></i>
@@ -176,18 +189,18 @@
       </a>
       <div class="dl-lock-tip">
         <i class="fa-solid fa-circle-info"></i>
-        我们不会验证，完全信任你
+        我们完全信任你，不会强制验证
       </div>
     </div>
 
-    <!-- 第 2 步：解锁后显示下载 -->
+    <!-- 第 2 步：解锁 -->
     <div class="dl-unlock-state" id="betaUnlock" hidden>
       <div class="dl-unlock-icon">
         <i class="fa-solid fa-circle-check"></i>
       </div>
       <h3 class="dl-unlock-title">已解锁测试版</h3>
       <p class="dl-unlock-desc">
-        感谢你的支持。下面就是测试版下载入口。
+        感谢你的支持。下面就是旧架构测试版下载入口。
       </p>
 
       <div class="dl-row dl-row-unlock">
@@ -213,10 +226,9 @@
         </a>
       </div>
     </div>
-
   </section>
 
-  <!-- 系统要求 -->
+  <!-- ================= 底部信息 ================= -->
   <section class="dl-specs">
     <h2 class="dl-specs-title">系统要求</h2>
     <div class="dl-specs-list">
@@ -226,20 +238,15 @@
       </div>
       <div class="dl-spec-item">
         <span class="dl-spec-label">运行时</span>
-        <span class="dl-spec-value">.NET 10 Desktop</span>
+        <span class="dl-spec-value">正式版/旧测试版需 .NET 10</span>
       </div>
       <div class="dl-spec-item">
         <span class="dl-spec-label">磁盘空间</span>
         <span class="dl-spec-value" data-text="system.disk">约 150 MB</span>
       </div>
-      <div class="dl-spec-item">
-        <span class="dl-spec-label">网络</span>
-        <span class="dl-spec-value">不需要</span>
-      </div>
     </div>
   </section>
 
-  <!-- 更新日志 -->
   <section class="dl-changelog">
     <h2 class="dl-specs-title">更新日志</h2>
     <div id="changelogCurrent"></div>
