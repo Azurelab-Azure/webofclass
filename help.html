@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
 <head>
 <meta charset="UTF-8">
@@ -20,10 +20,11 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "yvug3weevb");
 </script>
+  <script src="assets/js/glass-refraction.js"></script>
 </head>
-<body>
+<body class="has-global-bg">
 
-<nav class="navbar">
+<nav class="navbar island-ui">
   <div class="container navbar-inner">
     <a href="index.html" class="navbar-logo">
       <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
@@ -211,7 +212,7 @@
 
 <footer>
   <div class="container">
-        <div class="footer-links">
+    <div class="footer-links">
       <a href="product.html">产品介绍</a>
       <a href="docs.html">文档</a>
       <a href="help.html">帮助</a>
@@ -239,5 +240,12 @@
 <script src="assets/js/splash.js"></script>
 <script src="assets/js/liquid-glass-ui.js"></script>
 <script type="module" src="assets/js/help.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.GlassRefraction) {
+    window.GlassRefraction.init();
+  }
+});
+</script>
 </body>
 </html>

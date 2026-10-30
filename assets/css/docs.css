@@ -480,3 +480,46 @@
     transition: none !important;
   }
 }
+/* ============================================
+   全站背景图统一重写
+   ============================================ */
+
+/* 亮色 */
+html[data-theme="light"][data-ui="light"] body::before,
+html[data-theme="light"][data-ui="light"] .dl-bg {
+  background-image: url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=80&auto=format&fit=crop") !important;
+}
+html[data-theme="light"][data-ui="light"] body::after,
+html[data-theme="light"][data-ui="light"] .dl-bg-mask {
+  background: rgba(255, 255, 255, 0.281) !important;
+}
+
+/* 暗色 */
+html[data-theme="dark"] body::before,
+html[data-theme="dark"] .dl-bg {
+  background-image: url("https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=80&auto=format&fit=crop") !important;
+}
+html[data-theme="dark"] body::after,
+html[data-theme="dark"] .dl-bg-mask {
+  background: rgba(6, 6, 12, 0.39) !important;
+}
+
+/* 通透 */
+html[data-theme="light"][data-ui="clear"] body::before,
+html[data-theme="light"][data-ui="clear"] .dl-bg {
+  background-image: url("https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=2400&q=80&auto=format&fit=crop") !important;
+}
+html[data-theme="light"][data-ui="clear"] body::after,
+html[data-theme="light"][data-ui="clear"] .dl-bg-mask {
+  background: rgba(235, 244, 252, 0.377) !important;
+}
+
+/* 清新 */
+html[data-theme="light"][data-ui="fresh"] body::before,
+html[data-theme="light"][data-ui="fresh"] .dl-bg {
+  background-image: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=2400&q=80&auto=format&fit=crop") !important;
+}
+html[data-theme="light"][data-ui="fresh"] body::after,
+html[data-theme="light"][data-ui="fresh"] .dl-bg-mask {
+  background: rgba(245, 252, 240, 0.452) !important;
+}

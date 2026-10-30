@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
 <head>
 <meta charset="UTF-8">
@@ -9,10 +9,11 @@
 <link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/glass-refraction.js"></script>
 </head>
-<body>
+<body class="has-global-bg">
 
-<nav class="navbar">
+<nav class="navbar island-ui">
   <div class="container navbar-inner">
     <a href="index.html" class="navbar-logo">
       <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
@@ -126,7 +127,7 @@
 
 <footer>
   <div class="container">
-        <div class="footer-links">
+    <div class="footer-links">
       <a href="product.html">产品介绍</a>
       <a href="docs.html">文档</a>
       <a href="help.html">帮助</a>
@@ -152,5 +153,12 @@
 <script src="assets/js/splash.js"></script>
 <script src="assets/js/liquid-glass-ui.js"></script>
 <script src="assets/js/tree.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.GlassRefraction) {
+    window.GlassRefraction.init();
+  }
+});
+</script>
 </body>
 </html>
