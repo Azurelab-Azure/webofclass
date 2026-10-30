@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN" data-theme="dark" data-ui="dark" class="js-loading">
 <head>
 <meta charset="UTF-8">
@@ -14,84 +14,6 @@
 
 <!-- 引入折射滤镜脚本 -->
 <script src="assets/js/glass-refraction.js"></script>
-<style>
-  /* 移动端菜单核心样式 (内联以隔离冲突) */
-  @media (max-width: 900px) {
-    .navbar-links { display: none !important; }
-    .mobile-menu-toggle {
-      display: flex !important; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-      color: var(--text); width: 36px; height: 36px; border-radius: 50%;
-      margin-left: 8px; cursor: pointer;
-    }
-    [data-theme="dark"] .mobile-menu-toggle { background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); }
-  }
-  .mobile-menu-toggle { display: none; }
-  .mobile-menu-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
-    z-index: 9998; opacity: 0; visibility: hidden; transition: 0.3s;
-  }
-  .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
-  .mobile-menu {
-    position: fixed; top: 0; right: -100%; width: 300px; max-width: 80vw; height: 100vh;
-    z-index: 9999; display: flex; flex-direction: column; transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    background: rgba(255,255,255,0.7) !important; backdrop-filter: blur(24px) saturate(180%);
-    border-left: 1px solid rgba(255,255,255,0.4); box-shadow: -10px 0 40px rgba(0,0,0,0.1);
-  }
-  [data-theme="dark"] .mobile-menu { background: rgba(20,20,25,0.8) !important; border-left: 1px solid rgba(255,255,255,0.1); }
-  .mobile-menu.active { right: 0; }
-  .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .mobile-menu-title { font-size: 16px; font-weight: 800; color: var(--text); }
-  .mobile-menu-close { background: rgba(128,128,128,0.2); border: none; color: var(--text); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; }
-  .mobile-menu-links { list-style: none; padding: 16px; margin: 0; }
-  .mobile-menu-links a { display: block; padding: 14px 20px; border-radius: 12px; color: var(--text); font-size: 16px; font-weight: 600; text-decoration: none; }
-  .mobile-menu-links a:hover { background: rgba(128,128,128,0.1); }
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var navbarRight = document.querySelector('.navbar-right');
-  var navLinks = document.querySelector('.navbar-links');
-  if (!navbarRight || !navLinks) return;
-
-  // 1. 动态创建汉堡按钮并插入到 navbar-right
-  var toggleBtn = document.createElement('button');
-  toggleBtn.className = 'mobile-menu-toggle';
-  toggleBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-  toggleBtn.setAttribute('aria-label', '打开菜单');
-  navbarRight.appendChild(toggleBtn);
-
-  // 2. 动态克隆导航链接，构建抽屉
-  var overlay = document.createElement('div');
-  overlay.className = 'mobile-menu-overlay';
-  
-  var menu = document.createElement('div');
-  menu.className = 'mobile-menu';
-  
-  var menuHTML = '<div class="mobile-menu-header"><span class="mobile-menu-title">菜单</span><button class="mobile-menu-close"><i class="fa-solid fa-xmark"></i></button></div>';
-  menuHTML += '<ul class="mobile-menu-links">' + navLinks.innerHTML + '</ul>';
-  menu.innerHTML = menuHTML;
-
-  document.body.appendChild(overlay);
-  document.body.appendChild(menu);
-
-  // 3. 绑定交互
-  function openMenu() {
-    menu.classList.add('active');
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    menu.classList.remove('active');
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  toggleBtn.addEventListener('click', openMenu);
-  menu.querySelector('.mobile-menu-close').addEventListener('click', closeMenu);
-  overlay.addEventListener('click', closeMenu);
-});
-</script>
 </head>
 <body class="nova-body has-global-bg">
 
@@ -120,10 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <button data-ui="fresh"></button>
       </div>
       <button class="theme-toggle"><i class="fa-solid fa-moon"></i></button>
-          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div></div>
+      <!-- main.js 会自动注入汉堡按钮，不需要手动写了 -->
+    </div>
+  </div>
 </nav>
 
 <!-- ========== Nova Hero ========== -->
@@ -137,11 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
     </p>
 
     <div class="nova-hero-actions">
-      <a href="download.html" class="nova-btn primary island-ui">
+      <!-- 确保这里不要加 island-ui 类，否则会被折射滤镜覆盖颜色 -->
+      <a href="download.html" class="nova-btn primary">
         <i class="fa-brands fa-windows"></i>
         <span>下载 Windows 版</span>
       </a>
-      <a href="#" data-link="github" target="_blank" rel="noopener" class="nova-btn secondary island-ui">
+      <a href="#" data-link="github" target="_blank" rel="noopener" class="nova-btn secondary">
         <i class="fa-brands fa-github"></i>
         <span>源码仓库</span>
       </a>
@@ -165,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <div class="nova-bento">
-      <!-- 卡片 1: 大 -->
       <div class="nova-card large island-ui reveal">
         <div class="nova-icon"><i class="fa-solid fa-calendar-days"></i></div>
         <h3>多维课程表</h3>
@@ -175,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
 
-      <!-- 卡片 2: 纵向 -->
       <div class="nova-card tall island-ui reveal">
         <div class="nova-icon"><i class="fa-solid fa-chart-simple"></i></div>
         <h3>极速成绩分析</h3>
@@ -186,14 +106,12 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
 
-      <!-- 卡片 3: 横向 -->
       <div class="nova-card wide island-ui reveal">
         <div class="nova-icon"><i class="fa-solid fa-users"></i></div>
         <h3>学生管理</h3>
         <p>名单、座位表、个人档案。支持批量导入名单。</p>
       </div>
 
-      <!-- 卡片 4: 小 -->
       <div class="nova-card square island-ui reveal">
         <div class="nova-icon"><i class="fa-solid fa-mobile-screen"></i></div>
         <h3>灵动岛</h3>
@@ -207,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="nova-marquee-wrap reveal" aria-hidden="true">
   <div class="nova-marquee">
     <div class="nova-marquee-track">
-      <!-- 第一组 -->
       <span>课程表</span><span class="dot">·</span>
       <span>学生管理</span><span class="dot">·</span>
       <span>成绩分析</span><span class="dot">·</span>
@@ -218,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
       <span>无服务器</span><span class="dot">·</span>
       <span>MIT 开源</span><span class="dot">·</span>
       <span>数据永不上传</span><span class="dot">·</span>
-      <!-- 第二组 (无缝拼接) -->
       <span>课程表</span><span class="dot">·</span>
       <span>学生管理</span><span class="dot">·</span>
       <span>成绩分析</span><span class="dot">·</span>
@@ -241,7 +157,8 @@ document.addEventListener('DOMContentLoaded', function() {
         <h2>准备好开始了？</h2>
         <p>Windows 10 与 11 · 免费开源 · MIT 协议</p>
       </div>
-      <a href="#" data-link="download.installer" class="nova-btn primary large-btn island-ui">
+      <!-- 同样不要加 island-ui -->
+      <a href="#" data-link="download.installer" class="nova-btn primary large-btn">
         <i class="fa-solid fa-download"></i>
         <span>下载 Windows 版</span>
       </a>
@@ -283,23 +200,5 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-header">
-    <span class="mobile-menu-title">菜单</span>
-    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="关闭菜单">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-  </div>
-  <ul class="mobile-menu-links">
-    <li><a href="product.html">产品介绍</a></li>
-    <li><a href="index.html#features">功能</a></li>
-    <li><a href="docs.html">文档</a></li>
-    <li><a href="help.html">帮助</a></li>
-    <li><a href="themes.html">主题</a></li>
-    <li><a href="download.html">下载</a></li>
-    <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
-  </ul>
-</div>
 </body>
 </html>
