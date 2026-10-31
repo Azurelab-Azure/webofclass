@@ -6,6 +6,6 @@
   "download": {
     "installer": "https://github.com/Azurelab-Azure/myclassroom/releases/download/v1.1.0/CourseApp-Setup-1.1.0.exe",
     "beta": "https://github.com/Azurelab-Azure/myclassroom/releases/download/v1.1.5/My-Plan-Setup-1.1.5.exe",
-    "avalonia": "https://github.com/Azurelab-Azure/myclassroom/releases/download/3.0test/PlanPeople_Portable.zip"
+    "avalonia": "https://github.com/Azurelab-Azure/myclassroom/releases/download/v3.0.0-beta1/PlanPeopleAvalonia-beta1.exe"
   }
 }
