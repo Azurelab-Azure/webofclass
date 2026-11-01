@@ -33,7 +33,7 @@
     if (isAtBottom && consentCheck.disabled) {
       consentCheck.disabled = false;
       const tip = document.getElementById('scrollTip');
-      if (tip) tip.innerHTML = '<span style="color:#28C840;">✅ 已阅读完毕</span>';
+      if (tip) tip.innerHTML = '<span style="color:#28C840;">已阅读完毕</span>';
     }
   });
 
