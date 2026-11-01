@@ -1,0 +1,64 @@
+/* ============================================
+   全局设计令牌 (Design Tokens)
+   ============================================ */
+:root {
+  /* 核心调色板 */
+  --accent: #0078D4;
+  --accent-hover: #106EBE;
+  --bg-dark: #1E1E1E;
+  --bg-dark-soft: #252526;
+  --bg-light: #FFFFFF;
+  --bg-light-soft: #F3F3F3;
+  
+  /* 默认使用暗色系 */
+  --bg: var(--bg-dark);
+  --bg-soft: var(--bg-dark-soft);
+  --text: #F5F5F7;
+  --text-muted: #A1A1A6;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+
+  /* 排版 */
+  --font-sans: "Inter", "HarmonyOS Sans SC", -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas, monospace;
+  --nav-height: 64px;
+  
+  /* 动效 */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --glass-blur: blur(24px) saturate(180%);
+}
+
+/* 亮色主题 (跟随系统切换时应用) */
+[data-theme="light"] {
+  --bg: var(--bg-light);
+  --bg-soft: var(--bg-light-soft);
+  --text: #1D1D1F;
+  --text-muted: #86868B;
+  --border: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   液态玻璃开关控制
+   ============================================ */
+/* 默认：开启玻璃特效 */
+[data-glass="on"] .glass-element {
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-strong);
+}
+[data-theme="light"][data-glass="on"] .glass-element {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* 关闭：彻底降级为纯色，移除模糊和 SVG 滤镜 */
+[data-glass="off"] .glass-element {
+  background: var(--bg-soft) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid var(--border) !important;
+}
+[data-glass="off"] svg[id^="glass-refract-"] {
+  display: none !important;
+}

@@ -1,0 +1,231 @@
+/* ============================================
+   通用组件 (按钮、导航栏、徽章)
+   ============================================ */
+/* 导航栏 */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+
+.navbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.navbar-logo img {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+}
+
+.navbar-links a {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.navbar-links a:hover, .navbar-links a.active {
+  color: var(--text);
+  background: var(--bg-soft);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 按钮 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
+}
+
+.btn-secondary {
+  background: var(--bg-soft);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--border);
+}
+
+/* 开关按钮 (玻璃特效开关) */
+.toggle-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.toggle-btn:hover {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+/* ============================================
+   补充：移动端抽屉、Cookie 动画、滚动状态
+   ============================================ */
+
+/* 导航栏滚动后的实底效果 */
+.navbar.scrolled {
+  background: var(--bg-soft) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+[data-glass="on"] .navbar.scrolled {
+  background: rgba(30, 30, 30, 0.85) !important;
+  backdrop-filter: var(--glass-blur);
+}
+[data-theme="light"][data-glass="on"] .navbar.scrolled {
+  background: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* 移动端菜单按钮 (默认隐藏) */
+.mobile-menu-btn {
+  display: none;
+}
+
+/* 移动端遮罩 */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+}
+.mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 移动端抽屉 */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  max-width: 80vw;
+  height: 100vh;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  border-left: 1px solid var(--border);
+  background: var(--bg);
+}
+[data-glass="on"] .mobile-drawer {
+  background: rgba(30, 30, 30, 0.8);
+}
+.mobile-drawer.active {
+  right: 0;
+}
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+}
+.drawer-links {
+  list-style: none;
+  padding: 16px;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+.drawer-links li {
+  margin-bottom: 8px;
+}
+.drawer-links a {
+  display: block;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 500;
+}
+.drawer-links a:hover {
+  background: var(--bg-soft);
+}
+
+/* Cookie 提示条动画 */
+.cookie-banner {
+  opacity: 0;
+  transform: translate(-50%, 20px);
+  transition: opacity 0.4s ease, transform 0.4s var(--ease-out);
+}
+.cookie-banner.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* 响应式：在移动端显示菜单按钮 */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: flex;
+  }
+}

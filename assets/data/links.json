@@ -1,11 +1,9 @@
-{
-  "github": "https://github.com/Azurelab-Azure/myclassroom",
-  "license": "https://github.com/Azurelab-Azure/myclassroom/blob/main/LICENSE",
-  "issues": "https://github.com/Azurelab-Azure/myclassroom/issues",
-  "releases": "https://github.com/Azurelab-Azure/myclassroom/releases",
+﻿{
+  "github": "https://github.com/Azurelab-Azure/planpeople",
+  "issues": "https://github.com/Azurelab-Azure/planpeople/issues",
+  "license": "https://github.com/Azurelab-Azure/planpeople/blob/main/LICENSE",
   "download": {
-    "installer": "https://github.com/Azurelab-Azure/myclassroom/releases/download/v1.1.0/CourseApp-Setup-1.1.0.exe",
-    "beta": "https://github.com/Azurelab-Azure/myclassroom/releases/download/v1.1.5/My-Plan-Setup-1.1.5.exe",
-    "avalonia": "https://github.com/Azurelab-Azure/myclassroom/releases/download/v3.0.0-beta1/PlanPeopleAvalonia-beta1.exe"
+    "installer": "https://github.com/Azurelab-Azure/planpeople/releases/download/v1.0.0/PlanPeople-Setup.exe",
+    "avalonia": "https://github.com/Azurelab-Azure/planpeople/releases/download/v3.0.0-beta/PlanPeople-Avalonia.zip"
   }
 }

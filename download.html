@@ -1,392 +1,205 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<script>document.documentElement.classList.add('js-loading');</script>
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>下载 · 我的课表 MyClassroom</title>
-<meta name="description" content="下载我的课表 Windows 版。正式版、测试版与全新 Avalonia 架构体验版。">
-<link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="preconnect" href="https://images.unsplash.com">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans-sc@1.0.0/index.css">
-<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/download.css">
-
-<script>
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "yvug3weevb");
-</script>
-  <script src="assets/js/glass-refraction.js"></script>
-<style>
-  /* 移动端菜单核心样式 (内联以隔离冲突) */
-  @media (max-width: 900px) {
-    .navbar-links { display: none !important; }
-    .mobile-menu-toggle {
-      display: flex !important; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-      color: var(--text); width: 36px; height: 36px; border-radius: 50%;
-      margin-left: 8px; cursor: pointer;
-    }
-    [data-theme="dark"] .mobile-menu-toggle { background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); }
-  }
-  .mobile-menu-toggle { display: none; }
-  .mobile-menu-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
-    z-index: 9998; opacity: 0; visibility: hidden; transition: 0.3s;
-  }
-  .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
-  .mobile-menu {
-    position: fixed; top: 0; right: -100%; width: 300px; max-width: 80vw; height: 100vh;
-    z-index: 9999; display: flex; flex-direction: column; transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    background: rgba(255,255,255,0.7) !important; backdrop-filter: blur(24px) saturate(180%);
-    border-left: 1px solid rgba(255,255,255,0.4); box-shadow: -10px 0 40px rgba(0,0,0,0.1);
-  }
-  [data-theme="dark"] .mobile-menu { background: rgba(20,20,25,0.8) !important; border-left: 1px solid rgba(255,255,255,0.1); }
-  .mobile-menu.active { right: 0; }
-  .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .mobile-menu-title { font-size: 16px; font-weight: 800; color: var(--text); }
-  .mobile-menu-close { background: rgba(128,128,128,0.2); border: none; color: var(--text); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; }
-  .mobile-menu-links { list-style: none; padding: 16px; margin: 0; }
-  .mobile-menu-links a { display: block; padding: 14px 20px; border-radius: 12px; color: var(--text); font-size: 16px; font-weight: 600; text-decoration: none; }
-  .mobile-menu-links a:hover { background: rgba(128,128,128,0.1); }
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var navbarRight = document.querySelector('.navbar-right');
-  var navLinks = document.querySelector('.navbar-links');
-  if (!navbarRight || !navLinks) return;
-
-  // 1. 动态创建汉堡按钮并插入到 navbar-right
-  var toggleBtn = document.createElement('button');
-  toggleBtn.className = 'mobile-menu-toggle';
-  toggleBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-  toggleBtn.setAttribute('aria-label', '打开菜单');
-  navbarRight.appendChild(toggleBtn);
-
-  // 2. 动态克隆导航链接，构建抽屉
-  var overlay = document.createElement('div');
-  overlay.className = 'mobile-menu-overlay';
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>下载 - PlanPeople</title>
   
-  var menu = document.createElement('div');
-  menu.className = 'mobile-menu';
-  
-  var menuHTML = '<div class="mobile-menu-header"><span class="mobile-menu-title">菜单</span><button class="mobile-menu-close"><i class="fa-solid fa-xmark"></i></button></div>';
-  menuHTML += '<ul class="mobile-menu-links">' + navLinks.innerHTML + '</ul>';
-  menu.innerHTML = menuHTML;
-
-  document.body.appendChild(overlay);
-  document.body.appendChild(menu);
-
-  // 3. 绑定交互
-  function openMenu() {
-    menu.classList.add('active');
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    menu.classList.remove('active');
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  toggleBtn.addEventListener('click', openMenu);
-  menu.querySelector('.mobile-menu-close').addEventListener('click', closeMenu);
-  overlay.addEventListener('click', closeMenu);
-});
-</script>
+  <!-- 引入全局与专属样式 -->
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/download.css">
 </head>
-<body class="dl-body has-global-bg">
+<body>
 
-<!-- 背景 -->
-<div class="dl-bg" aria-hidden="true"></div>
-<div class="dl-bg-mask" aria-hidden="true"></div>
-
-<nav class="navbar island-ui">
-  <div class="container navbar-inner">
-    <a href="index.html" class="navbar-logo">
-      <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
-      <span data-text="brand.name">我的课表</span>
-    </a>
-    <ul class="navbar-links">
-      <li><a href="product.html">产品介绍</a></li>
-      <li><a href="index.html#features">功能</a></li>
-      <li><a href="docs.html">文档</a></li>
-      <li><a href="help.html">帮助</a></li>
-      <li><a href="themes.html">主题</a></li>
-      <li><a href="download.html">下载</a></li>
-      <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
-    </ul>
-    <div class="navbar-right">
-      <div class="ui-switcher" role="group" aria-label="UI 模式">
-        <button data-ui="light" title="亮色" aria-label="亮色"></button>
-        <button data-ui="dark" title="暗色" aria-label="暗色"></button>
-        <button data-ui="clear" title="通透" aria-label="通透"></button>
-        <button data-ui="fresh" title="清新" aria-label="清新"></button>
-      </div>
-      <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
-          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div></div>
-</nav>
-
-<div class="container dl-container">
-
-  <!-- 顶部大标题 -->
-  <header class="dl-hero">
-    <div class="dl-app-icon">
-      <img src="assets/img/logo/logo.png" alt="我的课表">
+  <!-- 顶部导航 -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/img/logo/icon.png" alt="Logo"> PlanPeople
+      </a>
+      <ul class="nav-links">
+  <li><a href="index.html">首页</a></li>
+  <li><a href="product.html">功能</a></li>
+  <li><a href="docs.html">文档</a></li>
+  <li><a href="download.html">下载</a></li>
+  <li><a href="about.html">关于</a></li>
+</ul>
+      <!-- 右侧占位，保持导航居中 -->
+      <div class="nav-actions" style="width: 100px;"></div>
     </div>
-    <h1 class="dl-title">选择你的版本</h1>
-    <p class="dl-subtitle">Windows 10 与 11 · 免费开源 · 无需登录</p>
-    <div class="dl-hero-badges">
-      <span><i class="fa-solid fa-check"></i> 纯本地存储</span>
-      <span><i class="fa-solid fa-check"></i> MIT 协议</span>
-      <span><i class="fa-solid fa-check"></i> 20 种语言</span>
-    </div>
-  </header>
+  </nav>
 
-  <!-- ================= 1. 正式版 ================= -->
-  <section class="dl-panel card-3d">
-    <div class="dl-panel-head">
-      <div class="dl-panel-label">稳定版</div>
-      <h2 class="dl-panel-title">我的课表 MyClassroom</h2>
-      <p class="dl-panel-sub">适合日常使用。安装时自动检测 .NET 运行时。</p>
-    </div>
+  <main>
+    <!-- 沉浸式标题 -->
+    <header class="download-hero">
+      <h1>选择你的版本</h1>
+      <div class="subtitle">下载 PlanPeople，开启全新体验。</div>
+      <p class="desc">无广告，无强制登录，纯本地运行。支持 Windows 10 与 Windows 11。</p>
+    </header>
 
-    <div class="dl-panel-body">
-      <div class="dl-row">
-        <div class="dl-row-icon">
-          <i class="fa-brands fa-windows"></i>
-        </div>
-        <div class="dl-row-content">
-          <div class="dl-row-title">Windows 安装包</div>
-          <div class="dl-row-meta">v<span data-text="version.current">1.0.0</span> · 约 45 MB</div>
-        </div>
-        <div class="dl-row-action">
-          <a href="#" data-link="download.installer" class="dl-btn dl-btn-primary">
-            <span>下载</span>
-            <i class="fa-solid fa-arrow-down"></i>
-          </a>
-        </div>
-      </div>
-      <div class="dl-row">
-        <div class="dl-row-icon">
-          <i class="fa-brands fa-github"></i>
-        </div>
-        <div class="dl-row-content">
-          <div class="dl-row-title">GitHub Releases</div>
-          <div class="dl-row-meta">查看全部历史版本与更新日志</div>
-        </div>
-        <div class="dl-row-action">
-          <a href="#" data-link="releases" target="_blank" rel="noopener" class="dl-btn dl-btn-secondary">
-            <span>查看</span>
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 2. 新版体验版 (Avalonia) ================= -->
-  <section class="dl-panel dl-panel-avalonia card-3d" id="avaloniaPanel">
-    <div class="dl-panel-head">
-      <div class="dl-panel-label dl-panel-label-avalonia">全新架构</div>
-      <h2 class="dl-panel-title">PlanPeople 测试版</h2>
-      <p class="dl-panel-sub">基于 C# 与 Avalonia 彻底重构。免安装，解压即用。</p>
-    </div>
-
-    <div class="dl-panel-body">
-      <div class="dl-row dl-row-avalonia">
-        <div class="dl-row-icon">
-          <i class="fa-solid fa-cube"></i>
-        </div>
-        <div class="dl-row-content">
-          <div class="dl-row-title">PlanPeople_Portable.zip</div>
-          <div class="dl-row-meta">
-            <span>v<span data-text="version.avalonia">3.0test</span></span>
-            <span class="dl-meta-dot">·</span>
-            <span>约 38.8 MB</span>
-            <span class="dl-meta-dot">·</span>
-            <span>绿色免安装</span>
+    <!-- 版本列表 -->
+    <div class="release-container">
+      
+      <!-- v1.0 经典版 -->
+      <div class="release-card">
+        <div class="release-info">
+          <div class="release-title">
+            <h2>v1.0 经典版</h2>
+            <span class="badge stable">Stable</span>
+          </div>
+          <p class="release-desc">基于 .NET 10 与 Windows Forms 构建。稳定可靠，功能完备，适合日常长期使用。</p>
+          <div class="release-meta">
+            <span><i class="fa-brands fa-windows"></i> Windows 10/11</span>
+            <span><i class="fa-solid fa-hdd"></i> 45 MB</span>
+            <span><i class="fa-solid fa-shield-halved"></i> 需 .NET 10 运行时</span>
           </div>
         </div>
-        <div class="dl-row-action">
-          <a href="#" data-link="download.avalonia" class="dl-btn dl-btn-avalonia">
-            <span>下载体验</span>
-            <i class="fa-solid fa-download"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <div class="dl-avalonia-note">
-      <i class="fa-solid fa-triangle-exclamation"></i>
-      <strong>警告：</strong>底层重写中，逻辑未完善，请勿用于重要生产环境。欢迎下载体验并反馈 Bug。
-    </div>
-  </section>
-
-  <!-- ================= 3. 旧版测试版 (Star 解锁) ================= -->
-  <section class="dl-panel dl-panel-beta card-3d" id="betaPanel">
-    <div class="dl-panel-head">
-      <div class="dl-panel-label dl-panel-label-beta">旧版测试 · Beta</div>
-      <h2 class="dl-panel-title">抢先体验新功能</h2>
-      <p class="dl-panel-sub">包含即将发布的功能，可能有 Bug。下载前请先给项目点个 Star。</p>
-    </div>
-
-    <!-- 解锁状态条 -->
-    <div class="dl-steps-indicator">
-      <div class="dl-step-node active" data-step-node="1">
-        <div class="dl-step-node-num">1</div>
-        <div class="dl-step-node-label">点 Star</div>
-      </div>
-      <div class="dl-step-line"></div>
-      <div class="dl-step-node" data-step-node="2">
-        <div class="dl-step-node-num">2</div>
-        <div class="dl-step-node-label">下载</div>
-      </div>
-    </div>
-
-    <!-- 第 1 步：锁定 -->
-    <div class="dl-lock-state" id="betaLock">
-      <div class="dl-lock-icon">
-        <i class="fa-brands fa-github"></i>
-      </div>
-      <h3 class="dl-lock-title">给项目点个 Star</h3>
-      <p class="dl-lock-desc">
-        你的支持能帮助更多教师和学生发现这个项目。<br>
-        点完 Star 回来后，下载按钮会自动出现。
-      </p>
-      <a href="#" data-link="github" target="_blank" rel="noopener"
-         class="dl-btn dl-btn-star" id="betaStarBtn">
-        <i class="fa-brands fa-github"></i>
-        <span>去 GitHub 点 Star</span>
-      </a>
-      <div class="dl-lock-tip">
-        <i class="fa-solid fa-circle-info"></i>
-        我们完全信任你，不会强制验证
-      </div>
-    </div>
-
-    <!-- 第 2 步：解锁 -->
-    <div class="dl-unlock-state" id="betaUnlock" hidden>
-      <div class="dl-unlock-icon">
-        <i class="fa-solid fa-circle-check"></i>
-      </div>
-      <h3 class="dl-unlock-title">已解锁测试版</h3>
-      <p class="dl-unlock-desc">
-        感谢你的支持。下面就是旧架构测试版下载入口。
-      </p>
-
-      <div class="dl-row dl-row-unlock">
-        <div class="dl-row-icon">
-          <i class="fa-solid fa-flask"></i>
-        </div>
-        <div class="dl-row-content">
-          <div class="dl-row-title">MyClassroom Beta</div>
-          <div class="dl-row-meta">v<span data-text="version.beta">1.1.0-beta.1</span> · 约 48 MB</div>
-        </div>
-        <div class="dl-row-action">
-          <a href="#" data-link="download.beta" class="dl-btn dl-btn-primary">
-            <span>下载</span>
-            <i class="fa-solid fa-arrow-down"></i>
+        <div class="release-action">
+          <!-- 纯 SVG 下载图标 -->
+          <a href="#" data-link="download.installer" class="btn-apple btn-apple-secondary" style="color: #F5F5F7; border-color: rgba(255,255,255,0.2);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            下载 .exe
           </a>
         </div>
       </div>
 
-      <div class="dl-unlock-actions">
-        <a href="#" data-link="github" target="_blank" rel="noopener" class="dl-btn dl-btn-ghost">
-          <i class="fa-brands fa-github"></i>
-          <span>再次前往 GitHub</span>
-        </a>
+      <!-- v3.0 重构版 (极客测试版) -->
+      <div class="release-card recommended" style="flex-direction: column; align-items: stretch;">
+        
+        <!-- 头部信息 -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
+          <div>
+            <div class="release-title">
+              <h2>v3.0 重构版 (演示框架)</h2>
+              <span class="badge beta" style="background: rgba(255, 59, 48, 0.15); color: #FF453A; border-color: rgba(255, 59, 48, 0.3);">极度不稳定</span>
+            </div>
+            <p class="release-desc">基于 .NET 8 与 Avalonia 11 的最新尝试。目前仅为演示框架，逻辑未完善，切勿用于生产环境。</p>
+            <div class="release-meta">
+              <span><i class="fa-brands fa-windows"></i> Windows 10/11</span>
+              <span><i class="fa-solid fa-file-zipper"></i> 38.8 MB</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 交互解锁区 -->
+        <div class="beta-interaction">
+          
+          <!-- 步骤 1：阅读协议 -->
+          <div id="step1" style="transition: opacity 0.3s;">
+            <div class="consent-box" id="consentBox">
+              <strong style="color: #FEBC2E;">知情同意书：</strong><br>
+              你即将下载的是 PlanPeople v3.0 的早期测试版本。<br><br>
+              1. 该版本底层刚刚重写，功能极度残缺。<br>
+              2. 随意使用可能导致系统卡顿或数据丢失。<br>
+              3. 界面和功能随时可能发生破坏性变动。<br>
+              4. 仅供拥有极客精神的测试人员用于评估架构。<br>
+              5. 数据格式随时可能改变，且不提供向下兼容保证。<br>
+              6. 使用过程中如遇崩溃属于正常现象。<br>
+              7. 本版本不包含完整的功能文档支持。<br>
+              8. 如果发现 Bug，欢迎前往 GitHub 提交。<br><br>
+              <span id="scrollTip" style="color: #666;"><em>*(请滑动到底部以解锁下方选项)*</em></span>
+            </div>
+
+            <label class="consent-checkbox" id="consentWrapper">
+              <input type="checkbox" id="consentCheck" disabled>
+              <span>我已阅读并知晓该版本的不稳定性，自愿承担测试风险</span>
+            </label>
+          </div>
+
+          <!-- 步骤 2：要求 Star (初始隐藏) -->
+          <div id="step2" style="display: none; margin-top: 24px; transition: opacity 0.3s;">
+            <div style="display: flex; align-items: center; justify-content: space-between; background: #1C1C1F; padding: 16px 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+              <div>
+                <div style="font-size: 15px; font-weight: 600; color: #F5F5F7;">支持开源项目</div>
+                <div style="font-size: 13px; color: #86868B;">点个 Star，帮更多教师和学生发现 PlanPeople</div>
+              </div>
+              <a href="#" data-link="github" target="_blank" class="btn-apple" id="starBtn" style="background: #24292F; color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 99px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; transition: all 0.2s;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+                </svg>
+                Star 支持
+              </a>
+            </div>
+          </div>
+
+          <!-- 步骤 3：下载完成解锁 (初始隐藏) -->
+          <div id="step3" style="display: none; margin-top: 24px;">
+            <div style="font-size: 14px; color: #28C840; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              验证通过，感谢你的支持！
+            </div>
+            <div id="downloadArea" style="display: none; gap: 16px;">
+              <a href="#" data-link="download.avalonia" class="btn-apple btn-apple-primary" style="width: 100%; padding: 16px; font-size: 16px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                确认风险，立即下载
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 极简系统要求 -->
+    <div class="system-req">
+      <h3>系统要求</h3>
+      <div class="req-grid">
+        <div class="req-item">
+          <div class="req-label">操作系统</div>
+          <div class="req-value">Windows 10 / 11 (64-bit)</div>
+        </div>
+        <div class="req-item">
+          <div class="req-label">磁盘空间</div>
+          <div class="req-value">约 150 MB</div>
+        </div>
+        <div class="req-item">
+          <div class="req-label">运行环境</div>
+          <div class="req-value">v3.0 免安装；v1.0 需 <code>.NET 10</code></div>
+        </div>
+        <div class="req-item">
+          <div class="req-label">网络要求</div>
+          <div class="req-value">完全离线可用</div>
+        </div>
       </div>
     </div>
-  </section>
+  </main>
 
-  <!-- ================= 底部信息 ================= -->
-  <section class="dl-specs">
-    <h2 class="dl-specs-title">系统要求</h2>
-    <div class="dl-specs-list">
-      <div class="dl-spec-item">
-        <span class="dl-spec-label">操作系统</span>
-        <span class="dl-spec-value" data-text="system.os">Windows 10 或 11</span>
-      </div>
-      <div class="dl-spec-item">
-        <span class="dl-spec-label">运行时</span>
-        <span class="dl-spec-value">正式版/旧测试版需 .NET 10</span>
-      </div>
-      <div class="dl-spec-item">
-        <span class="dl-spec-label">磁盘空间</span>
-        <span class="dl-spec-value" data-text="system.disk">约 150 MB</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="dl-changelog">
-    <h2 class="dl-specs-title">更新日志</h2>
-    <div id="changelogCurrent"></div>
-  </section>
-
-</div>
-
-<footer>
-  <div class="container">
-    <div class="footer-links">
-      <a href="product.html">产品介绍</a>
-      <a href="docs.html">文档</a>
-      <a href="help.html">帮助</a>
-      <a href="themes.html">主题</a>
-      <a href="about.html">关于</a>
+  <!-- 底部 Footer -->
+  <footer>
+  <div class="container footer-vertical">
+    <a href="index.html" class="footer-logo">
+      <img src="assets/img/logo/icon.png" alt="Logo"> PlanPeople
+    </a>
+    <div class="footer-links-vertical">
+      <a href="docs.html">使用文档</a>
+      <a href="product.html">功能介绍</a>
+      <a href="release.html">更新日志</a>
+      <a href="about.html">关于我们</a>
       <a href="privacy.html">隐私政策</a>
-      <a href="cookie.html">Cookie</a>
-      <a href="#" data-link="license" target="_blank" rel="noopener">MIT 协议</a>
-      <a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" data-link="issues">提交意见</a>
+      <a href="#" data-link="github">GitHub 源码</a>
     </div>
-    <p class="copyright">
-      © <span data-text="brand.copyright">2026</span>
-      <span class="lab">
-        <span class="lab-mark" data-text="brand.labMark">KZ</span>
-        <span class="brand" data-text="brand.lab">Kzure Lab</span>
-      </span>
-      · 我的课表 MyClassroom · 保留所有权利
-    </p>
+    <div class="footer-bottom-vertical">
+      © 2026 Kzure Lab. 保留所有权利。
+    </div>
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
-<script src="assets/js/splash.js"></script>
-<script src="assets/js/liquid-glass-ui.js"></script>
-<script src="assets/js/download.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  if (window.GlassRefraction) {
-    window.GlassRefraction.init();
-  }
-});
-</script>
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-header">
-    <span class="mobile-menu-title">菜单</span>
-    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="关闭菜单">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
+  <!-- 引入脚本 -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/download.js"></script>
+  <!-- 强制拦截的 Cookie 弹窗 -->
+  <div class="cookie-overlay" id="cookieOverlay">
+    <div class="cookie-modal">
+      <div class="cookie-modal-icon"></div>
+      <h3>您的隐私选择</h3>
+      <p>PlanPeople 仅使用必要的本地存储来记住您的偏好设置。我们不包含任何追踪代码，也不会向服务器上传您的任何数据。<br><a href="cookie.html">查看详情</a></p>
+      <div class="cookie-modal-actions">
+        <button class="btn-cookie-decline" id="cookieDecline">拒绝</button>
+        <button class="btn-cookie-accept" id="cookieAccept">接受并继续</button>
+      </div>
+    </div>
   </div>
-  <ul class="mobile-menu-links">
-    <li><a href="product.html">产品介绍</a></li>
-    <li><a href="index.html#features">功能</a></li>
-    <li><a href="docs.html">文档</a></li>
-    <li><a href="help.html">帮助</a></li>
-    <li><a href="themes.html">主题</a></li>
-    <li><a href="download.html">下载</a></li>
-    <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
-  </ul>
-</div>
 </body>
 </html>

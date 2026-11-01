@@ -1,0 +1,118 @@
+/* ============================================
+   法务页面专属样式 (极简 / 终端风)
+   ============================================ */
+
+.legal-page {
+  padding-top: calc(var(--nav-height) + 100px);
+  padding-bottom: 120px;
+  background: #000;
+  min-height: 100vh;
+}
+
+.legal-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 顶部标题区 */
+.legal-header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.legal-header h1 {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  color: #F5F5F7;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.legal-header .meta {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: #86868B;
+  background: var(--surface);
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+}
+
+/* 内容区块 */
+.legal-content {
+  color: #A1A1A6;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.legal-content h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #F5F5F7;
+  margin: 56px 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 序号样式 */
+.legal-content h2::before {
+  content: "#";
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.legal-content p {
+  margin-bottom: 20px;
+}
+
+/* 强调列表 */
+.legal-list {
+  list-style: none;
+  margin: 0 0 24px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.legal-list li {
+  position: relative;
+  padding-left: 28px;
+}
+
+.legal-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: bold;
+}
+
+.legal-list strong {
+  color: #F5F5F7;
+  font-weight: 600;
+}
+
+/* 高亮卡片 (用于重要承诺) */
+.legal-card {
+  background: #121214;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 24px 32px;
+  margin: 32px 0;
+}
+
+.legal-card p {
+  margin: 0;
+  color: #F5F5F7;
+  font-weight: 500;
+}

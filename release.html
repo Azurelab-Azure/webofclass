@@ -1,403 +1,121 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark" data-ui="dark" class="js-loading">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<script>document.documentElement.classList.add('js-loading');</script>
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>全新架构 · PlanPeople 发布</title>
-<meta name="description" content="我的课表迎来重大更新：全面切换至 C# 与 Avalonia 架构，极客版抢先体验。">
-<link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans-sc@1.0.0/index.css">
-<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
-
-<style>
-/* ============================================
-   发布页专用：苹果风极致暗黑
-   ============================================ */
-body.rel-body {
-  background: #000000;
-  color: #F5F5F7;
-  overflow-x: hidden;
-}
-
-body.rel-body::before,
-body.rel-body::after {
-  display: none;
-}
-
-/* 覆盖导航 */
-body.rel-body .navbar {
-  background: rgba(0, 0, 0, 0.7) !important;
-  border-bottom: none;
-  backdrop-filter: blur(20px);
-}
-body.rel-body .navbar-logo span,
-body.rel-body .navbar-links a {
-  color: #F5F5F7;
-}
-body.rel-body .navbar-links a:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-body.rel-body .theme-toggle,
-body.rel-body .ui-switcher {
-  display: none; /* 强制纯黑 */
-}
-
-.rel-container {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* Hero */
-.rel-hero {
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding-top: 80px;
-  position: relative;
-}
-
-.rel-badge {
-  font-size: 14px;
-  font-weight: 700;
-  color: #2997FF;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: relFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
-}
-
-.rel-title {
-  font-size: clamp(48px, 8vw, 96px);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
-  margin-bottom: 24px;
-  color: #F5F5F7;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: relFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
-}
-
-.rel-title span {
-  background: linear-gradient(135deg, #FFFFFF 0%, #A1A1A6 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.rel-subtitle {
-  font-size: clamp(20px, 2.5vw, 28px);
-  font-weight: 500;
-  color: #86868B;
-  max-width: 680px;
-  line-height: 1.4;
-  margin-bottom: 40px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: relFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
-}
-
-.rel-cta {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: relFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
-}
-
-.rel-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 32px;
-  border-radius: 999px;
-  background: #0071E3;
-  color: #FFFFFF;
-  font-size: 17px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.2s, transform 0.1s;
-}
-
-.rel-btn:hover {
-  background: #0077ED;
-  color: #FFFFFF;
-}
-
-.rel-btn:active {
-  transform: scale(0.96);
-}
-
-.rel-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(41, 151, 255, 0.15) 0%, transparent 60%);
-  transform: translate(-50%, -50%);
-  filter: blur(60px);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* 亮点区域 */
-.rel-section {
-  padding: 120px 0;
-}
-
-.rel-section-title {
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  text-align: center;
-  margin-bottom: 80px;
-}
-
-.rel-section-title span {
-  color: #2997FF;
-}
-
-.rel-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-.rel-card {
-  background: #161617;
-  border-radius: 28px;
-  padding: 48px 40px;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.rel-card:hover {
-  transform: scale(1.02);
-}
-
-.rel-card-full {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.rel-card-tag {
-  font-size: 14px;
-  font-weight: 700;
-  color: #86868B;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.rel-card h3 {
-  font-size: clamp(28px, 3.5vw, 40px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin-bottom: 16px;
-  color: #F5F5F7;
-}
-
-.rel-card p {
-  font-size: 17px;
-  line-height: 1.6;
-  color: #86868B;
-  max-width: 500px;
-}
-
-.rel-cs-icon {
-  font-size: 44px;
-  font-weight: 800;
-  color: #A855F7;
-  margin-bottom: 24px;
-  letter-spacing: -0.05em;
-}
-
-.rel-icon {
-  font-size: 40px;
-  color: #F5F5F7;
-  margin-bottom: 24px;
-}
-
-/* 动画 */
-@keyframes relFadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.rel-reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.rel-reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.rel-delay-1 { transition-delay: 0.1s; }
-.rel-delay-2 { transition-delay: 0.2s; }
-
-/* 底部 */
-.rel-footer-cta {
-  text-align: center;
-  padding: 120px 0 160px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.rel-footer-cta h2 {
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 24px;
-}
-
-.rel-footer-cta p {
-  font-size: 20px;
-  color: #86868B;
-  margin-bottom: 40px;
-}
-
-@media (max-width: 768px) {
-  .rel-grid { grid-template-columns: 1fr; }
-  .rel-card { padding: 36px 24px; }
-  .rel-hero { min-height: 80vh; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>更新日志 - PlanPeople</title>
+  
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/release.css">
 </head>
-<body class="rel-body">
+<body>
 
-<nav class="navbar">
-  <div class="container navbar-inner">
-    <a href="index.html" class="navbar-logo">
-      <img src="assets/img/logo/logo.png" alt="返回首页">
-      <span>我的课表</span>
-    </a>
-    <ul class="navbar-links">
-      <li><a href="index.html">返回首页</a></li>
-      <li><a href="download.html">下载</a></li>
-      <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
-    </ul>
-  </div>
-</nav>
-
-<header class="rel-hero">
-  <div class="rel-glow"></div>
-  <div class="rel-container">
-    <div class="rel-badge">新版本发布 · v3.0test</div>
-    <h1 class="rel-title">
-      <span>底层重写。<br>全面进化。</span>
-    </h1>
-    <p class="rel-subtitle">
-      我们抛弃了旧的纯 C#，全面拥抱原生。<br>
-      全新 PlanPeople 基于 C# 与 Avalonia 打造，极致轻量，纯粹顺滑。
-    </p>
-    <div class="rel-cta">
-      <a href="#" data-link="download.avalonia" class="rel-btn">
-        下载免安装体验版
-        <i class="fa-solid fa-download"></i>
+  <!-- 顶部导航 -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/img/logo/icon.png" alt="Logo"> PlanPeople
       </a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="product.html">功能</a></li>
+        <li><a href="docs.html">文档</a></li>
+        <li><a href="download.html">下载</a></li>
+        <li><a href="about.html">关于</a></li>
+      </ul>
+      <div class="nav-actions" style="width: 100px;"></div>
     </div>
-  </div>
-</header>
+  </nav>
 
-<section class="rel-section">
-  <div class="rel-container">
-    <h2 class="rel-section-title rel-reveal">
-      核心架构，推倒重来。<br>
-      只为<span>更快、更稳</span>。
-    </h2>
+  <main>
+    <header class="release-hero">
+      <h1>Release Notes</h1>
+      <p>见证 PlanPeople 的每一次进化。最新的功能改进与底层优化都在这里。</p>
+    </header>
 
-    <div class="rel-grid">
-      <div class="rel-card rel-reveal rel-delay-1">
-        <div class="rel-cs-icon">C#</div>
-        <div class="rel-card-tag">开发语言</div>
-        <h3>基于 C# 12 & Avalonia</h3>
-        <p>从底层彻底重构。强类型语言带来了前所未有的稳定性，内存占用锐减，冷启动时间压缩至极速。</p>
-      </div>
-
-      <div class="rel-card rel-reveal rel-delay-2">
-        <div class="rel-icon"><i class="fa-solid fa-layer-group"></i></div>
-        <div class="rel-card-tag">UI 框架</div>
-        <h3>采用 Avalonia</h3>
-        <p>告别旧时代。跨平台渲染引擎，带来更现代的动画渲染与更细腻的字体排版，彻底告别界面撕裂与卡顿。</p>
-      </div>
-
-      <div class="rel-card rel-card-full rel-reveal">
-        <div class="rel-icon"><i class="fa-brands fa-windows"></i></div>
-        <div class="rel-card-tag">绿色免安装</div>
-        <h3>即下即用</h3>
-        <p>PlanPeople 版本无需繁琐的安装步骤，下载 38.8 MB 压缩包，解压后双击即可直接运行。这一次，让工具回归简单。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="rel-footer-cta">
-  <div class="rel-container rel-reveal">
-    <h2>全新体验，等你开启。</h2>
-    <p>逻辑尚未完善，欢迎极客下载体验。</p>
-    <a href="#" data-link="download.avalonia" class="rel-btn">
-      <i class="fa-solid fa-cube"></i>
-      直接下载压缩包
-    </a>
-  </div>
-</section>
-
-<!-- 引入主站脚本保证 data-link 生效 -->
-<script src="assets/js/main.js"></script>
-<script>
-(function () {
-  'use strict';
-
-  var reveals = document.querySelectorAll('.rel-reveal');
-  
-  if ('IntersectionObserver' in window && reveals.length) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target); 
-        }
-      });
-    }, {
-      threshold: 0.15, 
-      rootMargin: '0px 0px -50px 0px'
-    });
-
-    reveals.forEach(function (el) { io.observe(el); });
-  } else {
-    reveals.forEach(function (el) { el.classList.add('is-visible'); });
-  }
-
-  var hero = document.querySelector('.rel-hero');
-  var glow = document.querySelector('.rel-glow');
-  
-  if (hero && glow) {
-    hero.addEventListener('mousemove', function (e) {
-      var rect = hero.getBoundingClientRect();
-      var x = e.clientX - rect.left;
-      var y = e.clientY - rect.top;
+    <!-- 时间轴 -->
+    <div class="timeline">
       
-      glow.style.left = x + 'px';
-      glow.style.top = y + 'px';
-    });
-  }
-})();
-</script>
+      <!-- v3.0 重构版 (最新) -->
+      <div class="timeline-item latest">
+        <div class="timeline-dot"></div>
+        <div class="version-header">
+          <div class="version-num">v3.0.0 Test</div>
+          <div class="version-date">2026.10</div>
+        </div>
+        <ul class="changelog-list">
+          <li>【底层重构】全面抛弃旧版渲染引擎，拥抱 .NET 8 与 Avalonia 11。</li>
+          <li>【极致轻量】发布包体积降至 38.8MB，彻底告别 Web 套壳臃肿。</li>
+          <li>【性能飞跃】课表拖拽、页面切换达到原生 60FPS 绝对顺滑体验。</li>
+          <li>【单文件发布】解压即用，无需手动安装 .NET 运行时环境。</li>
+          <li>【警告】当前为演示框架版本，逻辑尚未完善，仅供极客测试评估。</li>
+        </ul>
+      </div>
+
+      <!-- v1.1 经典版 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="version-header">
+          <div class="version-num">v1.1.0</div>
+          <div class="version-date">2026.08</div>
+        </div>
+        <ul class="changelog-list">
+          <li>新增学生管理模块：支持名单导入、可视化座位表与 13 项个人档案。</li>
+          <li>新增成绩分析看板：自动生成班级排名、及格率，支持导出 PDF。</li>
+          <li>上线桌面灵动岛悬浮窗，实时显示当前课程与倒计时。</li>
+        </ul>
+      </div>
+
+      <!-- v1.0 经典版 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="version-header">
+          <div class="version-num">v1.0.0</div>
+          <div class="version-date">2026.06</div>
+        </div>
+        <ul class="changelog-list">
+          <li>PlanPeople 首个正式版本发布。</li>
+          <li>支持自定义排课（周次、单双周、特殊节次）。</li>
+          <li>实现纯本地 JSON 数据存储，彻底杜绝服务器数据泄露风险。</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 底部 Footer -->
+  <footer>
+  <div class="container footer-vertical">
+    <a href="index.html" class="footer-logo">
+      <img src="assets/img/logo/icon.png" alt="Logo"> PlanPeople
+    </a>
+    <div class="footer-links-vertical">
+      <a href="docs.html">使用文档</a>
+      <a href="product.html">功能介绍</a>
+      <a href="release.html">更新日志</a>
+      <a href="about.html">关于我们</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="#" data-link="issues">提交意见</a>
+      <a href="#" data-link="github">GitHub 源码</a>
+    </div>
+    <div class="footer-bottom-vertical">
+      © 2026 Kzure Lab. 保留所有权利。
+    </div>
+  </div>
+</footer>
+
+  <script src="assets/js/main.js"></script>
+  <!-- 强制拦截的 Cookie 弹窗 -->
+  <div class="cookie-overlay" id="cookieOverlay">
+    <div class="cookie-modal">
+      <div class="cookie-modal-icon"></div>
+      <h3>您的隐私选择</h3>
+      <p>PlanPeople 仅使用必要的本地存储来记住您的偏好设置。我们不包含任何追踪代码，也不会向服务器上传您的任何数据。<br><a href="cookie.html">查看详情</a></p>
+      <div class="cookie-modal-actions">
+        <button class="btn-cookie-decline" id="cookieDecline">拒绝</button>
+        <button class="btn-cookie-accept" id="cookieAccept">接受并继续</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

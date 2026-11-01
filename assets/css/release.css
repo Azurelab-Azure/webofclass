@@ -1,0 +1,136 @@
+/* ============================================
+   更新日志专属样式 (时间轴 / 极简风)
+   ============================================ */
+
+.release-hero {
+  padding-top: calc(var(--nav-height) + 100px);
+  padding-bottom: 60px;
+  text-align: center;
+  background: #000;
+}
+
+.release-hero h1 {
+  font-size: clamp(48px, 7vw, 80px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #F5F5F7;
+  margin-bottom: 16px;
+}
+
+.release-hero p {
+  font-size: 20px;
+  color: #86868B;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 时间轴布局 */
+.timeline {
+  max-width: 800px;
+  margin: 0 auto 120px;
+  padding: 0 24px;
+  position: relative;
+}
+
+/* 左侧竖线 */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 44px; /* 居中对齐圆点 */
+  width: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+
+/* 单个版本节点 */
+.timeline-item {
+  position: relative;
+  padding-left: 80px;
+  margin-bottom: 64px;
+  z-index: 1;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 节点圆点 */
+.timeline-dot {
+  position: absolute;
+  left: 35px;
+  top: 6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #121214;
+  border: 2px solid var(--border);
+  z-index: 2;
+  transition: all 0.3s;
+}
+
+/* 最新版本的圆点高亮 */
+.timeline-item.latest .timeline-dot {
+  background: #0071E3;
+  border-color: #0071E3;
+  box-shadow: 0 0 16px rgba(0, 120, 212, 0.4);
+}
+
+/* 版本信息区 */
+.version-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.version-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: #F5F5F7;
+  letter-spacing: -0.02em;
+}
+
+.version-date {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #86868B;
+  background: var(--surface);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+/* 更新内容列表 */
+.changelog-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.changelog-list li {
+  font-size: 16px;
+  color: #A1A1A6;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.changelog-list li::before {
+  content: "•";
+  color: var(--accent);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+/* 响应式 */
+@media (max-width: 600px) {
+  .timeline::before { left: 14px; }
+  .timeline-item { padding-left: 40px; }
+  .timeline-dot { left: 5px; }
+  .version-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+}

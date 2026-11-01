@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
 <head>
 <meta charset="UTF-8">
@@ -9,10 +9,6 @@
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://images.unsplash.com">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans-sc@1.0.0/index.css">
-<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/download.css">
 
 <script>
     (function(c,l,a,r,i,t,y){
@@ -21,6 +17,16 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "yvug3weevb");
 </script>
+
+
+
+<!-- 根据页面引入特定 CSS，如 index.css / download.css / docs.css / page.css -->
+
+<link rel="stylesheet" href="assets/css/variables.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<!-- 根据页面引入特定 CSS，如 index.css / download.css / docs.css / page.css -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="dl-body">
 
@@ -236,9 +242,8 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
-<script src="assets/js/splash.js"></script>
-<script src="assets/js/liquid-glass-ui.js"></script>
+
+
 <script>
 (function () {
   var starBtn = document.getElementById('betaStarBtn');
@@ -256,5 +261,9 @@
   });
 })();
 </script>
+
+
+<script src="assets/js/glass.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

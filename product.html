@@ -1,619 +1,183 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<script>document.documentElement.classList.add('js-loading');</script>
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>产品介绍 · 我的课表 MyClassroom</title>
-<meta name="description" content="我的课表产品介绍：纯本地、无服务器、跨语言的课程表应用。">
-<meta name="keywords" content="课程表,课表软件,产品介绍,教师工具,学生工具,开源">
-<meta property="og:title" content="产品介绍 · 我的课表 MyClassroom">
-<meta property="og:description" content="纯本地、无服务器、跨语言的课程表应用。">
-<meta property="og:type" content="website">
-<link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans-sc@1.0.0/index.css">
-<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/product.css">
-
-<script>
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "yvug3weevb");
-</script>
-  <script src="assets/js/glass-refraction.js"></script>
-<style>
-  /* 移动端菜单核心样式 (内联以隔离冲突) */
-  @media (max-width: 900px) {
-    .navbar-links { display: none !important; }
-    .mobile-menu-toggle {
-      display: flex !important; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-      color: var(--text); width: 36px; height: 36px; border-radius: 50%;
-      margin-left: 8px; cursor: pointer;
-    }
-    [data-theme="dark"] .mobile-menu-toggle { background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); }
-  }
-  .mobile-menu-toggle { display: none; }
-  .mobile-menu-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
-    z-index: 9998; opacity: 0; visibility: hidden; transition: 0.3s;
-  }
-  .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
-  .mobile-menu {
-    position: fixed; top: 0; right: -100%; width: 300px; max-width: 80vw; height: 100vh;
-    z-index: 9999; display: flex; flex-direction: column; transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    background: rgba(255,255,255,0.7) !important; backdrop-filter: blur(24px) saturate(180%);
-    border-left: 1px solid rgba(255,255,255,0.4); box-shadow: -10px 0 40px rgba(0,0,0,0.1);
-  }
-  [data-theme="dark"] .mobile-menu { background: rgba(20,20,25,0.8) !important; border-left: 1px solid rgba(255,255,255,0.1); }
-  .mobile-menu.active { right: 0; }
-  .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .mobile-menu-title { font-size: 16px; font-weight: 800; color: var(--text); }
-  .mobile-menu-close { background: rgba(128,128,128,0.2); border: none; color: var(--text); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; }
-  .mobile-menu-links { list-style: none; padding: 16px; margin: 0; }
-  .mobile-menu-links a { display: block; padding: 14px 20px; border-radius: 12px; color: var(--text); font-size: 16px; font-weight: 600; text-decoration: none; }
-  .mobile-menu-links a:hover { background: rgba(128,128,128,0.1); }
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var navbarRight = document.querySelector('.navbar-right');
-  var navLinks = document.querySelector('.navbar-links');
-  if (!navbarRight || !navLinks) return;
-
-  // 1. 动态创建汉堡按钮并插入到 navbar-right
-  var toggleBtn = document.createElement('button');
-  toggleBtn.className = 'mobile-menu-toggle';
-  toggleBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-  toggleBtn.setAttribute('aria-label', '打开菜单');
-  navbarRight.appendChild(toggleBtn);
-
-  // 2. 动态克隆导航链接，构建抽屉
-  var overlay = document.createElement('div');
-  overlay.className = 'mobile-menu-overlay';
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>核心功能 - PlanPeople</title>
   
-  var menu = document.createElement('div');
-  menu.className = 'mobile-menu';
-  
-  var menuHTML = '<div class="mobile-menu-header"><span class="mobile-menu-title">菜单</span><button class="mobile-menu-close"><i class="fa-solid fa-xmark"></i></button></div>';
-  menuHTML += '<ul class="mobile-menu-links">' + navLinks.innerHTML + '</ul>';
-  menu.innerHTML = menuHTML;
-
-  document.body.appendChild(overlay);
-  document.body.appendChild(menu);
-
-  // 3. 绑定交互
-  function openMenu() {
-    menu.classList.add('active');
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    menu.classList.remove('active');
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  toggleBtn.addEventListener('click', openMenu);
-  menu.querySelector('.mobile-menu-close').addEventListener('click', closeMenu);
-  overlay.addEventListener('click', closeMenu);
-});
-</script>
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/product.css">
 </head>
-<body class="pd-body has-global-bg">
+<body>
 
-<!-- 滚动进度条 -->
-<div class="pd-progress">
-  <div class="pd-progress-fill" id="pdProgress"></div>
-</div>
+  <!-- 顶部导航 (功能页高亮) -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/img/logo/icon.png" alt="Logo"> PlanPeople
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="product.html" class="active">功能</a></li>
+        <li><a href="docs.html">文档</a></li>
+        <li><a href="download.html">下载</a></li>
+        <li><a href="about.html">关于</a></li>
+      </ul>
+      <div class="nav-actions" style="width: 100px;"></div>
+    </div>
+  </nav>
 
-<!-- 章节 HUD -->
-<nav class="pd-hud" id="pdHud" aria-label="章节导航">
-  <a href="#intro" class="pd-hud-dot active" data-label="入口"></a>
-  <a href="#privacy" class="pd-hud-dot" data-label="隐私"></a>
-  <a href="#schedule" class="pd-hud-dot" data-label="课表"></a>
-  <a href="#students" class="pd-hud-dot" data-label="学生"></a>
-  <a href="#grades" class="pd-hud-dot" data-label="成绩"></a>
-  <a href="#island" class="pd-hud-dot" data-label="灵动岛"></a>
-  <a href="#theme" class="pd-hud-dot" data-label="主题"></a>
-  <a href="#language" class="pd-hud-dot" data-label="语言"></a>
-  <a href="#specs" class="pd-hud-dot" data-label="参数"></a>
-</nav>
+  <main>
+    <!-- 1. 首屏沉浸 -->
+    <header class="product-hero">
+      <h1>为极致专注而生。</h1>
+      <p>抛弃陈旧的 Web 套壳方案，我们用原生渲染重构了排课与成绩管理的每一处细节。</p>
+      <img src="assets/img/screenshots/dashboard-dark.png" alt="主界面预览" class="product-hero-img">
+    </header>
 
-<!-- 导航栏 -->
-<nav class="navbar pd-navbar">
-  <div class="container navbar-inner">
-    <a href="index.html" class="navbar-logo">
-      <img src="assets/img/logo/logo.png" alt="我的课表 Logo" data-logo="main">
-      <span data-text="brand.name">我的课表</span>
+    <!-- 2. 核心功能交替展示 -->
+    
+    <!-- 模块 A：课表 -->
+    <section class="feature-section">
+      <div class="feature-grid">
+        <div class="feature-text">
+          <span class="feature-label">Schedule Engine</span>
+          <h2>60FPS 丝滑拖拽的<br>课表引擎</h2>
+          <p>告别手绘表格的死板。我们使用了绝对定位与原生渲染引擎，让排课像堆积木一样简单。</p>
+          <ul class="feature-list">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              12 节课表自定义，支持单双周及特殊节次
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              拖拽自动吸附，冲突自动检测
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              一屏预览今日课程与倒计时
+            </li>
+          </ul>
+        </div>
+        <div class="feature-image-wrap">
+          <img src="assets/img/screenshots/schedule-light.png" alt="课表引擎" class="feature-image">
+        </div>
+      </div>
+    </section>
+
+    <!-- 模块 B：成绩 (反向布局) -->
+    <section class="feature-section" style="background: #121214;">
+      <div class="feature-grid reverse">
+        <div class="feature-text">
+          <span class="feature-label">Grade Analytics</span>
+          <h2>极速录入，<br>可视化成绩看板</h2>
+          <p>专为教师减负。键盘极速流录入，自动计算排名与及格率，让教学反馈更直观。</p>
+          <ul class="feature-list">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Tab / Enter 快捷键极速跳转录入
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              自动生成最高分、平均分、及格率
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              一键导出 PDF 成绩单发给家长
+            </li>
+          </ul>
+        </div>
+        <div class="feature-image-wrap">
+          <img src="assets/img/screenshots/grades-light.png" alt="成绩分析" class="feature-image">
+        </div>
+      </div>
+    </section>
+
+    <!-- 模块 C：学生档案 -->
+    <section class="feature-section">
+      <div class="feature-grid">
+        <div class="feature-text">
+          <span class="feature-label">Student Profiles</span>
+          <h2>数字档案，<br>记录每一次成长</h2>
+          <p>支持批量导入学生名单，自定义照片和 13 项详细字段，随时掌握班级全貌。</p>
+          <ul class="feature-list">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              CSV / Excel 极速导入导出名单
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              可视化座位表拖拽调整
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              家长联系方式与考勤一键查阅
+            </li>
+          </ul>
+        </div>
+        <div class="feature-image-wrap">
+          <img src="assets/img/screenshots/students-light.png" alt="学生管理" class="feature-image">
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 数据指标区 -->
+    <section class="metrics-section">
+      <div class="metrics-grid">
+        <div class="metric-item">
+          <div class="metric-num">0<span>%</span></div>
+          <div class="metric-label">数据上传</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-num">60<span>FPS</span></div>
+          <div class="metric-label">渲染帧率</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-num">100<span>%</span></div>
+          <div class="metric-label">纯本地存储</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-num">38<span>MB</span></div>
+          <div class="metric-label">极轻量体积</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 底部 Footer -->
+  <footer>
+  <div class="container footer-vertical">
+    <a href="index.html" class="footer-logo">
+      <img src="assets/img/logo/icon.png" alt="Logo"> PlanPeople
     </a>
-        <ul class="navbar-links">
-      <li><a href="product.html">产品介绍</a></li>
-      <li><a href="index.html#features">功能</a></li>
-      <li><a href="docs.html">文档</a></li>
-      <li><a href="help.html">帮助</a></li>
-      <li><a href="themes.html">主题</a></li>
-      <li><a href="download.html">下载</a></li>
-      <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
-    </ul>
-    <div class="navbar-right">
-      <div class="ui-switcher" role="group" aria-label="UI 模式">
-        <button data-ui="light" title="亮色" aria-label="亮色"></button>
-        <button data-ui="dark" title="暗色" aria-label="暗色"></button>
-        <button data-ui="clear" title="通透" aria-label="通透"></button>
-        <button data-ui="fresh" title="清新" aria-label="清新"></button>
-      </div>
-      <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
-          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div></div>
-</nav>
-
-<!-- ========== 1 入口 ========== -->
-<section class="pd-scene" id="intro" data-scene="1">
-  <div class="pd-scene-inner">
-    <div class="pd-eyebrow" data-enter>PRODUCT / 01</div>
-    <h1 class="pd-h1" data-enter>
-      <span class="pd-char-line">进入你的</span>
-      <span class="pd-char-line pd-glow">课表宇宙</span>
-    </h1>
-    <p class="pd-lead" data-enter>
-      无服务器、纯本地、20 种语言。<br>
-      数据永远留在你的设备上，打开即用。
-    </p>
-
-    <div class="pd-intro-tags" data-enter>
-      <span><i class="fa-solid fa-shield-halved"></i> 纯本地</span>
-      <span><i class="fa-solid fa-cloud-slash"></i> 无服务器</span>
-      <span><i class="fa-solid fa-key"></i> 无需登录</span>
-      <span><i class="fa-solid fa-code"></i> MIT 开源</span>
-    </div>
-
-    <div class="pd-cta-buttons" data-enter>
-      <a href="download.html" class="btn btn-primary btn-3d">
-        <i class="fa-brands fa-windows"></i>
-        <span>下载 Windows 版</span>
-      </a>
-      <a href="#" data-link="github" target="_blank" rel="noopener" class="btn btn-secondary btn-3d">
-        <i class="fa-brands fa-github"></i>
-        <span>查看 GitHub</span>
-      </a>
-    </div>
-
-    <div class="pd-hint" data-enter>
-      <i class="fa-solid fa-arrow-down"></i>
-      <span>向下滚动，穿越空间</span>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 2 隐私 ========== -->
-<section class="pd-scene" id="privacy" data-scene="2">
-  <div class="pd-scene-inner">
-    <div class="pd-eyebrow" data-enter>PRIVACY / 02</div>
-    <h2 class="pd-h2" data-enter>你的数据<br>永远留在设备上</h2>
-    <p class="pd-body" data-enter>
-      没有账号，没有服务器，没有分析工具。<br>
-      课程、学生、成绩全部以 JSON 保存在本地。
-    </p>
-
-    <div class="pd-metrics" data-enter>
-      <div class="pd-metric">
-        <div class="pd-metric-num" data-count="0">0</div>
-        <div class="pd-metric-label">上传数据</div>
-      </div>
-      <div class="pd-metric">
-        <div class="pd-metric-num" data-count="0">0</div>
-        <div class="pd-metric-label">需要账号</div>
-      </div>
-      <div class="pd-metric">
-        <div class="pd-metric-num" data-count="100" data-suffix="%">0</div>
-        <div class="pd-metric-label">本地存储</div>
-      </div>
-      <div class="pd-metric">
-        <div class="pd-metric-num">JSON</div>
-        <div class="pd-metric-label">纯文本可查</div>
-      </div>
-    </div>
-
-    <div class="pd-promise-list" data-enter>
-      <div class="pd-promise-item">
-        <i class="fa-solid fa-xmark"></i>
-        <div>
-          <strong>不收集个人信息</strong>
-          <span>没有追踪，没有上报，没有第三方 SDK</span>
-        </div>
-      </div>
-      <div class="pd-promise-item">
-        <i class="fa-solid fa-xmark"></i>
-        <div>
-          <strong>不要求登录</strong>
-          <span>打开即用，不需要手机号或邮箱</span>
-        </div>
-      </div>
-      <div class="pd-promise-item">
-        <i class="fa-solid fa-xmark"></i>
-        <div>
-          <strong>不展示广告</strong>
-          <span>没有弹窗，没有推广，专注教学</span>
-        </div>
-      </div>
-      <div class="pd-promise-item">
-        <i class="fa-solid fa-xmark"></i>
-        <div>
-          <strong>不上传数据</strong>
-          <span>所有内容保存在你本地的 JSON 文件中</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 3 课表 ========== -->
-<section class="pd-scene" id="schedule" data-scene="3">
-  <div class="pd-scene-inner">
-    <div class="pd-eyebrow" data-enter>SCHEDULE / 03</div>
-    <h2 class="pd-h2" data-enter>12 节课<br>排得明明白白</h2>
-    <p class="pd-body" data-enter>
-      支持周次、单双周、特殊节次。<br>
-      打开第一眼就是今天上什么、下节课在哪。
-    </p>
-
-    <div class="pd-window-3d" data-enter>
-      <div class="pd-window-bar">
-        <span class="pd-dot pd-dot-red"></span>
-        <span class="pd-dot pd-dot-yellow"></span>
-        <span class="pd-dot pd-dot-green"></span>
-        <span class="pd-window-title">课表</span>
-      </div>
-      <img src="assets/img/screenshots/schedule.png" alt="课表界面">
-    </div>
-
-    <div class="pd-feature-grid" data-enter>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-calendar-day"></i></div>
-        <h4>今日课程</h4>
-        <p>打开即看今天上什么，下节课在哪间教室。</p>
-      </div>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-repeat"></i></div>
-        <h4>单双周切换</h4>
-        <p>一节课程按周次自动隐藏或显示，不用手动改。</p>
-      </div>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-clock"></i></div>
-        <h4>自定义节次</h4>
-        <p>12 节课的起止时间按学校作息自由调整。</p>
-      </div>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-tag"></i></div>
-        <h4>特殊节次标注</h4>
-        <p>考试、自习、临时调课都能单独标记。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 4 学生 ========== -->
-<section class="pd-scene" id="students" data-scene="4">
-  <div class="pd-scene-inner">
-    <div class="pd-eyebrow" data-enter>STUDENTS / 04</div>
-    <h2 class="pd-h2" data-enter>一次录入<br>全程可用</h2>
-    <p class="pd-body" data-enter>
-      名单导入、座位表、个人档案。<br>
-      从开学排到期末，不用重复填。
-    </p>
-
-    <div class="pd-window-3d" data-enter>
-      <div class="pd-window-bar">
-        <span class="pd-dot pd-dot-red"></span>
-        <span class="pd-dot pd-dot-yellow"></span>
-        <span class="pd-dot pd-dot-green"></span>
-        <span class="pd-window-title">学生管理</span>
-      </div>
-      <img src="assets/img/screenshots/students.png" alt="学生管理">
-    </div>
-
-    <div class="pd-feature-grid" data-enter>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-file-import"></i></div>
-        <h4>批量导入名单</h4>
-        <p>支持 Excel 与 CSV，一次导入整个班级。</p>
-      </div>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-chair"></i></div>
-        <h4>可视化座位表</h4>
-        <p>拖拽调整座位，导出图片贴到教室墙上。</p>
-      </div>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-id-card"></i></div>
-        <h4>个人档案</h4>
-        <p>学号、生日、家长联系方式，一次录入全程可用。</p>
-      </div>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-user-check"></i></div>
-        <h4>考勤标记</h4>
-        <p>缺勤、请假、迟到，一键记录。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 5 成绩 ========== -->
-<section class="pd-scene" id="grades" data-scene="5">
-  <div class="pd-scene-inner">
-    <div class="pd-eyebrow" data-enter>GRADES / 05</div>
-    <h2 class="pd-h2" data-enter>录入看板<br>排名及格率</h2>
-    <p class="pd-body" data-enter>
-      键盘快速录入，自动保存。<br>
-      班级排名、及格率、成绩趋势一眼看清。
-    </p>
-
-    <div class="pd-window-3d" data-enter>
-      <div class="pd-window-bar">
-        <span class="pd-dot pd-dot-red"></span>
-        <span class="pd-dot pd-dot-yellow"></span>
-        <span class="pd-dot pd-dot-green"></span>
-        <span class="pd-window-title">成绩看板</span>
-      </div>
-      <img src="assets/img/screenshots/grades.png" alt="成绩看板">
-    </div>
-
-    <div class="pd-feature-grid" data-enter>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-keyboard"></i></div>
-        <h4>键盘快速录入</h4>
-        <p>Tab 键跳转，回车确认，录入速度翻倍。</p>
-      </div>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-ranking-star"></i></div>
-        <h4>班级排名</h4>
-        <p>自动计算名次，支持并列，实时更新。</p>
-      </div>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-percent"></i></div>
-        <h4>及格率统计</h4>
-        <p>各科及格率、优秀率，教学效果量化。</p>
-      </div>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-chart-line"></i></div>
-        <h4>成绩趋势</h4>
-        <p>按学期追踪，看进步也看退步。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 6 灵动岛 ========== -->
-<section class="pd-scene" id="island" data-scene="6">
-  <div class="pd-scene-inner">
-    <div class="pd-eyebrow" data-enter>DYNAMIC ISLAND / 06</div>
-    <h2 class="pd-h2" data-enter>正在上的课<br>浮在桌面上</h2>
-    <p class="pd-lead" data-enter>
-      今日课程悬浮窗，正在上的课高亮。<br>
-      下课倒计时一眼可见。
-    </p>
-
-    <div class="pd-island-mock" data-enter>
-      <div class="pd-island-dot"></div>
-      <div class="pd-island-text">暂无课程</div>
-      <div class="pd-island-time">09:20</div>
-    </div>
-
-    <div class="pd-island-mock pd-island-mock-active" data-enter>
-      <div class="pd-island-dot pd-island-dot-active"></div>
-      <div class="pd-island-text">高等数学 · 正在上课</div>
-      <div class="pd-island-time">剩余 32 分</div>
-    </div>
-
-    <div class="pd-feature-grid pd-feature-grid-3" data-enter>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-location-crosshairs"></i></div>
-        <h4>正在上的课高亮</h4>
-        <p>一眼看出当前节次，不用翻课表。</p>
-      </div>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-hourglass-half"></i></div>
-        <h4>下课倒计时</h4>
-        <p>剩余分钟数实时刷新，不会错过下课。</p>
-      </div>
-      <div class="pd-feature-cell">
-        <div class="pd-feature-icon"><i class="fa-solid fa-arrows-up-down-left-right"></i></div>
-        <h4>可拖动悬浮窗</h4>
-        <p>放在屏幕任意角落，不遮挡课件。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 7 主题 ========== -->
-<section class="pd-scene" id="theme" data-scene="7">
-  <div class="pd-scene-inner">
-    <div class="pd-eyebrow" data-enter>THEMES / 07</div>
-    <h2 class="pd-h2" data-enter>四种主题<br>四种心情</h2>
-    <p class="pd-body" data-enter>
-      亮色、暗色、通透、清新。<br>
-      一键切换，右上角的圆点现在就可以试。
-    </p>
-
-    <div class="pd-theme-grid" data-enter>
-      <div class="pd-theme-card" data-preview="light">
-        <div class="pd-theme-swatch" style="background:#FFFFFF"></div>
-        <div class="pd-theme-name">亮色</div>
-        <div class="pd-theme-desc">白底黑字，白天清晰</div>
-      </div>
-      <div class="pd-theme-card" data-preview="dark">
-        <div class="pd-theme-swatch" style="background:#17171A"></div>
-        <div class="pd-theme-name">暗色</div>
-        <div class="pd-theme-desc">深底浅字，夜间护眼</div>
-      </div>
-      <div class="pd-theme-card" data-preview="clear">
-        <div class="pd-theme-swatch" style="background:#EEF3F9"></div>
-        <div class="pd-theme-name">通透</div>
-        <div class="pd-theme-desc">冷调浅蓝，清爽现代</div>
-      </div>
-      <div class="pd-theme-card" data-preview="fresh">
-        <div class="pd-theme-swatch" style="background:#F1F7EC"></div>
-        <div class="pd-theme-name">清新</div>
-        <div class="pd-theme-desc">自然绿调，柔和护眼</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 8 语言 ========== -->
-<section class="pd-scene" id="language" data-scene="8">
-  <div class="pd-scene-inner">
-    <div class="pd-eyebrow" data-enter>LANGUAGE / 08</div>
-    <h2 class="pd-h2" data-enter>20 种语言<br>说你的话</h2>
-    <p class="pd-lead" data-enter>
-      简体、繁体、英、日、韩、法、德、西、俄、阿。<br>
-      随时切换，互不影响数据。
-    </p>
-
-    <div class="pd-lang-cloud" data-enter>
-      <span>简体中文</span>
-      <span>繁體中文</span>
-      <span>English</span>
-      <span>日本語</span>
-      <span>한국어</span>
-      <span>Français</span>
-      <span>Deutsch</span>
-      <span>Español</span>
-      <span>Русский</span>
-      <span>العربية</span>
-      <span>Português</span>
-      <span>Italiano</span>
-      <span>Nederlands</span>
-      <span>Polski</span>
-      <span>Türkçe</span>
-      <span>ไทย</span>
-      <span>Tiếng Việt</span>
-      <span>Bahasa</span>
-      <span>हिन्दी</span>
-      <span>עברית</span>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 9 参数 ========== -->
-<section class="pd-scene" id="specs" data-scene="9">
-  <div class="pd-scene-inner">
-    <div class="pd-eyebrow" data-enter>SPECS / 09</div>
-    <h2 class="pd-h2" data-enter>简单可靠<br>可审计</h2>
-    <p class="pd-body" data-enter>
-      轻量、稳定、开源。代码全部可读，数据全部可查。
-    </p>
-
-    <div class="pd-specs-grid" data-enter>
-      <div class="pd-spec">
-        <div class="pd-spec-val" data-text="system.language">C# 12</div>
-        <div class="pd-spec-key">开发语言</div>
-      </div>
-      <div class="pd-spec">
-        <div class="pd-spec-val">.NET 10</div>
-        <div class="pd-spec-key">运行时</div>
-      </div>
-      <div class="pd-spec">
-        <div class="pd-spec-val" data-text="system.framework">Windows Forms</div>
-        <div class="pd-spec-key">界面框架</div>
-      </div>
-      <div class="pd-spec">
-        <div class="pd-spec-val" data-text="system.storage">JSON</div>
-        <div class="pd-spec-key">数据存储</div>
-      </div>
-      <div class="pd-spec">
-        <div class="pd-spec-val" data-text="system.license">MIT</div>
-        <div class="pd-spec-key">开源协议</div>
-      </div>
-      <div class="pd-spec">
-        <div class="pd-spec-val">Win 10 / 11</div>
-        <div class="pd-spec-key">支持系统</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 10 终幕 ========== -->
-<section class="pd-scene" id="final" data-scene="10">
-  <div class="pd-scene-inner">
-    <h2 class="pd-h2 pd-h2-big" data-enter>现在就开始</h2>
-    <p class="pd-lead" data-enter>
-      免费、开源、无需注册。<br>
-      Windows 10 与 11，下载即用。
-    </p>
-    <div class="pd-cta-buttons" data-enter>
-      <a href="download.html" class="btn btn-primary btn-3d">
-        <i class="fa-brands fa-windows"></i>
-        <span>下载 Windows 版</span>
-      </a>
-    </div>
-    <div class="pd-end-mark" data-enter>
-      <span class="pd-end-dot"></span>
-      <span>Kzure Lab</span>
-      <span class="pd-end-dot"></span>
-    </div>
-  </div>
-</section>
-
-<!-- 页脚 -->
-<footer>
-  <div class="container">
-    <div class="footer-links">
-      <a href="product.html">产品介绍</a>
-      <a href="docs.html">文档</a>
-      <a href="help.html">帮助</a>
-      <a href="themes.html">主题</a>
-      <a href="about.html">关于</a>
+    <div class="footer-links-vertical">
+      <a href="docs.html">使用文档</a>
+      <a href="product.html">功能介绍</a>
+      <a href="release.html">更新日志</a>
+      <a href="about.html">关于我们</a>
       <a href="privacy.html">隐私政策</a>
-      <a href="cookie.html">Cookie</a>
-      <a href="#" data-link="license" target="_blank" rel="noopener">MIT 协议</a>
-      <a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" data-link="issues">提交意见</a>
+      <a href="#" data-link="github">GitHub 源码</a>
     </div>
-    <p class="copyright">
-      © <span data-text="brand.copyright">2026</span>
-      <span class="lab">
-        <span class="lab-mark" data-text="brand.labMark">KZ</span>
-        <span class="brand" data-text="brand.lab">Kzure Lab</span>
-      </span>
-      · 我的课表 MyClassroom · 保留所有权利
-    </p>
+    <div class="footer-bottom-vertical">
+      © 2026 Kzure Lab. 保留所有权利。
+    </div>
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
-<script src="assets/js/splash.js"></script>
-<script src="assets/js/liquid-glass-ui.js"></script>
-<script src="assets/js/product-3d.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  if (window.GlassRefraction) {
-    window.GlassRefraction.init();
-  }
-});
-</script>
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-header">
-    <span class="mobile-menu-title">菜单</span>
-    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="关闭菜单">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
+  <!-- 只有全局注入脚本 -->
+  <script src="assets/js/main.js"></script>
+  <!-- 强制拦截的 Cookie 弹窗 -->
+  <div class="cookie-overlay" id="cookieOverlay">
+    <div class="cookie-modal">
+      <div class="cookie-modal-icon"></div>
+      <h3>您的隐私选择</h3>
+      <p>PlanPeople 仅使用必要的本地存储来记住您的偏好设置。我们不包含任何追踪代码，也不会向服务器上传您的任何数据。<br><a href="cookie.html">查看详情</a></p>
+      <div class="cookie-modal-actions">
+        <button class="btn-cookie-decline" id="cookieDecline">拒绝</button>
+        <button class="btn-cookie-accept" id="cookieAccept">接受并继续</button>
+      </div>
+    </div>
   </div>
-  <ul class="mobile-menu-links">
-    <li><a href="product.html">产品介绍</a></li>
-    <li><a href="index.html#features">功能</a></li>
-    <li><a href="docs.html">文档</a></li>
-    <li><a href="help.html">帮助</a></li>
-    <li><a href="themes.html">主题</a></li>
-    <li><a href="download.html">下载</a></li>
-    <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
-  </ul>
-</div>
 </body>
 </html>

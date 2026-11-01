@@ -1,169 +1,90 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<script>document.documentElement.classList.add('js-loading');</script>
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>文档中心 · MyClassroom</title>
-<meta name="description" content="我的课表文档中心：快速开始、功能说明、个性化、备份与恢复。">
-<link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/harmonyos-sans-sc@1.0.0/index.css">
-<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<!-- marked.js，MIT 协议，用于渲染 Markdown -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css" id="hljs-light">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" id="hljs-dark" disabled>
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/docs.css">
-
-<script>
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "yvug3weevb");
-</script>
-  <script src="assets/js/glass-refraction.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使用文档 - PlanPeople</title>
+  
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/docs.css">
+  
+  <!-- Markdown 渲染和代码高亮依赖 (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/common.min.js"></script>
 </head>
-<body class="has-global-bg">
+<body>
 
-<nav class="navbar island-ui">
-  <div class="container navbar-inner">
-    <a href="index.html" class="navbar-logo">
-      <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
-      <span data-text="brand.name">我的课表</span>
-    </a>
-    <ul class="navbar-links">
-      <li><a href="product.html">产品介绍</a></li>
-      <li><a href="index.html#features">功能</a></li>
-      <li><a href="docs.html">文档</a></li>
-      <li><a href="help.html">帮助</a></li>
-      <li><a href="themes.html">主题</a></li>
-      <li><a href="download.html">下载</a></li>
-      <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
-    </ul>
-    <div class="navbar-right">
-      <div class="ui-switcher" role="group" aria-label="UI 模式">
-        <button data-ui="light" title="亮色" aria-label="亮色"></button>
-        <button data-ui="dark" title="暗色" aria-label="暗色"></button>
-        <button data-ui="clear" title="通透" aria-label="通透"></button>
-        <button data-ui="fresh" title="清新" aria-label="清新"></button>
-      </div>
-      <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
-        <i class="fa-solid fa-bars"></i>
-      </button>
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/img/logo/icon.png" alt="Logo"> PlanPeople
+      </a>
+      <ul class="nav-links">
+  <li><a href="index.html">首页</a></li>
+  <li><a href="product.html">功能</a></li>
+  <li><a href="docs.html">文档</a></li>
+  <li><a href="download.html">下载</a></li>
+  <li><a href="about.html">关于</a></li>
+</ul>
+      <div class="nav-actions" style="width: 100px;"></div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-header">
-    <span class="mobile-menu-title">菜单</span>
-    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="关闭菜单">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-  </div>
-  <ul class="mobile-menu-links">
-    <li><a href="product.html">产品介绍</a></li>
-    <li><a href="index.html#features">功能</a></li>
-    <li><a href="docs.html">文档</a></li>
-    <li><a href="help.html">帮助</a></li>
-    <li><a href="themes.html">主题</a></li>
-    <li><a href="download.html">下载</a></li>
-    <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
-  </ul>
-</div>
-
-<div class="container">
-  <div class="docs-layout">
-
-    <!-- 侧边栏 -->
-    <aside class="docs-aside" id="docsAside">
-      <div class="docs-search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="docsSearch" placeholder="搜索文档..." autocomplete="off">
-        <button class="docs-search-clear" id="docsSearchClear" hidden>
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="docs-nav" id="docsNav">
-        <div class="docs-nav-loading">
-          <i class="fa-solid fa-spinner fa-spin"></i>
-          <span>正在加载目录...</span>
-        </div>
-      </div>
+  <div class="container docs-layout">
+    <!-- 左侧目录 -->
+    <aside class="docs-sidebar">
+      <ul class="docs-menu">
+        <li><a data-file="quickstart.md">快速开始</a></li>
+        <li><a data-file="schedule.md">课程表配置</a></li>
+        <li><a data-file="students.md">学生管理</a></li>
+        <li><a data-file="grades.md">成绩分析</a></li>
+        <li><a data-file="backup.md">备份与恢复</a></li>
+        <li><a data-file="faq.md">常见问题</a></li>
+      </ul>
     </aside>
 
-    <!-- 主内容 -->
-    <main class="docs-main">
-      <div class="docs-toolbar">
-        <button class="docs-mobile-toggle" id="docsMobileToggle">
-          <i class="fa-solid fa-list"></i>
-          <span>目录</span>
-        </button>
-        <div class="docs-breadcrumb" id="docsBreadcrumb"></div>
-        <div class="docs-actions">
-          <a href="#" class="docs-action" id="docsEditLink" target="_blank" rel="noopener" title="在 GitHub 上查看源文件">
-            <i class="fa-brands fa-github"></i>
-          </a>
-          <button class="docs-action" id="docsCopyLink" title="复制当前链接">
-            <i class="fa-solid fa-link"></i>
-          </button>
-        </div>
+    <!-- 右侧文章 -->
+    <article class="docs-content">
+      <div class="md-body" id="markdownContainer">
+        <!-- 内容由 JS 动态渲染 -->
       </div>
-
-      <article class="docs-article" id="docsArticle">
-        <div class="docs-placeholder">
-          <i class="fa-solid fa-book-open"></i>
-          <h2>正在加载文档</h2>
-          <p>请稍候...</p>
-        </div>
-      </article>
-    </main>
-
+    </article>
   </div>
-</div>
 
-<footer>
-  <div class="container">
-    <div class="footer-links">
-      <a href="product.html">产品介绍</a>
-      <a href="docs.html">文档</a>
-      <a href="help.html">帮助</a>
-      <a href="themes.html">主题</a>
-      <a href="about.html">关于</a>
+  <footer>
+  <div class="container footer-vertical">
+    <a href="index.html" class="footer-logo">
+      <img src="assets/img/logo/icon.png" alt="Logo"> PlanPeople
+    </a>
+    <div class="footer-links-vertical">
+      <a href="docs.html">使用文档</a>
+      <a href="product.html">功能介绍</a>
+      <a href="release.html">更新日志</a>
+      <a href="about.html">关于我们</a>
       <a href="privacy.html">隐私政策</a>
-      <a href="cookie.html">Cookie</a>
-      <a href="#" data-link="license" target="_blank" rel="noopener">MIT 协议</a>
-      <a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" data-link="issues">提交意见</a>
+      <a href="#" data-link="github">GitHub 源码</a>
     </div>
-    <p class="copyright">
-      © <span data-text="brand.copyright">2026</span>
-      <span class="lab">
-        <span class="lab-mark" data-text="brand.labMark">KZ</span>
-        <span class="brand" data-text="brand.lab">Kzure Lab</span>
-      </span>
-      · 我的课表 MyClassroom · 保留所有权利
-    </p>
+    <div class="footer-bottom-vertical">
+      © 2026 Kzure Lab. 保留所有权利。
+    </div>
   </div>
 </footer>
 
-<!-- marked 渲染 Markdown，MIT 协议 -->
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
-<!-- highlight.js 代码高亮，BSD 协议 -->
-<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/common.min.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/splash.js"></script>
-<script src="assets/js/liquid-glass-ui.js"></script>
-<script src="assets/js/docs.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  if (window.GlassRefraction) {
-    window.GlassRefraction.init();
-  }
-});
-</script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/docs.js"></script>
+  <!-- 强制拦截的 Cookie 弹窗 -->
+  <div class="cookie-overlay" id="cookieOverlay">
+    <div class="cookie-modal">
+      <div class="cookie-modal-icon"></div>
+      <h3>您的隐私选择</h3>
+      <p>PlanPeople 仅使用必要的本地存储来记住您的偏好设置。我们不包含任何追踪代码，也不会向服务器上传您的任何数据。<br><a href="cookie.html">查看详情</a></p>
+      <div class="cookie-modal-actions">
+        <button class="btn-cookie-decline" id="cookieDecline">拒绝</button>
+        <button class="btn-cookie-accept" id="cookieAccept">接受并继续</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

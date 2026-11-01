@@ -1,27 +1,5 @@
-{
-  "brand": {
-    "name": "我的课表",
-    "enName": "MyClassroom",
-    "lab": "Kzure Lab",
-    "labMark": "KZ",
-    "copyright": "2026"
-  },
-  "contact": {
-    "email": "chzurelab@outlook.com"
-  },
-  "system": {
-    "os": "Windows 10 / 11",
-    "runtime": ".NET 10 Desktop Runtime",
-    "disk": "约 150 MB",
-    "language": "C# 12",
-    "framework": "Windows Forms",
-    "storage": "JSON",
-    "license": "MIT"
-  },
-  "version": {
-    "current": "1.0.0",
-    "beta": "1.1.5 beta",
-    "avalonia": "3.0test",
-    "releaseDate": "2026-10-16"
-  }
+﻿{
+  "brand": { "name": "PlanPeople", "copyright": "2026", "lab": "Kzure Lab" },
+  "version": { "current": "1.0.0", "avalonia": "3.0-test", "date": "2026-10" },
+  "system": { "os": "Windows 10 / 11", "framework": "Avalonia 11", "runtime": ".NET 8" }
 }

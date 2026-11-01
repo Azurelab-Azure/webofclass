@@ -1,0 +1,132 @@
+/* ============================================
+   关于页专属样式 (规格说明书 / 极客风)
+   ============================================ */
+
+.about-hero {
+  padding-top: calc(var(--nav-height) + 100px);
+  padding-bottom: 80px;
+  text-align: center;
+  background: #000;
+}
+
+.about-hero h1 {
+  font-size: clamp(48px, 8vw, 80px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: #F5F5F7;
+  margin-bottom: 16px;
+}
+
+.about-hero p {
+  font-size: 20px;
+  color: #86868B;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 规格卡片网格 */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto 80px;
+  padding: 0 24px;
+}
+
+.spec-card {
+  background: #121214;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.spec-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.spec-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #F5F5F7;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* 规格项 */
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.spec-item:last-child { margin-bottom: 0; }
+
+.spec-label {
+  color: #86868B;
+  font-size: 15px;
+}
+
+.spec-value {
+  color: #F5F5F7;
+  font-size: 15px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+/* 团队成员列表 */
+.team-list {
+  max-width: 1000px;
+  margin: 0 auto 120px;
+  padding: 0 24px;
+}
+
+.team-list h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #F5F5F7;
+  margin-bottom: 32px;
+}
+
+.team-member {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #1C1C1F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 800;
+  color: #A1A1A6;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.member-info h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #F5F5F7;
+  margin-bottom: 4px;
+}
+
+.member-info p {
+  font-size: 14px;
+  color: #86868B;
+}
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .spec-card { padding: 24px; }
+}

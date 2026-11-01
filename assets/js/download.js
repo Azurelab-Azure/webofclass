@@ -1,83 +1,58 @@
 /* ============================================
-   下载页 · 测试版解锁流程
-   初始只显示「点 Star」按钮
-   点击后显示「下载」按钮
+   PlanPeople - download.js
    ============================================ */
 
 (function () {
   'use strict';
 
-  var STAR_KEY = 'myclassroom_beta_unlocked';
+  const STAR_KEY = 'planpeople_beta_unlocked';
 
-  var lockEl = document.getElementById('betaLock');
-  var unlockEl = document.getElementById('betaUnlock');
-  var starBtn = document.getElementById('betaStarBtn');
-  var stepNodes = document.querySelectorAll('.dl-step-node');
+  const consentBox = document.getElementById('consentBox');
+  const consentCheck = document.getElementById('consentCheck');
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const step3 = document.getElementById('step3');
+  const starBtn = document.getElementById('starBtn');
+  const downloadArea = document.getElementById('downloadArea');
 
-  if (!lockEl || !unlockEl || !starBtn) return;
+  if (!consentBox || !consentCheck || !starBtn) return;
 
-  /**
-   * 设置已解锁状态
-   * 隐藏锁定，显示下载
-   * 更新步骤指示器
-   */
-  function setUnlocked() {
-    lockEl.hidden = true;
-    unlockEl.hidden = false;
-
-    stepNodes.forEach(function (node) {
-      var step = node.getAttribute('data-step-node');
-      if (step === '1') {
-        node.classList.remove('active');
-        node.classList.add('done');
-      } else if (step === '2') {
-        node.classList.add('active');
-      }
-    });
-  }
-
-  /**
-   * 检查本地存储是否已解锁
-   */
   function checkUnlocked() {
     try {
       if (localStorage.getItem(STAR_KEY) === '1') {
-        setUnlocked();
-        return true;
+        step1.style.display = 'none';
+        step2.style.display = 'none';
+        step3.style.display = 'block';
+        downloadArea.style.display = 'block';
       }
     } catch (e) {}
-    return false;
   }
 
-  /**
-   * 点击 Star 按钮
-   * 记录状态，但先不立即解锁
-   * 等用户从 GitHub 回来再显示
-   */
-  starBtn.addEventListener('click', function () {
-    try {
-      localStorage.setItem(STAR_KEY, '1');
-    } catch (e) {}
-  });
-
-  /**
-   * 监听页面可见性变化
-   * 用户从 GitHub 切回本页时，检测是否已点过 Star
-   */
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) {
-      checkUnlocked();
+  consentBox.addEventListener('scroll', () => {
+    const isAtBottom = consentBox.scrollHeight - consentBox.scrollTop <= consentBox.clientHeight + 5;
+    if (isAtBottom && consentCheck.disabled) {
+      consentCheck.disabled = false;
+      const tip = document.getElementById('scrollTip');
+      if (tip) tip.innerHTML = '<span style="color:#28C840;">✅ 已阅读完毕</span>';
     }
   });
 
-  /**
-   * 监听窗口聚焦
-   * 兼容某些浏览器的行为
-   */
-  window.addEventListener('focus', function () {
-    checkUnlocked();
+  consentCheck.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      step1.style.opacity = '0.4';
+      consentCheck.disabled = true;
+      step2.style.display = 'block';
+    }
   });
 
-  // 初始化：如果之前已解锁，直接显示下载
+  starBtn.addEventListener('click', () => {
+    try { localStorage.setItem(STAR_KEY, '1'); } catch (e) {}
+    step2.style.opacity = '0.4';
+    step2.style.pointerEvents = 'none';
+    step3.style.display = 'block';
+    downloadArea.style.display = 'block';
+  });
+
   checkUnlocked();
+
 })();

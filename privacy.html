@@ -1,167 +1,111 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light" data-ui="light" class="js-loading">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<script>document.documentElement.classList.add('js-loading');</script>
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>隐私政策 · MyClassroom</title>
-<meta name="description" content="我的课表隐私政策：不收集任何个人信息，所有数据保存在本地设备。">
-<link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
-<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/glass-refraction.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>隐私政策 - PlanPeople</title>
+  
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/legal.css">
 </head>
-<body class="has-global-bg">
+<body>
 
-<nav class="navbar island-ui">
-  <div class="container navbar-inner">
-    <a href="index.html" class="navbar-logo">
-      <img src="assets/img/logo/logo.png" alt="我的课表 Logo">
-      <span data-text="brand.name">我的课表</span>
-    </a>
-    <ul class="navbar-links">
-      <li><a href="product.html">产品介绍</a></li>
-      <li><a href="index.html#features">功能</a></li>
-      <li><a href="docs.html">文档</a></li>
-      <li><a href="help.html">帮助</a></li>
-      <li><a href="themes.html">主题</a></li>
-      <li><a href="download.html">下载</a></li>
-      <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
-    </ul>
-    <div class="navbar-right">
-      <div class="ui-switcher" role="group" aria-label="UI 模式">
-        <button data-ui="light" title="亮色" aria-label="亮色"></button>
-        <button data-ui="dark" title="暗色" aria-label="暗色"></button>
-        <button data-ui="clear" title="通透" aria-label="通透"></button>
-        <button data-ui="fresh" title="清新" aria-label="清新"></button>
-      </div>
-      <button class="theme-toggle" aria-label="切换主题"><i class="fa-solid fa-moon"></i></button>
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-  </div>
-</nav>
-
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-header">
-    <span class="mobile-menu-title">菜单</span>
-    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="关闭菜单">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-  </div>
-  <ul class="mobile-menu-links">
-    <li><a href="product.html">产品介绍</a></li>
-    <li><a href="index.html#features">功能</a></li>
-    <li><a href="docs.html">文档</a></li>
-    <li><a href="help.html">帮助</a></li>
-    <li><a href="themes.html">主题</a></li>
-    <li><a href="download.html">下载</a></li>
-    <li><a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a></li>
-  </ul>
-</div>
-
-<div class="container">
-  <div class="tree-layout">
-
-    <aside class="tree-aside" id="treeAside">
-      <div class="tree-title">目录</div>
-
-      <div class="tree-group">
-        <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 政策条款</div>
-        <ul class="tree-items">
-          <li><a href="#who" class="active">我们是谁</a></li>
-          <li><a href="#collect">我们收集什么</a></li>
-          <li><a href="#storage">数据存储</a></li>
-          <li><a href="#third">第三方服务</a></li>
-          <li><a href="#rights">您的权利</a></li>
-          <li><a href="#contact">联系我们</a></li>
-        </ul>
-      </div>
-
-      <div class="tree-group">
-        <div class="tree-group-title"><i class="fa-solid fa-chevron-down"></i> 相关</div>
-        <ul class="tree-items">
-          <li><a href="cookie.html">Cookie 与本地存储</a></li>
-          <li><a href="about.html">关于</a></li>
-        </ul>
-      </div>
-    </aside>
-
-    <main class="tree-content">
-      <button class="tree-mobile-toggle">
-        <i class="fa-solid fa-list"></i> 目录
-      </button>
-
-      <h1>隐私政策</h1>
-      <p class="page-lead">最后更新：2026-10-06</p>
-
-      <h2 id="who">一、我们是谁</h2>
-      <p>本软件我的课表由 Kzure Lab 开发。这是一款完全离线的本地软件，无需登录、无需网络。</p>
-
-      <h2 id="collect">二、我们收集什么</h2>
-      <p>我们不收集任何个人信息。所有数据，包括课程、教师、学生、成绩等，均保存在您的本地设备上，永远不会上传到任何服务器。</p>
-
-      <h2 id="storage">三、数据存储</h2>
-      <p>所有数据以 JSON 文件形式保存在程序目录，或 %APPDATA%\MyClassroom 中。您可以随时打开、备份、复制或删除这些文件。</p>
-
-      <h2 id="third">四、第三方服务</h2>
-      <p>本软件不使用任何第三方分析服务、广告服务或统计服务。</p>
-      <p>新闻资讯功能为可选，默认关闭，会访问您指定的 RSS 地址，仅用于获取新闻标题。该功能不会上传您的任何信息。</p>
-
-      <div class="callout">
-        <strong>说明：</strong>RSS 功能只下载内容到本地，不会上传任何数据。默认关闭，需手动开启。
-      </div>
-
-      <h2 id="rights">五、您的权利</h2>
-      <p>您拥有数据的完整控制权。删除程序目录即可完全卸载，不残留任何数据。</p>
-
-      <h2 id="contact">六、联系我们</h2>
-      <p>如有隐私相关问题，请通过以下方式反馈：</p>
-      <ul>
-        <li>GitHub Issues：<a href="#" data-link="issues" target="_blank" rel="noopener">项目主页</a></li>
-        <li>邮箱：<code data-text="contact.email">chzurelab@outlook.com</code></li>
+  <!-- 顶部导航 (无多余按钮) -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/img/logo/icon.png" alt="Logo"> PlanPeople
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="product.html">功能</a></li>
+        <li><a href="docs.html">文档</a></li>
+        <li><a href="download.html">下载</a></li>
+        <li><a href="about.html">关于</a></li>
       </ul>
-
-    </main>
-  </div>
-</div>
-
-<footer>
-  <div class="container">
-    <div class="footer-links">
-      <a href="product.html">产品介绍</a>
-      <a href="docs.html">文档</a>
-      <a href="help.html">帮助</a>
-      <a href="themes.html">主题</a>
-      <a href="about.html">关于</a>
-      <a href="privacy.html">隐私政策</a>
-      <a href="cookie.html">Cookie</a>
-      <a href="#" data-link="license" target="_blank" rel="noopener">MIT 协议</a>
-      <a href="#" data-link="github" target="_blank" rel="noopener">GitHub</a>
+      <div class="nav-actions" style="width: 100px;"></div>
     </div>
-    <p class="copyright">
-      © <span data-text="brand.copyright">2026</span>
-      <span class="lab">
-        <span class="lab-mark" data-text="brand.labMark">KZ</span>
-        <span class="brand" data-text="brand.lab">Kzure Lab</span>
-      </span>
-      · 我的课表 MyClassroom · 保留所有权利
-    </p>
-  </div>
-</footer>
+  </nav>
 
-<script src="assets/js/main.js"></script>
-<script src="assets/js/splash.js"></script>
-<script src="assets/js/liquid-glass-ui.js"></script>
-<script src="assets/js/tree.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  if (window.GlassRefraction) {
-    window.GlassRefraction.init();
-  }
-});
-</script>
+  <main class="legal-page">
+    <div class="legal-container">
+      
+      <!-- 头部 -->
+      <header class="legal-header">
+        <h1>隐私政策</h1>
+        <div class="meta">Effective Date: 2026-10-01</div>
+      </header>
+
+      <!-- 正文 -->
+      <div class="legal-content">
+        <p>PlanPeople 的核心理念是：<strong>你的数据，只属于你。</strong> 我们不仅承诺保护你的隐私，更从底层架构上杜绝了数据泄露的可能。</p>
+
+        <h2>我们收集了哪些信息？</h2>
+        <p><strong>没有任何信息。</strong> 我们不收集、不读取、不上传您的任何个人数据。</p>
+        <ul class="legal-list">
+          <li><strong>无需注册：</strong> 无需邮箱、手机号，下载后即可使用全部功能。</li>
+          <li><strong>无云端同步：</strong> 我们没有服务器来存储您的课表或成绩。</li>
+          <li><strong>无遥测数据：</strong> 不会在后台静默收集您的点击习惯或崩溃日志。</li>
+        </ul>
+
+        <h2>数据存储在哪里？</h2>
+        <p>所有的课程、学生档案、成绩等数据，均以纯文本的 JSON 格式保存在您电脑的本地文件夹中（<code>data/</code> 目录）。</p>
+        <p>您可以随时打开这些文件进行查看、备份或删除。只要您不删除该文件夹，您的数据就永远在您的硬盘里。</p>
+
+        <h2>网络请求说明</h2>
+        <p>PlanPeople 是一款完全离线的软件。它在后台运行时不会发起任何网络请求。只有当您主动点击“检查更新”或在“关于”页面访问 GitHub 链接时，才会连接到互联网。</p>
+
+        <h2>第三方服务</h2>
+        <p>本软件不使用任何第三方分析服务、广告 SDK 或支付接口。项目代码遵循 MIT 协议开源，您可以随时审查底层的网络行为。</p>
+
+        <h2>数据销毁与迁移</h2>
+        <p>卸载软件时，程序会自动清理运行时缓存，但会保留 <code>data/</code> 文件夹以防您日后重装。若您需要彻底销毁数据，只需手动删除该文件夹即可，不留任何残留。</p>
+
+        <!-- 重点高亮 -->
+        <div class="legal-card">
+          <p>PlanPeople 是纯本地架构的坚持者。无论未来版本如何迭代，我们承诺始终保留离线可用的核心体验。</p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- 统一竖向页脚 -->
+  <footer>
+    <div class="container footer-vertical">
+      <a href="index.html" class="footer-logo">
+        <img src="assets/img/logo/icon.png" alt="Logo"> PlanPeople
+      </a>
+      <div class="footer-links-vertical">
+        <a href="docs.html">使用文档</a>
+        <a href="product.html">功能介绍</a>
+        <a href="release.html">更新日志</a>
+        <a href="about.html">关于我们</a>
+        <a href="privacy.html">隐私政策</a>
+        <a href="#" data-link="issues">提交意见</a>
+        <a href="#" data-link="github">GitHub 源码</a>
+      </div>
+      <div class="footer-bottom-vertical">
+        © 2026 Kzure Lab. 保留所有权利。
+      </div>
+    </div>
+  </footer>
+
+  <!-- 统一 Cookie -->
+  
+
+  <script src="assets/js/main.js"></script>
+  <!-- 强制拦截的 Cookie 弹窗 -->
+  <div class="cookie-overlay" id="cookieOverlay">
+    <div class="cookie-modal">
+      <div class="cookie-modal-icon"></div>
+      <h3>您的隐私选择</h3>
+      <p>PlanPeople 仅使用必要的本地存储来记住您的偏好设置。我们不包含任何追踪代码，也不会向服务器上传您的任何数据。<br><a href="cookie.html">查看详情</a></p>
+      <div class="cookie-modal-actions">
+        <button class="btn-cookie-decline" id="cookieDecline">拒绝</button>
+        <button class="btn-cookie-accept" id="cookieAccept">接受并继续</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
